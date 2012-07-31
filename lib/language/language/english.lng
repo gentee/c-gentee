@@ -1,0 +1,10 @@
+﻿<data 
+    name = English native = English
+/>
+<default>
+    <test1>Test, 1, item</> 
+    <test2 = "Test 2 item" /> 
+    <test3>
+     Test 3 item
+    </> 
+</>

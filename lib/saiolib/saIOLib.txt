@@ -1,0 +1,45 @@
+Function Descriptions
+
+
+Please refer to the prototype for the particular language you are using. 
+
+
+io_PortOut
+Outputs a byte to the specified port.
+
+io_PortWordOut
+Outputs a word (16-bits) to the specified port.
+
+io_PortDWordOut
+Outputs a double word (32-bits) to the specified port.
+
+io_PortIn
+Reads a byte from the specified port.
+
+io_PortWordIn
+Reads a word (16-bits) from the specified port.
+
+io_PortDWordIn
+Reads a double word (32-bits) from the specified port.
+
+io_SetPortBit
+Sets the bit of the specified port.
+
+io_ClrPortBit
+Clears the bit of the specified port.
+
+io_NotPortBit
+Nots (inverts) the bit of the specified port.
+
+io_GetPortBit
+Returns the state of the specified bit.
+
+io_RightPortShift
+Shifts the specified port to the right. The LSB is returned, and the value passed becomes the MSB.
+
+io_LeftPortShift
+Shifts the specified port to the left. The MSB is returned, and the value passed becomes the LSB.
+
+IsDriverInstalled
+Returns non-zero if io.dll is installed and functioning. The primary purpose of this function is to ensure that the 
+kernel mode driver for NT/2000/XP has been installed and is accessible.

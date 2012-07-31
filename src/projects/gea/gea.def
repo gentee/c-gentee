@@ -1,0 +1,12 @@
+LIBRARY   gea
+EXPORTS
+	lzge_encode  @1
+	lzge_decode  @2
+	ppmd_encode  @3
+	ppmd_decode  @4
+	ppmd_start   @5
+	ppmd_stop    @6
+    gea_init     @7
+
+
+

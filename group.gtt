@@ -1,0 +1,45 @@
+﻿/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* ID: group 03.11.06 0.0.A.  
+*
+* Summary: The memberlist of The Gentee Group.   
+*
+******************************************************************************/
+
+<algen name = "Alexander Krivonogov" email = alexander@gentee.com
+  city = Tyumen country = Russia www = www.gentee.com date = 20.10.06 />
+
+<Andrew name = "Andrey" email = anstudi@mail.ru
+  city = Krasnoyarsk country = Russia date = 05.03.08 />
+
+<elwray name="Ermakov Dmitriy" email = djuice@email.ua country = Ukraine 
+  city = Kharkov date = 11.01.09 />
+
+<fireFly name = "Alexander Caracatsanis" email = sunpsych@ncable.com.au
+  city = Mildura country = Australia date = 16.12.07 />
+
+<gentee name = "Alexey Krivonogov" email = alexey@gentee.com
+  city = Tyumen country = Russia www = www.gentee.com date = 30.05.06 />
+
+<jangle name = "Alexander Pashkov" email = "alx_ps @ mail.ru" 
+       city = Moscow country = Russia www = scriptcom.narod.ru 
+       date = 18.02.08 />
+
+<pretorian name = "Sergey Kurganov" email = pi@alarmomsk.ru
+  city = Omsk country = Russia www = gentee.narod.ru date = 09.10.06 />
+
+<prockrammer name = "Sardorbek Pulatov" email = sardor90@gmail.com
+  country = Uzbekistan city = Tashkent www = celovers.narod.ru date = 16.03.07 />
+
+<santy name = "Alex Antypenko" email = santysoft@narod.ru
+  city = Lviv country = Ukraine www = www.santysoft.narod.ru date = 27.09.06 />
+
+<SWR name = "Sergey" email = swr_@mail.ru
+  city = "N. Novgorod" country = Russia date = 01.02.08 />

@@ -1,0 +1,184 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_EXAMPLE             "import """"\r\n{\r\n   c_func( uint, uint, uint)\r\n   // textcolor, bgcolor, text\r\n}\r\n\r\nfunc gentee_func( uint name )\r\n{\r\n   str sname\r\n   sname.copy( name )\r\n   //You can change the parameters\r\n   c_func( 0x996633, 0x99CCCC, \r\n                ""Hello, \\(sname)!"".ptr() )  \r\n}\r\n"
+END
+
+#endif    // Russian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""resource.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON                ICON    DISCARDABLE     "..\\embed.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MAIN DIALOG DISCARDABLE  22, 17, 242, 126
+STYLE DS_ABSALIGN | DS_MODALFRAME | DS_CENTER | WS_VISIBLE | WS_CLIPSIBLINGS | 
+    WS_CLIPCHILDREN | WS_CAPTION | WS_SYSMENU
+CAPTION "Gentee Integration Example"
+FONT 6, "System"
+BEGIN
+END
+
+IDD_DLG1 DIALOG DISCARDABLE  0, 0, 299, 144
+STYLE DS_CONTROL | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "File name:",IDC_STATIC,7,7,32,8
+    EDITTEXT        IDC_EDITFILE,41,7,206,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Open",IDC_BUTOPEN,254,7,38,12
+    PUSHBUTTON      "Run",IDC_BUTRUN,41,21,98,12
+    CONTROL         "Hook messagefunc",IDC_CHECKMESSAGE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,35,133,8
+    CONTROL         "Hook printfunc",IDC_CHECKPRINT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,145,36,147,8
+    EDITTEXT        IDC_EDITMESSAGE,7,46,132,91,ES_MULTILINE | ES_READONLY | 
+                    WS_VSCROLL
+    EDITTEXT        IDC_EDITPRINT,145,46,147,91,ES_MULTILINE | ES_READONLY | 
+                    WS_VSCROLL
+    CONTROL         "Include stdlib",IDC_CHECKSTDLIB,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,145,23,101,10
+END
+
+IDD_DLG2 DIALOG DISCARDABLE  0, 0, 299, 144
+STYLE WS_CHILD | WS_CLIPSIBLINGS | WS_CLIPCHILDREN
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Run",IDC_BUTEXAMPLE,217,125,75,12
+    EDITTEXT        IDC_EDITSOURCE,7,16,203,121,ES_MULTILINE | WS_VSCROLL
+    EDITTEXT        IDC_EDITNAME,218,108,74,12,ES_AUTOHSCROLL
+    LTEXT           "Gentee source code:",IDC_STATIC,7,7,64,8
+    LTEXT           "Result:",IDC_STATIC,244,7,22,8
+    LTEXT           "Your name:",IDC_STATIC,216,98,35,8
+    CONTROL         "Custom1",IDC_PANEL,"panelclass",0x0,215,16,77,76
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DLG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 292
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 137
+    END
+
+    IDD_DLG2, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 292
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 137
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

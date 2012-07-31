@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="launcherd" />
+		<Option pch_mode="2" />
+		<Option compiler="ow" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin\Debug\launcherd" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="0" />
+				<Option compiler="ow" />
+				<Compiler>
+					<Add option="-d2" />
+					<Add option="-dLAUNCHERD" />
+				</Compiler>
+				<Linker>
+					<Add library="..\dll\bin\Debug\gentee.lib" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin\Release\launcherd" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="0" />
+				<Option compiler="ow" />
+				<Compiler>
+					<Add option="-ox" />
+					<Add option="-ot" />
+					<Add option="-os" />
+					<Add option="-fpi" />
+					<Add option="-4s" />
+					<Add option="-cc" />
+					<Add option="-dLAUNCHERD" />
+				</Compiler>
+				<Linker>
+					<Add library="..\dll\bin\Release\gentee.lib" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-bt=nt" />
+			<Add option="-wx" />
+		</Compiler>
+		<Linker>
+			<Add library="gdi32" />
+			<Add library="user32" />
+			<Add library="kernel32" />
+		</Linker>
+		<Unit filename="..\..\..\src\projects\launcher\launcher.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

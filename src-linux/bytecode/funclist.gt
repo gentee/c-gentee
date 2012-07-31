@@ -1,0 +1,281 @@
+/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* Author: Alexey Krivonogov ( gentee )
+*
+* Summary: The list of the embedded byte-code commands. It is used for
+  generating funclist.h and funclist.ñ files 
+*
+******************************************************************************/
+<_ ret = TUint params = "TStr,TUint,TCollection" func = vm_getid 
+     name = "getid" comment = 
+     "uint getid( str name, uint flags, collection colpars )" />
+<_ ret = TUint params = TUint func = type_hasinit name = "type_hasinit" 
+          comment = "uint type_hasinit( uint itype )" />
+<_ ret = TUint params = TUint func = type_hasdelete name = "type_hasdelete" 
+          comment = "uint type_hasdelete( uint itype )" />
+<_ ret = TUint params = "TUint,TUint" func = type_isinherit name = "type_isinherit" 
+          comment = "uint type_isinherit( uint itype iowner )" />
+<_ ret = TUint params = "TUint,TUint" func = type_init name = "type_init" 
+          comment = "uint type_init( uint ptr itype )" />
+<_ params = "TUint,TUint" func = type_delete name = "type_delete" 
+          comment = "uint type_delete( uint ptr itype )" />
+<_ ret = TUint params = "TUint" func = type_sizeof name = "sizeof" 
+          comment = "uint sizeof( uint itype )" />
+<_ ret = TUint params = "TUint,TUint" func = type_new name = "new" 
+          comment = "uint new( uint itype pdata )" />
+<_ params = "TUint" func = type_destroy name = "destroy" 
+          comment = "destroy( uint object )" />
+<_ ret = TUint params = "TUint,TUint" func = lex_init name = "lex_init" 
+          comment = "uint lex_init( plex pl, puint ptbl )" />
+<_ params = "TUint" func = lex_delete name = "lex_delete" 
+          comment = "lex_delete( plex pl )" />
+<_ ret = TUint params = "TUint,TUint,TUint" func = gentee_lex 
+ name = "gentee_lex" comment = "uint gentee_lex(pbuf input, plex pl, parr output)" />
+<_ ret = TUint params = "TUint" func = gentee_compile 
+ name = "gentee_compile" comment = "uint gentee_compile( pcompileinfo compinit )" />
+<_ ret = TUint params = "TUint,TUint" func = gentee_set 
+ name = "gentee_set" comment = "uint gentee_set( uint flag, uint value )" />
+                    
+<_ ret = TUint params = "TUint" func = mem_alloc name = "malloc" 
+          comment = "uint malloc( uint size )" />
+<_ ret = TUint params = "TUint,TUint,TUint" func = mem_copy name = "mcopy" 
+          comment = "uint mcopy( uint dest src size )" />
+<_ ret = TInt params = "TUint,TUint,TUint" func = mem_cmp name = "mcmp" 
+          comment = "int mcmp( uint dest src size )" />
+<_ params = "TUint" func = mem_free name = "mfree" 
+          comment = "mfree( uint ptr )" />
+<_ ret = TUint params = "TUint,TUint,TUint" func = mem_move name = "mmove" 
+          comment = "uint mmove( uint dest src size )" />
+<_ ret = TUint params = "TUint,TUint" func = mem_zero name = "mzero" 
+          comment = "uint mzero( uint dest size )" />
+<_ ret = TUint params = "TUint" func = mem_len name = "mlen" 
+          comment = "uint mlen( uint data )" />
+<_ ret = TUint params = "TUint" func = mem_lensh name = "mlensh" 
+          comment = "uint mlensh( uint data )" />
+<_ ret = TUint func = os_getchar name = "getch" 
+          comment = "uint getch()" />
+<_ ret = TUint params = "TUint,TUint" func = os_scan name = "scan" 
+          comment = "uint os_scan( pubyte input, uint len )" />
+<_ ret = TStr params = "TUint" func = vmres_getstr name = "res_getstr" 
+          comment = "str res_getstr( uint )" />
+<_ ret = TUint params = "TUint,TUint,TUint" func = crc name = "crc" 
+          comment = "uint crc( uint ptr size sead )" />
+<_ ret = TInt params = "TUint,TUint" func = os_strcmp name = "strcmp" 
+          comment = "int strcmp( uint left right )" />
+<_ ret = TInt params = "TUint,TUint" func = os_strcmpign name = "strcmpign" 
+          comment = "int strcmpign( uint left right )" />
+<_ ret = TInt params = "TUint,TUint,TUint" func = os_strcmplen 
+      name = "strcmplen" comment = "int strcmplen( uint left right len )" />
+<_ ret = TInt params = "TUint,TUint,TUint" func = os_strcmpignlen 
+     name = "strcmpignlen" comment = "int strcmpignlen( uint left right len)" />
+<_ ret = TInt params = "TUint,TUint,TUint" func = os_ustrcmplen 
+      name = "ustrcmplen" comment = "int ustrcmplen( uint left right len )" />
+<_ ret = TInt params = "TUint,TUint,TUint" func = os_ustrcmpignlen 
+     name = "ustrcmpignlen" comment = "int ustrcmpignlen( uint left right len)" />
+<_ ret = TUint params = "TUint" func = gentee_ptr name = "gentee_ptr" 
+          comment = "uint gentee_ptr( uint par)" />
+<_ ret = TUint func = argc name = "argc" comment = "uint argc()" />
+<_ ret = TStr params = "TStr,TUint" func = argv name = "argv" 
+          comment = "uint argv( str ret, uint num )" />
+<_ ret = TUint func = vm_calladdr name = "calladdr" 
+          comment = "uint calladdr()" />
+<_ func = qs_init params = "TUint, TUint, TUint, TUint" name = "qs_init" 
+          comment = "void qs_init( pssearch, pubyte pattern, uint m, uint flag )" />
+<_ ret = TUint func = qs_search params = "TUint, TUint, TUint" 
+          name = "qs_search" 
+          comment = "uint qs_search( pssearch psearch, pubyte y, uint n )" />
+<_ func = fastsort params = "TUint, TUint, TUint, TUint" name = "fastsort" 
+          comment = "void fastsort( pvoid base, uint count, uint size, uint mode )" />
+<_ func = sort params = "TUint, TUint, TUint, TUint" name = "sort" 
+          comment = "void sort( pvoid base, uint count, uint size, uint idfunc )" />
+               
+<-_ ret = TUint params = "TStr,TUint" func = os_fileopen name = "open" 
+          comment = "uint  os_fileopen( pstr name, uint flag )"/>
+<_ ret = TUint params = "TUint" func = os_fileclose name = "close" 
+          comment = "uint  os_fileclose( uint handle )"/>
+<_ ret = TUint params = "TUint,TUint,TUint" func = os_fileread name = "read" 
+          comment = "uint  os_fileread( uint handle, pubyte data, uint size )" />
+<_ ret = TUint params = "TUint,TUint,TUint" func = os_filewrite name = "write" 
+          comment = "uint  os_filewrite( uint handle, pubyte data, uint size )" />
+<_ ret = TUlong params = "TUint,TUlong,TUint" func = os_filepos name = "setpos" 
+         comment = "ulong64 os_filepos( uint handle, long64 offset, uint mode )" /->
+<_ ret = TStr func = os_gettemp name = "gettemp" 
+          comment = "str  os_gettemp( )" />
+
+<_ ret = TBuf params = "TBuf,TUint,TUint" name = "@append" func = buf_append
+          comment = "buf buf.append( uint ptr, uint size )" />
+<_ ret = TBuf params = TBuf func = buf_init name = "@init" 
+          comment = "buf buf.init()" />
+<_ ret = TBuf params = "TBuf,TUint,TUint" name = "@del" func = buf_del
+          comment = "buf buf.del( uint offset, uint size )" />
+<_ params = TBuf name = "@delete" func = buf_delete
+          comment = "buf.delete()" />
+<_ ret = TBuf params = TBuf name = "@clear" func = buf_clear
+          comment = "buf buf.clear()" />
+<_ ret = TBuf params = "TBuf,TUint,TUint" name = "@copy" func = buf_copy
+          comment = "buf buf.copy( uint ptr, uint size )" />
+<_ ret = TBuf params = "TBuf,TUint,TUint,TUint" name = "@insert" 
+       func = buf_insert comment = "buf buf.insert( uint off ptr size )" />
+<_ ret = TBuf params = TBuf name = "@free" func = buf_free
+          comment = "buf buf.free()" />
+<_ ret = TUint params = TBuf func = buf_ptr name = "@ptr" 
+          comment = "uint buf.ptr()" />
+<_ ret = TBuf params = "TBuf,TUint,TUint" func = buf_copy name = "@load" 
+          comment = "buf buf.load( uint ptr, uint size )" />
+<_ ret = TBuf params = "TBuf,TUint" name = "@array" func = buf_array
+          comment = "buf.array( uint index )" />
+<_ ret = TUint params = "TBuf,TUint" name = "@index" func = buf_index
+          comment = "buf.index( uint index )" />
+<_ ret = TBuf params = "TBuf,TUint" name = "@reserve" func = buf_reserve
+          comment = "buf.reserve( uint size )" />
+<_ ret = TBuf params = "TBuf,TUint" name = "@expand" func = buf_expand
+          comment = "buf.expand( uint size )" />
+<_ ret = TUint params = "TBuf" func = buf_len name = "#*" 
+          comment = "*buf" />
+<_ ret = TBuf params = "TBuf,TBuf" func = buf_set name = "#=" 
+          comment = "buf = buf" />
+<_ ret = TBuf params = "TBuf,TBuf" name = "#+=" func = buf_add
+          comment = "buf += buf" />
+<_ ret = TBuf params = "TBuf,TUbyte" name = "#+=" func = buf_appendch
+          comment = "buf += ubyte" />
+<_ ret = TBuf params = "TBuf,TUshort" name = "#+=" func = buf_appendushort
+          comment = "buf += ushort" />
+<_ ret = TBuf params = "TBuf,TUint" name = "#+=" func = buf_appenduint
+          comment = "buf += uint" />
+<_ ret = TBuf params = "TBuf,TUlong" name = "#+=" func = buf_appendulong
+          comment = "buf += ulong" />
+<_ ret = TUint params = "TBuf,TBuf" name = "#==" func = buf_isequal
+          comment = "buf == buf" />
+<_ ret = TUint params = "TBuf,TUint,TUint" func = buf_find 
+      name = "@findch" comment = "uint buf.findch( uint off symbol )" />
+<_ ret = TUint params = "TBuf,TUint,TUint" func = buf_findsh 
+      name = "@findsh" comment = "uint buf.findsh( uint off symbol )" />
+
+<_ ret = TStr params = TStr func = str_init name = "@init" 
+          comment = "str str.init()" />
+<_ ret = TStr params = "TStr,TUint,TUint" func = str_copylen name = "@load" 
+          comment = "str str.load( uint ptr, uint size )" />
+<_ ret = TStr params = "TStr,TUint" func = str_copyzero name = "@copy" 
+          comment = "str str.copy( uint ptr )" />
+<_ ret = TUint params = "TStr,TUint,TUint,TUint" func = str_find 
+      name = "@findch" comment = "str str.findch( uint off symbol fromend )" />
+<_ ret = TUint params = "TStr,TUint" func = str_findch name = "@findch" 
+          comment = "str str.findch( uint symbol )" />
+<_ ret = TUint params = "TStr,TStr" func = str_fwildcard name = "@fwildcard" 
+          comment = "uint str.fwildcard( str mask )" />
+<_ params = TStr func = str_output name = "@print" 
+          comment = "str.print()" />
+<_ params = TStr func = str_output name = "print" 
+          comment = "print( str )" />
+<_ ret = TStr params = "TStr,TUint" func = str_setlen name = "@setlen" 
+          comment = "str str.setlen( uint )" />
+<_ ret = TStr params = "TStr,TStr,TUint,TUint" func = str_substr 
+          name = "@substr" comment = "str str.substr( str uint off len )" />
+<_ ret = TStr params = "TStr,TStr" func = str_copy name = "#=" 
+          comment = "str = str" />
+<_ ret = TStr params = "TStr,TStr" func = str_add name = "#+=" 
+          comment = "str += str" />
+<_ ret = TStr params = "TStr,TUint" func = str_appenduint name = "#+=" 
+          comment = "str += uint" />
+<_ ret = TUint params = "TStr" func = str_len name = "#*" 
+          comment = "*str" />
+<_ ret = TStr params = "TStr,TStr,TUint" func = str_out4 name = "@out4" 
+          comment = "str.out4( str format, uint value )" />
+<_ ret = TStr params = "TStr,TStr,TUlong" func = str_out8 name = "@out8" 
+          comment = "str.out8( str format, ulong value )" />
+          
+<_ ret = TUint params = "TReserved,TUint" name = "@index" func = mem_index
+          comment = "reserved.index( uint index )" />
+
+<_ ret = TArr params = TArr func = garr_init name = "@init" 
+          comment = "arr arr.init()" />
+<_ params = TArr name = "@delete" func = garr_delete
+          comment = "arr.delete()" />
+<_ params = "TArr,TUint" name = "@oftype" func = garr_oftype
+          comment = "arr.oftype( uint )" />
+<_ params = "TArr,TUint" name = "@array" func = garr_array
+          comment = "arr.array( uint first )" />
+<_ params = "TArr,TUint,TUint" name = "@array" func = garr_array2
+          comment = "arr.array( uint first second )" />
+<_ params = "TArr,TUint,TUint,TUint" name = "@array" func = garr_array3
+          comment = "arr.array( uint first second third )" />
+<_ ret = TUint params = "TArr,TUint" name = "@index" func = garr_index
+          comment = "uint arr.index( uint first )" />
+<_ ret = TUint params = "TArr,TUint,TUint" name = "@index" func = garr_index2
+          comment = "uint arr.index( uint first second )" />
+<_ ret = TUint params = "TArr,TUint,TUint,TUint" name = "@index" 
+    func = garr_index3 comment = "uint arr.index( uint first second third )" />
+<_ ret = TUint params = TArr func = garr_count name = "#*" 
+          comment = "uint *( arr )" />
+<_ ret = TUint params = "TArr,TUint" func = garr_expand 
+         name = "@expand" comment = "uint arr.expand( uint )" />
+<_ ret = TUint params = "TArr,TUint,TUint" func = garr_insert 
+         name = "@insert" comment = "uint arr.insert( uint from count )" />
+<_ ret = TArr params = "TArr,TUint,TUint" func = garr_del 
+         name = "@del" comment = "uint arr.del( uint from count )" />
+                    
+<_ ret = TUint params = "TCollection,TUint" name = "@index" func = collect_index
+          comment = "uint collection.index( uint first )" />
+<_ ret = TUint params = "TCollection,TUint" name = "@ptr" func = collect_index
+          comment = "uint collection.ptr( uint first )" />
+<_ ret = TUint params = "TCollection,TUint" name = "@gettype" 
+   func = collect_gettype comment = "uint collection.gettype( uint first )" />
+<_ ret = TUint params = TCollection name = "#*" 
+   func = collect_count comment = "uint *( collection )" />
+<_ ret = TStr params = "TStr,TStr,TCollection" name = "@printf" 
+     func = str_sprintf comment = "str str.printf( str, collection )" />
+
+<- All cdecl functions must be described below ! ->
+
+<_ ret = TDouble params = "TDouble" func = sin  
+         name = "sin" comment = "double sin( double )" />
+<_ ret = TDouble params = "TDouble" func = cos  
+         name = "cos" comment = "double cos( double )" />
+<_ ret = TDouble params = "TDouble" func = tan  
+         name = "tan" comment = "double tan( double )" />
+<_ ret = TDouble params = "TDouble" func = asin  
+         name = "asin" comment = "double asin( double )" />
+<_ ret = TDouble params = "TDouble" func = acos  
+         name = "acos" comment = "double acos( double )" />
+<_ ret = TDouble params = "TDouble" func = atan  
+         name = "atan" comment = "double atan( double )" />
+<_ ret = TDouble params = "TDouble" func = exp  
+         name = "exp" comment = "double exp( double )" />
+<_ ret = TDouble params = "TDouble" func = log  
+         name = "ln" comment = "double ln( double )" />
+<_ ret = TDouble params = "TDouble" func = log10  
+         name = "log" comment = "double log( double )" />
+<_ ret = TDouble params = "TDouble,TDouble" func = pow  
+         name = "pow" comment = "double pow( double, double )" />
+<_ ret = TDouble params = "TDouble" func = sqrt  
+         name = "sqrt" comment = "double sqrt( double )" />
+<_ ret = TUint params = "TInt" func = labs name = "abs" 
+         comment = "uint abs( int )" />
+<_ ret = TDouble params = "TDouble" func = fabs  
+         name = "fabs" comment = "double fabs( double )" />
+<_ ret = TDouble params = "TDouble,TUint" func = modf  
+         name = "modf" comment = "double modf( double, uint )" />
+<_ ret = TDouble params = "TDouble" func = ceil  
+         name = "ceil" comment = "double ceil( double )" />
+<_ ret = TDouble params = "TDouble" func = floor  
+         name = "floor" comment = "double floor( double )" />
+<_ ret = TInt params = "TUint,TUint,TUint" func = strtol name = "strtol" 
+          comment = "int strtol( uint ptr end base )" />
+<_ ret = TUint params = "TUint,TUint,TUint" func = strtoul name = "strtoul" 
+          comment = "int strtoul( uint ptr end base )" />
+<_ ret = TDouble params = "TUint" func = atof name = "atof" 
+          comment = "double atof( uint ptr )" />
+<_ ret = TLong params = "TUint" func = ATOI64 name = "atoi64" 
+          comment = "long atoi64( uint ptr )" />
+<_ ret = TUint params = "TUint" func = getenv name = "_getenv" 
+          comment = "pubyte getenv( pubyte ptr )" />
+<_ ret = TInt params = "TUint" func = _putenv name = "_setenv" 
+          comment = "int setenv( pubyte ptr )" />
+                         

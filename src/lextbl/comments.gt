@@ -1,0 +1,29 @@
+/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* ID: comments 18.10.06 0.0.A.
+*
+* Author: Alexey Krivonogov ( gentee )
+*
+* Summary: Lexical table for parsing commenst in *.g and *.gt files
+*
+******************************************************************************/
+
+<comments prefix = "CMN_" desc = "Comments" gout = "lexcomments.g" >
+   <MAIN cmd = SKIP >
+      <_ multi = '/***' state = HEAD pos itstate />
+      <_ multi = '/*--' state = DOC pos itstate />
+   </>   
+   <HEAD cmd = OK >
+      <_ multi = '***/' state = MAIN cmd = OK />
+   </>
+   <DOC cmd = OK >
+      <_ multi = '--*/' state = MAIN cmd = OK />
+   </>
+</comments>

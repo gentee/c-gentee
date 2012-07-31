@@ -1,0 +1,126 @@
+<--/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* ID: msglist 26.10.06 0.0.A.
+*
+* Author: Alexander Krivonogov ( algen )
+*
+* Summary: The list of the operations 
+*
+******************************************************************************/-->
+<--Флаги операций-->
+<flags>
+<nop     comment="Не имеет кода операции"/>
+<binary  comment="Бинарная операция"/>
+<unary   comment="Унарная операция стоящая перед операндом"/>
+<post    comment="Унарная операция стоящая после операнда"/>
+<undef   comment="Операция не определена, следующая операция, для данного типа всегда должен стоять unary"/> 
+<retuint comment="Операция будет возвращать uint"/>
+<addnot  comment="Данная операция разбивается на две - предыдущая операция и логическое НЕТ"/>
+<open    comment="Открывающая скобка"/>
+<close   comment="Закрывающая скобка"/>
+<lvalue  comment="LValue операция"/>
+</flags>
+
+<--Описание списка-->
+<desc>
+
+</desc>
+
+<--Список операций, не изменять взаимное расположение!
+формат списка:
+   <идентификатор>="<лексема>" prin=<приоритет вх> prout=<приоритет вых> <флаги>
+
+<идентификатор> - Идентификатор лексемы, соответсвует индексу в таблице
+<лексема> - Символьное предсавление системной лексемы
+<приоритет вх> - приоритет при первом получении лексемы  
+<приоритет вых> - приоритет в стэке операций
+<флаги> - комбинация флагов операций 
+-->
+<--space      =""                     nop            /-->
+<--file       =""                     nop            /-->
+<tbl>
+<as         =""    prin=14 prout=3  binary lvalue nop /> 
+<func       =""    prin=18 prout=18 unary  nop     />
+<line       =""    prin=0  prout=0  nop />
+<strappend  ="+="  prin=18 prout=18 binary lvalue />
+<strtext    ="@"  prin=18 prout=18 unary />
+<plus       ="+"   prin=16 prout=15 undef unary nop />
+<add        ="+"   prin=12 prout=12 binary          />
+<minus      ="-"   prin=16 prout=15 undef unary     />
+<sub        ="-"   prin=12 prout=12 binary          />
+<len        ="*"   prin=16 prout=15 undef unary     />
+<mul        ="*"   prin=13 prout=13 binary          />
+<div        ="/"   prin=13 prout=13 binary          />
+<mod        ="%"   prin=13 prout=13 binary          />
+<binnot     ="~"   prin=16 prout=15 undef unary     />
+<late       ="~"   prin=17 prout=17 binary nop      />
+<addr       ="&"   prin=16 prout=15 undef unary nop lvalue retuint />
+<binand     ="&"   prin=8  prout=8  binary               />
+<binxor     ="^"   prin=7  prout=7  binary               />
+<binor      ="|"   prin=6  prout=6  binary               /> 
+<lognot     ="!"   prin=16 prout=15 unary                />
+<logand     ="&&"  prin=5  prout=5  binary nop retuint   />
+<logor      ="||"  prin=4  prout=4  binary nop retuint   />
+<left       ="<<"  prin=11 prout=11 binary               />
+<right      =">>"  prin=11 prout=11 binary               />
+
+<incleft    ="++"  prin=16 prout=15 undef unary lvalue   />
+<incright   ="_++" prin=16 prout=15 post lvalue          />
+<decleft    ="--"  prin=16 prout=15 undef unary lvalue   />
+<decright   ="_--" prin=16 prout=15 post lvalue          />
+
+<set        ="="   prin=14 prout=3  binary lvalue        />
+<addset     ="+="  prin=14 prout=3  binary lvalue        />
+<subset     ="-="  prin=14 prout=3  binary lvalue        />
+<mulset     ="*="  prin=14 prout=3  binary lvalue        />
+<divset     ="/="  prin=14 prout=3  binary lvalue        />
+<modset     ="%="  prin=14 prout=3  binary lvalue        />
+<andset     ="&="  prin=14 prout=3  binary lvalue        />
+<orset      ="|="  prin=14 prout=3  binary lvalue        />
+<xorset     ="^="  prin=14 prout=3  binary lvalue        />
+<leftset    ="<<=" prin=14 prout=3  binary lvalue        />
+<rightset   =">>=" prin=14 prout=3  binary lvalue        />
+
+<comma      =","   prin=2  prout=2  binary nop           />
+<with       ="."   prin=16 prout=15 undef unary          />
+<point      ="."   prin=17 prout=17 binary               />
+<ptr        ="->"  prin=17 prout=17 binary nop           />
+<quest      ="?"   prin=18 prout=18 unary nop            />
+<strout     ="@"   prin=16 prout=15 undef unary nop      />
+<stradd     ="@"   prin=12 prout=12 binary               />
+
+<lbrack     ="("   prin=19 prout=1  open nop             />
+<rbrack     =")"   prin=1  prout=20 close nop            />
+<lsqbrack   ="["   prin=18 prout=1  open nop             />
+<rsqbrack   ="]"   prin=1  prout=20 close nop            />
+<lcrbrack   ="{"   prin=19 prout=1  open nop             />
+<rcrbrack   ="}"   prin=1  prout=20 close nop            />
+<collect    ="%{"  prin=19 prout=1  open nop             />
+
+<eq         ="=="  prin=9  prout=9  binary               />
+<noteq      ="!="  prin=9  prout=9  binary addnot        />
+<greater    =">"   prin=10 prout=10 binary               />
+<lesseq     ="<="  prin=10 prout=10 binary addnot        />
+<less       ="<"   prin=10 prout=10 binary               />
+<greateq    =">="  prin=10 prout=10 binary addnot        />
+
+<igneq      ="%==" prin=9  prout=9  binary               />
+<ignnoteq   ="%!=" prin=9  prout=9  binary addnot        />
+<igngreater ="%>"  prin=10 prout=10 binary               />
+<ignlesseq  ="%<=" prin=10 prout=10 binary addnot        />
+<ignless    ="%<"  prin=10 prout=10 binary               />
+<igngreateq ="%>=" prin=10 prout=10 binary addnot        />
+
+</tbl>   
+
+   
+   
+   
+   	      

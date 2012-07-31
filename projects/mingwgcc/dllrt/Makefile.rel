@@ -1,0 +1,145 @@
+# A simple makefile generator by KiSoft, 2007. mailto: kisoft@rambler.ru
+# version: 0.3.11.11
+
+# Project Variables start
+CPP=mingw32-g++.exe
+CC=mingw32-gcc.exe
+LD=mingw32-g++.exe
+LIB=ar.exe
+WINDRES=windres.exe
+# Project Variables end
+
+# Target: Release
+
+OBJS_RELEASE=obj\Release\res\dll\version.res obj\Release\src\Algorithm\qsort.o obj\Release\src\Algorithm\search.o obj\Release\src\bytecode\cmdlist.o obj\Release\src\bytecode\funclist.o obj\Release\src\bytecode\ge.o obj\Release\src\bytecode\geload.o obj\Release\src\common\arr.o obj\Release\src\common\arrdata.o obj\Release\src\common\buf.o obj\Release\src\common\collection.o obj\Release\src\common\crc.o obj\Release\src\common\file.o obj\Release\src\common\hash.o obj\Release\src\common\memory.o obj\Release\src\common\mix.o obj\Release\src\common\msg.o obj\Release\src\common\msglist.o obj\Release\src\common\number.o obj\Release\src\common\str.o obj\Release\src\genteeapi\gentee.o obj\Release\src\os\user\defines.o obj\Release\src\projects\dll\dll.o obj\Release\src\vm\vm.o obj\Release\src\vm\vmload.o obj\Release\src\vm\vmmanage.o obj\Release\src\vm\vmres.o obj\Release\src\vm\vmrun.o obj\Release\src\vm\vmtype.o
+
+Release: bin\Release\genteert.dll
+
+bin\Release\genteert.dll: $(OBJS_RELEASE)
+	@echo Building dynamic library bin\Release\genteert.dll
+	@mingw32-g++.exe -shared -Wl,--output-def= -Wl,--out-implib= -Wl,--dll  $(Release)  -o   -luser32 
+
+obj\Release\res\dll\version.res: D:\ANO_PR~1\PROJEC~3\Gentee_3\res\dll\version.rc
+	@echo Compiling: D:\ANO_PR~1\PROJEC~3\Gentee_3\res\dll\version.rc
+	@windres.exe -i D:\ANO_PR~1\PROJEC~3\Gentee_3\res\dll\version.rc -J rc -o obj\Release\res\dll\version.res -O coff 
+
+obj\Release\src\Algorithm\qsort.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\Algorithm\qsort.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\Algorithm\qsort.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\Algorithm\qsort.c -o obj\Release\src\Algorithm\qsort.o
+
+obj\Release\src\Algorithm\search.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\Algorithm\search.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\Algorithm\search.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\Algorithm\search.c -o obj\Release\src\Algorithm\search.o
+
+obj\Release\src\bytecode\cmdlist.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\bytecode\cmdlist.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\bytecode\cmdlist.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\bytecode\cmdlist.c -o obj\Release\src\bytecode\cmdlist.o
+
+obj\Release\src\bytecode\funclist.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\bytecode\funclist.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\bytecode\funclist.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\bytecode\funclist.c -o obj\Release\src\bytecode\funclist.o
+
+obj\Release\src\bytecode\ge.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\bytecode\ge.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\bytecode\ge.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\bytecode\ge.c -o obj\Release\src\bytecode\ge.o
+
+obj\Release\src\bytecode\geload.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\bytecode\geload.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\bytecode\geload.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\bytecode\geload.c -o obj\Release\src\bytecode\geload.o
+
+obj\Release\src\common\arr.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\arr.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\arr.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\arr.c -o obj\Release\src\common\arr.o
+
+obj\Release\src\common\arrdata.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\arrdata.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\arrdata.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\arrdata.c -o obj\Release\src\common\arrdata.o
+
+obj\Release\src\common\buf.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\buf.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\buf.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\buf.c -o obj\Release\src\common\buf.o
+
+obj\Release\src\common\collection.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\collection.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\collection.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\collection.c -o obj\Release\src\common\collection.o
+
+obj\Release\src\common\crc.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\crc.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\crc.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\crc.c -o obj\Release\src\common\crc.o
+
+obj\Release\src\common\file.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\file.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\file.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\file.c -o obj\Release\src\common\file.o
+
+obj\Release\src\common\hash.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\hash.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\hash.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\hash.c -o obj\Release\src\common\hash.o
+
+obj\Release\src\common\memory.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\memory.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\memory.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\memory.c -o obj\Release\src\common\memory.o
+
+obj\Release\src\common\mix.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\mix.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\mix.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\mix.c -o obj\Release\src\common\mix.o
+
+obj\Release\src\common\msg.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\msg.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\msg.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\msg.c -o obj\Release\src\common\msg.o
+
+obj\Release\src\common\msglist.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\msglist.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\msglist.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\msglist.c -o obj\Release\src\common\msglist.o
+
+obj\Release\src\common\number.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\number.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\number.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\number.c -o obj\Release\src\common\number.o
+
+obj\Release\src\common\str.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\str.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\str.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\common\str.c -o obj\Release\src\common\str.o
+
+obj\Release\src\genteeapi\gentee.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\genteeapi\gentee.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\genteeapi\gentee.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\genteeapi\gentee.c -o obj\Release\src\genteeapi\gentee.o
+
+obj\Release\src\os\user\defines.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\os\user\defines.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\os\user\defines.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\os\user\defines.c -o obj\Release\src\os\user\defines.o
+
+obj\Release\src\projects\dll\dll.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\projects\dll\dll.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\projects\dll\dll.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\projects\dll\dll.c -o obj\Release\src\projects\dll\dll.o
+
+obj\Release\src\vm\vm.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vm.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vm.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vm.c -o obj\Release\src\vm\vm.o
+
+obj\Release\src\vm\vmload.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmload.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmload.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmload.c -o obj\Release\src\vm\vmload.o
+
+obj\Release\src\vm\vmmanage.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmmanage.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmmanage.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmmanage.c -o obj\Release\src\vm\vmmanage.o
+
+obj\Release\src\vm\vmres.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmres.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmres.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmres.c -o obj\Release\src\vm\vmres.o
+
+obj\Release\src\vm\vmrun.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmrun.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmrun.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmrun.c -o obj\Release\src\vm\vmrun.o
+
+obj\Release\src\vm\vmtype.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmtype.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmtype.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\vm\vmtype.c -o obj\Release\src\vm\vmtype.o
+
+.PHONY: clean_Release
+
+clean_Release: 
+	@echo Delete $(OBJS_RELEASE) bin\Release\genteert.dll
+	-@del /f $(OBJS_RELEASE) bin\Release\genteert.dll
+
+
+

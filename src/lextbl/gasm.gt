@@ -1,0 +1,223 @@
+/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* ID: gasm 18.10.06 0.0.A.
+*
+* Author: Alexey Krivonogov ( gentee )
+*
+* Contributors: Sergey Kurganov ( pretorian )
+*
+* Summary: ASM lexical table
+*
+******************************************************************************/
+
+<gasm prefix = "ASM_" desc = "Assembler sources" gout =
+     "..\..\example\asm\lexasm.g"
+     binout2 = "..\..\example\asm\lexasm.lex" >
+   <MAIN cmd = SKIP >
+      <_ hexch = '0A' cmd = LINE pos itcmd />
+      <_ ch = ',' cmd = SYSCHAR pos itcmd value />
+      <_ ch = '[' cmd = SYSCHAR pos itcmd value />
+      <_ ch = ']' cmd = SYSCHAR pos itcmd value />
+      <_ ch = '+' cmd = SYSCHAR pos itcmd value />
+      <_ ch = '-' cmd = SYSCHAR pos itcmd value />
+      <_ ch = '/' state = ISCOMMENT pos/>
+      <_ ch = '0' state = ISNUMBER pos cmd = NUMBER itcmd />
+      <_ range = '19' state = DECIMAL pos cmd = NUMBER itcmd />
+      <_ name state = NAME pos itstate keyword/>
+   </>   
+   <ISCOMMENT state = MAIN stay >
+      <_ ch = '*' state = COMMENT />
+      <_ ch = '/' state = LINECOMMENT />
+   </>
+   <COMMENT cmd = SKIP comment = "Comment /* ... */">
+      <_ multi = '*/' cmd = SKIP state = MAIN />
+   </>
+   <LINECOMMENT cmd = SKIP comment = "Comment //... ">
+      <_ hexch = '0D0A' state = MAIN stay />
+   </>
+   <NAME state = MAIN stay comment = "Name identifier">
+      <_ numname cmd = OK />
+      <_ ch = ':' cmd = OK state = MAIN />
+   </>
+   <ISNUMBER state = MAIN stay >
+      <_ range = '09' state = DECIMAL cmd = OK />
+      <_ ch = 'xX' state = HEX cmd = OK />
+      <_ ch = '&' state = BIN cmd = OK />
+   </>
+   <DECIMAL state = MAIN stay >
+      <_ range = '09' cmd = OK />
+   </>
+   <HEX state = MAIN stay >
+      <_ numhex cmd = OK />
+   </>
+   <BIN state = MAIN stay >
+      <_ ch = '01' cmd = OK />
+   </>
+   <commands skip>
+      <LINE comment = "New line 0x0D0A or 0x0A" />
+      <SYSCHAR comment = "System character ', [ ] + - '" />
+      <NUMBER comment = "Number decimal, hexadecimal or binary" />
+   </commands>
+   <keywords skip ignore>
+      <_= AH id = 0x00/>
+      <_= AL id = 0x01/>
+      <_= BH id = 0x02/>
+      <_= BL id = 0x03/>
+      <_= CH id = 0x04/>
+      <_= CL id = 0x05/>
+      <_= DH id = 0x06/>
+      <_= DL id = 0x07/>
+
+      <_= AX id = 0x08/>
+      <_= BX id = 0x09/>
+      <_= CX id = 0x0A/>
+      <_= DX id = 0x0B/>
+
+      <_= EAX id = 0x10/>
+      <_= ECX id = 0x11/>
+      <_= EDX id = 0x12/>
+      <_= EBX id = 0x13/>
+      <_= ESP id = 0x14/>
+      <_= EBP id = 0x15/>
+      <_= ESI id = 0x16/>
+      <_= EDI id = 0x17/>
+
+      <_= CR0 id = 0x20/>
+      <_= CR1 id = 0x21/>
+      <_= CR2 id = 0x22/>
+      <_= CR3 id = 0x23/>
+      <_= DR0 id = 0x24/>
+      <_= DR1 id = 0x25/>
+      <_= DR2 id = 0x26/>
+      <_= DR3 id = 0x27/>
+      <_= DR4 id = 0x28/>
+      <_= DR5 id = 0x29/>
+      <_= DR6 id = 0x2A/>
+      <_= DR7 id = 0x2B/>
+
+      <_= JA id = 0x40/>
+      <_= JAE id = 0x41/>
+      <_= JB id = 0x42/>
+      <_= JBE id = 0x43/>
+      <_= JC id = 0x44/>
+      <_= JCXZ id = 0x45/>
+      <_= JE id = 0x46/>
+      <_= JECXZ id = 0x47/>
+      <_= JG id = 0x48/>
+      <_= JGE id = 0x49/>
+      <_= JL id = 0x4A/>
+      <_= JLE id = 0x4B/>
+      <_= JNA id = 0x4C/>
+      <_= JNAE id = 0x4D/>
+      <_= JNB id = 0x4E/>
+      <_= JNBE id = 0x4F/>
+      <_= JNC id = 0x50/>
+      <_= JNE id = 0x51/>
+      <_= JNG id = 0x52/>
+      <_= JNGE id = 0x53/>
+      <_= JNL id = 0x54/>
+      <_= JNLE id = 0x55/>
+      <_= JNO id = 0x56/>
+      <_= JNP id = 0x57/>
+      <_= JNS id = 0x58/>
+      <_= JNZ id = 0x59/>
+      <_= JO id = 0x5A/>
+      <_= JP id = 0x5B/>
+      <_= JS id = 0x5C/>
+      <_= JZ id = 0x5D/>
+      <_= LOOP id = 0x5E/>
+      <_= LOOPE id = 0x5F/>
+      <_= LOOPNE id = 0x60/>
+      <_= LOOPNZ id = 0x61/>
+      <_= REP id = 0x62/>
+      <_= REPE id = 0x63/>
+      <_= REPZ id = 0x64/>
+      <_= REPNE id = 0x65/>
+      <_= REPNZ id = 0x66/>
+      <_= CALL id = 0x67/>
+
+      <_= CMP id = 0x80/>
+      <_= MPS id = 0x81/>
+      <_= CMPSB id = 0x82/>
+      <_= CMPSW id = 0x83/>
+      <_= CMPSD id = 0x84/>
+      <_= TEST id = 0x85/>
+      <_= ADC id = 0x86/>
+      <_= ADD id = 0x87/>
+      <_= DEC id = 0x88/>
+      <_= DIV id = 0x89/>
+      <_= IDIV id = 0x8A/>
+      <_= IMUL id = 0x8B/>
+      <_= INC id = 0x8C/>
+      <_= MUL id = 0x8D/>
+      <_= RCL id = 0x8E/>
+      <_= ROL id = 0x8F/>
+      <_= RCR id = 0x90/>
+      <_= ROR id = 0x91/>
+      <_= SAL id = 0x92/>
+      <_= SHL id = 0x93/>
+      <_= SAR id = 0x94/>
+      <_= SHR id = 0x95/>
+      <_= SUB id = 0x96/>
+      <_= AND id = 0x97/>
+      <_= OR id = 0x98/>
+      <_= XOR id = 0x99/>
+      <_= NOT id = 0x9A/>
+      <_= NEG id = 0x9B/>
+      <_= IN id = 0x9C/>
+      <_= INS id = 0x9D/>
+      <_= INSB id = 0x9E/>
+      <_= INSW id = 0x9F/>
+      <_= INSD id = 0xA0/>
+      <_= LEA id = 0xA1/>
+      <_= LODS id = 0xA2/>
+      <_= LODSB id = 0xA3/>
+      <_= LODSW id = 0xA4/>
+      <_= LODSD id = 0xA5/>
+      <_= MOV id = 0xA6/>
+      <_= MOVS id = 0xA7/>
+      <_= MOVSB id = 0xA8/>
+      <_= MOVSW id = 0xA9/>
+      <_= MOVSD id = 0xAA/>
+      <_= MOVSX id = 0xAB/>
+      <_= MOVZX id = 0xAC/>
+      <_= POP id = 0xAD/>
+      <_= POPF id = 0xAE/>
+      <_= POPFD id = 0xAF/>
+      <_= POPFW id = 0xB0/>
+      <_= "PUSHA PUSHAD" id = 0xB1/>
+      <_= "POPA POPAD" id = 0xB2/>
+      <_= PUSH id = 0xB3/>
+      <_= PUSHF id = 0xB4/>
+      <_= PUSHFD id = 0xB5/>
+      <_= PUSHFW id = 0xB6/>
+      <_= SCAS id = 0xB7/>
+      <_= SCASB id = 0xB8/>
+      <_= SCASW id = 0xB9/>
+      <_= SCASD id = 0xBA/>
+      <_= STOS id = 0xBB/>
+      <_= STOSB id = 0xBC/>
+      <_= STOSW id = 0xBD/>
+      <_= STOSD id = 0xBE/>
+      <_= XCHG id = 0xBF/>
+      <_= NOP id = 0xC0/>
+      <_= PUSHAW id = 0xC1/>
+      <_= POPAW id = 0xC2/>
+      <_= SAHF id = 0xC3/>
+      <_= LAHF id = 0xC4/>
+      <_= CLC id = 0xC5/>
+      <_= STC id = 0xC6/>
+      <_= CLI id = 0xC7/>
+      <_= STI id = 0xC8/>
+      <_= CLD id = 0xC9/>
+      <_= STD id = 0xCA/>
+      <_= RET id = 0xCB/>
+ </keywords>
+</gasm>

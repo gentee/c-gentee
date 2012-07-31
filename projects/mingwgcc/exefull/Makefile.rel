@@ -1,0 +1,37 @@
+# A simple makefile generator by KiSoft, 2007. mailto: kisoft@rambler.ru
+# version: 0.3.11.11
+
+# Project Variables start
+CPP=mingw32-g++.exe
+CC=mingw32-gcc.exe
+LD=mingw32-g++.exe
+LIB=ar.exe
+WINDRES=windres.exe
+# Project Variables end
+
+# Target: Release
+
+OBJS_RELEASE=obj\Release\src\projects\exe\exe.o obj\Release\res\exe\version.res
+
+Release: bin\Release\gentee.exe
+
+bin\Release\gentee.exe: $(OBJS_RELEASE)
+	@echo Building console executable bin\Release\gentee.exe
+	@mingw32-g++.exe  -o  $(Release)   ..\gelib\Release\libgelib.a 
+
+obj\Release\src\projects\exe\exe.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\projects\exe\exe.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\projects\exe\exe.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\projects\exe\exe.c -o obj\Release\src\projects\exe\exe.o
+
+obj\Release\res\exe\version.res: D:\ANO_PR~1\PROJEC~3\Gentee_3\res\exe\version.rc
+	@echo Compiling: D:\ANO_PR~1\PROJEC~3\Gentee_3\res\exe\version.rc
+	@windres.exe -i D:\ANO_PR~1\PROJEC~3\Gentee_3\res\exe\version.rc -J rc -o obj\Release\res\exe\version.res -O coff 
+
+.PHONY: clean_Release
+
+clean_Release: 
+	@echo Delete $(OBJS_RELEASE) bin\Release\gentee.exe
+	-@del /f $(OBJS_RELEASE) bin\Release\gentee.exe
+
+
+

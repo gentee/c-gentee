@@ -1,0 +1,227 @@
+/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* ID: operlist 26.10.06 0.0.A.
+*
+* Author: Alexander Krivonogov ( algen )
+*
+* Summary: The program generates syslex.h and syslex.с files 
+*
+******************************************************************************/
+
+include : $"..\..\lib\gt\gt.g"
+include : $"..\bytecode\cmdlist.g"
+
+/*-----------------------------------------------------------------------------
+*
+* ID: operlist_h 26.10.06 0.0.A. 
+* 
+* Summary: The .h output function.
+*  
+-----------------------------------------------------------------------------*/
+text operlist_h( arr aopers of str, arr acom of str, arr amflgs of str, arr aflgscom of str )
+\@headerout( "operlist_h", "Generated with 'operlist' program", 
+"This file contains a list of the compiler's or VM's messages.")
+#ifndef _OPERLIST_
+#define _OPERLIST_
+
+   #ifdef __cplusplus               
+      extern "C" {                 
+   #endif // __cplusplus      
+
+#include "../common/types.h"
+
+//Флаги операций для таблицы операций
+\{
+   uint i
+   
+   fornum i, *amflgs
+   {
+      @("#define "@amflgs[i]@"\t\t"@hex2stru( "0x", 1<<i )@"\t\t//"@aflgscom[i]@"\l")
+      //@(amflgs[i]@"xx")
+   }
+}
+
+#define  OPERCOUNT  \( *aopers ) //Количество операций
+
+//Идентификаторы операций
+enum {
+\{   
+   
+   fornum i = 0, *aopers
+   { 
+      @"   \(aopers[ i ] ),\t\t  // 0x\( hex2stru( "", i )) \"\( acom[ i ] )\"\l" 
+   }   
+}
+};
+
+//Структура для описания операций
+typedef struct {
+   ubyte     before; // Приоритет на входе в стэк операций
+   ubyte     after;  // Приоритет после вставки в стэк операций
+   ushort    flgs;   // Тип операции OPER_   
+} soper, * psoper;
+
+extern const soper opers[];
+extern const ubyte operlexlist[];
+   #ifdef __cplusplus              
+      }                            
+   #endif // __cplusplus
+
+#endif // _OPERLIST_
+\!
+
+
+func str buf2const( str name, str res, buf b )
+{
+   uint i
+   uint lnum
+   res = "const ubyte \(name)[] = { "
+   fornum i=0, *b
+   {
+      if b[i] 
+      {  
+         res += "'"
+         res.appendch( b[i])
+         res += "'"         
+      }
+      else
+      {
+         res += "0"
+      }
+      res +=", "      
+      if *res - lnum  > 75 
+      {                  
+         res += "\l"
+         lnum = *res
+      }  
+   }
+   res += "};\l"
+   return res
+}
+
+/*-----------------------------------------------------------------------------
+*
+* ID: operlist_c 26.10.06 0.0.A. 
+* 
+* Summary: The .c output function.
+*  
+-----------------------------------------------------------------------------*/
+
+text  operlist_c( buf blex, arr aprin of str, arr aprout of str, arr atblflgs of str, arr aopers of str, arr acom of str )
+\@headerout( "operlist_c", "Generated with 'operlist' program", "")
+
+#include "operlist.h"
+
+//Таблица приоритетов и типов операций
+const soper opers[] = {
+\{
+   uint i  
+   
+   fornum i, *atblflgs
+   {
+      @"   { \( aprin[i] ), \( aprout[i] ), \(atblflgs[i]) },// '\( acom[ i ] )'  \(aopers[i]) \l"
+   }      
+}
+};
+
+//Список строк операций
+\{ str slex
+   @buf2const( "operlexlist", slex, blex)
+}
+
+\!
+
+/*-----------------------------------------------------------------------------
+*
+* ID: opermain 26.10.06 0.0.A.ABKL 
+* 
+* Summary: The main function.
+*  
+-----------------------------------------------------------------------------*/
+
+func opermain<main>
+{   
+   str hout
+   gt  opergt
+   gtitems gtis
+   
+   uint i,j   
+   uint gtflgs, gttbl
+   arr  aflgs  of str   //Массив типов флагов
+   arr  amflgs of str   //Массив типов флагов с приведенными именами 
+   arr  aflgscom of str //Комментарии к типам флагов
+   arr  atblflgs of str //Массив наборов флагов для таблицы операций
+   arr  aopers   of str //Массив идентификаторов операций
+   arr  aoperscom of str //Массив комментариев к идентификаторам операций
+   arr  aprin  of str   //Массив входных приоритетов для таблицы операций
+   arr  aprout of str   //Массив выходных приоритетов для таблицы операций
+   buf  blex            //Строковые представления операций
+   uint flgwasundef     //Последняя операция была undef
+   
+   opergt.read( "operlist.gt" )
+   
+   gtflgs as opergt.find("flags")   
+   aflgs.expand( *gtflgs )
+   amflgs.expand( *gtflgs )
+   aflgscom.expand( *gtflgs )
+   foreach curf, gtflgs.items( gtis )
+   {
+      aflgs[i] = curf.name
+      amflgs[i] = "OPF_" + curf.name
+      amflgs[i].upper()
+      aflgscom[i++] = curf.get( "comment" )      
+   } 
+   
+   gttbl as opergt.find("tbl")
+   atblflgs.expand( *gttbl )
+   aopers.expand( *gttbl )
+   aoperscom.expand( *gttbl )
+   aprin.expand( *gttbl )
+   aprout.expand( *gttbl )
+   foreach cur, gttbl.items( gtis )
+   {      
+      if cur.find( "prin" )
+      {
+         cur.get("prin",aprin[j])
+      }
+      else : aprin[j]="0"
+      if cur.find( "prout" )
+      {
+         cur.get("prout",aprout[j])
+      }
+      else : aprout[j]="0"      
+      aopers[j] = "Op" + cur.name
+      aopers[j].uppersub( 2, 1 )
+      aoperscom[j] = cur.value
+      if flgwasundef && !cur.find( "post" )
+      {
+         blex += ""
+      }
+      else : blex += cur.value      
+      fornum i=0, *aflgs
+      {
+         if cur.find( aflgs[i] ) 
+         {
+            if *atblflgs[j] : atblflgs[j]@" | "
+            atblflgs[j]@amflgs[i] 
+         }
+      }
+      if cur.find( "undef" ) : flgwasundef = 1
+		else : flgwasundef = 0
+      j++
+   }
+
+   hout@operlist_h( aopers, aoperscom, amflgs, aflgscom )
+   hout.write( "operlist.h" )
+   hout.clear()
+   hout@operlist_c( blex, aprin, aprout, atblflgs, aopers, aoperscom )
+   hout.write( "operlist.c" )
+   congetch("Press any key...")   
+}

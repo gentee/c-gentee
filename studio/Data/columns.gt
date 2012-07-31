@@ -1,0 +1,75 @@
+<*|columns>
+   <files>
+      <src = 200>
+      <dest = 150>
+      <custom = 200>
+      <ifexist = 180>
+      <group = 150>
+   </files>
+   <registry>
+      <root = 160>
+      <subkey = 254>
+      <valname = 200>
+      <valtype = 100>
+      <valdata = 270>
+   </registry>
+   <shcut>
+      <shpath = 175>
+      <shname = 195>
+      <tarpath = 182>
+      <tarname = 225>
+      <cmdline = 250>
+      <workpath = 180>
+      <workcust = 240>
+      <icon = 180>
+   </shcut>
+   <install>
+      <cmd = 150>
+      <dest = 250>
+   </install>
+   <uninstall>
+      <cmd = 150>
+      <dest = 250>
+   </uninstall>
+   <runx>
+      <type = 150>
+      <path = 150>
+      <file = 150>
+      <cmdline = 200>
+      <wait = 100>
+      <workdir = 150>
+      <custdir = 200>
+      <when = 150>
+   </runx>
+   <ini>
+      <inipath = 175>
+      <ininame = 195>
+      <section = 182>
+      <key = 175>
+      <value = 250>
+   </ini>
+   <mreg>
+      <macro = 150>
+      <root = 160>
+      <subkey = 254>
+      <valname = 200>
+      <defdata = 200>
+   </mreg>
+   <activex>
+      <path = 175>
+      <name = 195>
+   </activex>
+   <font>
+      <path = 175>
+      <name = 195>
+      <fontname = 150>
+      <permanent = 100>
+   </font>
+   <ext>
+      <ext = 100>
+      <path = 175>
+      <name = 195>
+      <cmdline = 150>
+   </ext>
+</columns>
+

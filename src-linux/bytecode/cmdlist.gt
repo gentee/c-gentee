@@ -1,0 +1,312 @@
+/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* ID: cmdlist 20.10.06 0.0.A.
+*
+* Author: Alexey Krivonogov ( gentee )
+*
+* Summary: The list of the embedded byte-code commands. It is used for
+  generating cmdlist.h and cmdlist.с files 
+*
+******************************************************************************/
+
+<CNone comment = "Error command" type />
+<TInt comment = "int type" type />
+<TUint comment = "uint type" type />
+<TByte comment = "byte type" type />
+<TUbyte comment = "ubyte type" type />
+<TShort comment = "short type" type />
+<TUshort comment = "ushort type" type />
+<TFloat comment = "float type" type />
+<TDouble comment = "double type" type />
+<TLong comment = "long type" type />
+<TUlong comment = "ulong type" type />
+<TReserved comment = "reserved type" type />
+<TBuf comment = "buf type" type />
+<TStr comment = "str type" type />
+<TArr comment = "arr type" type />
+<TCollection comment = "collection type" type />
+<TAny comment = "any type" type />
+<TFordata comment = "foreach type" type />
+<CNop comment = "The command does nothing" />
+<CGoto comment = "The unconditional jump." cmdshift = 1 >
+      <summary>cmd + 1 uint - absolute position in the byte-code</>
+</>
+<CGotonocls comment = "The unconditional jump without clearing stack."
+    cmdshift = 1 >
+</>
+<CIfze comment = "The conditional jump" cmdshift = 1 >
+   <summary>
+         if top (uint) == 0 then go to cmd + 1 ( uint ) - absolute position in
+ the byte-code
+   </>
+</>
+<CIfznocls comment = "The conditional jump without clearing stack" 
+    cmdshift = 1  topshift = -1 >
+</>
+<CIfnze comment = "The conditional jump" cmdshift = 1>
+   <summary>
+      if top (uint) != 0 then go to cmd + 1 ( uint ) - absolute position in
+ the byte-code
+   </>
+</>
+<CIfnznocls comment = "The conditional jump without clearing stack." 
+    cmdshift = 1  topshift = -1 ></>
+<CByload comment = "The next ubyte push into stack. GE only" topshift = 0
+    cmdshift = 0 ></>    
+<CShload comment = "The next ushort push into stack. GE only" topshift = 0
+    cmdshift = 0 ></>    
+<CDwload comment = "The next uint push into stack." topshift = 1
+    cmdshift = 1 ></>    
+<CCmdload comment = "The next ID push into stack." topshift = 1
+    cmdshift = 1 ></>    
+<CResload comment = "The next ID (resource) push into stack." topshift = 1
+    cmdshift = 1 ></>    
+<CQwload comment = "The next ulong push into stack." topshift = 2
+    cmdshift = 2 ></>    
+<CDwsload comment = "The next uints ( cmd 1 ) ( cmd 2 ) push into the stack"
+    topshift = 0 cmdshift = 0 ></>    
+<CVarload comment = "Load the value of parameter or variable with number ( cmd 1)"
+    topshift = 1 cmdshift = 1 ></>    
+<CVarptrload comment = "Load the pointer to value of parameter or variable with number ( cmd 1)"
+    topshift = 1 cmdshift = 1 ></>
+<CDatasize comment = "Load the pointer to the next data and the size"
+    topshift = 0 ></>
+<CLoglongtrue comment = "Return 1 if ulong in stack is not zero"
+    topshift = -1 ></>
+<CLognot comment = "Logical not" topshift = 0 ></>
+<CLoglongnot comment = "Logical NOT for long ulong"
+    topshift = -1 ></>
+<CDup comment = "Duplicate top value" topshift = 1 ></>
+<CDuplong comment = "Duplicate two top value" topshift = 2 ></>
+<CTop comment = "Return the pointer to top" topshift = 1 ></>
+<CPop comment = "Delete the top value" topshift = -1 ></>
+<CGetUB comment = " * ( pubyte ) " topshift = 0 ></>
+<CGetB comment = " * ( pbyte ) " topshift = 0 ></>
+<CGetUS comment = " * ( pushort ) " topshift = 0 ></>
+<CGetS comment = " * ( pshort ) " topshift = 0 ></>
+<CGetI comment = " * ( puint && pint && float ) " topshift = 0 ></>
+<CGetL comment = " * ( pulong && plong && double ) " topshift = 1 ></>
+<CSetUB comment = " * ( pubyte ) = " topshift = -1 ></>
+<CSetB comment = " * ( pbyte ) = " topshift = -1 ></>
+<CSetUS comment = " * ( pushort ) = " topshift = -1 ></>
+<CSetS comment = " * ( pshort ) = " topshift = -1 ></>
+<CSetI comment = " * ( puint && pint && float ) = " topshift = -1 ></>
+<CSetL comment = " * ( pulong && plong && double ) = " topshift = -1 ></>
+<CAddUIUI comment = " + " topshift = -1 ></> 
+<CSubUIUI comment = " - " topshift = -1 ></>
+<CMulUIUI comment = " * " topshift = -1 ></>
+<CDivUIUI comment = " / " topshift = -1 ></>
+<CModUIUI comment = " % " topshift = -1 ></>
+<CAndUIUI comment = " & " topshift = -1 ></>
+<COrUIUI comment = " | " topshift = -1 ></>
+<CXorUIUI comment = " ^ " topshift = -1 ></>
+<CLeftUIUI comment = " << " topshift = -1 ></>
+<CRightUIUI comment = " >> " topshift = -1 ></>
+<CLessUIUI comment = " < " topshift = -1 ></>
+<CGreaterUIUI comment = " > " topshift = -1 ></>
+<CEqUIUI comment = " == " topshift = -1 ></>
+<CNotUI comment = " ~ " topshift = 0 ></>
+<CIncLeftUI comment = " ++i " topshift = 0 ></>
+<CIncRightUI comment = " i++ " topshift = 0 ></>
+<CDecLeftUI comment = " --i " topshift = 0 ></>
+<CDecRightUI comment = " i-- " topshift = 0 ></>
+<CAddUI comment = " += " topshift = -1 ></>
+<CSubUI comment = " -= " topshift = -1 ></>
+<CMulUI comment = " *= " topshift = -1 ></>
+<CDivUI comment = " /= " topshift = -1 ></>
+<CModUI comment = " %= " topshift = -1 ></>
+<CAndUI comment = " &= " topshift = -1 ></>
+<COrUI  comment = " |= " topshift = -1 ></>
+<CXorUI comment = " ^= " topshift = -1 ></>
+<CLeftUI comment = " <<= " topshift = -1 ></>
+<CRightUI comment = " >>= " topshift = -1 ></>
+<CVarsInit comment = "Initialize variables in block cmd1 " 
+         topshift = 0 cmdshift = 1 ></>
+<CGetText comment = "Get current output of text function" topshift = 1></> 
+<CSetText comment = "Print string to current output of text function" 
+         topshift = -1></>         
+<CPtrglobal comment = "Get to the global variable" topshift = 1 
+         cmdshift = 1></>
+<CSubcall comment = "Call a subfunc cmd 1 - goto" cmdshift = 1 />
+<CSubret comment = "The number of returned uint cmd 1" cmdshift = 1 />
+<CSubpar comment = "Parameters of subfunc. cmd 1 - Set block" cmdshift = 1 />
+<CSubreturn comment = "Return from a subfunc" />
+<CCmdcall comment = "Call a funcion" cmdshift = 1 ></>
+<CCallstd comment = "Call a stdcall or cdecl funcion" cmdshift = 2 topshift = 1></>
+<CReturn comment = "Return from the function."></>
+<CAsm comment = "Assembler" cmdshift = 1 ></>
+<CDbgTrace comment = "Debug line tracing" topshift = -1 ></>
+<CDbgFunc comment = "Debug func entering" topshift = -2 ></>
+
+<- Pseudo stack commands ->
+
+<CMulII comment = " * " topshift = -1 ></>
+<CDivII comment = " / " topshift = -1 ></>
+<CModII comment = " % " topshift = -1 ></>
+<CLeftII comment = " << " topshift = -1 ></>
+<CRightII comment = " >> " topshift = -1 ></>
+<CSignI comment = " change sign " topshift = 0 ></>
+<CLessII comment = " < " topshift = -1 ></>
+<CGreaterII comment = " > " topshift = -1 ></>
+<CMulI comment = " *= " topshift = -1 ></>
+<CDivI comment = " /= " topshift = -1 ></>
+<CModI comment = " %= " topshift = -1 ></>
+<CLeftI comment = " <<= " topshift = -1 ></>
+<CRightI comment = " >>= " topshift = -1 ></>
+<CMulB comment = " *= " topshift = -1 ></>
+<CDivB comment = " /= " topshift = -1 ></>
+<CModB comment = " %= " topshift = -1 ></>
+<CLeftB comment = " <<= " topshift = -1 ></>
+<CRightB comment = " >>= " topshift = -1 ></>
+<CMulS comment = " *= " topshift = -1 ></>
+<CDivS comment = " /= " topshift = -1 ></>
+<CModS comment = " %= " topshift = -1 ></>
+<CLeftS comment = " <<= " topshift = -1 ></>
+<CRightS comment = " >>= " topshift = -1 ></>
+<Cd2f comment = "double 2 float" topshift = -1 ></>
+<Cd2i comment = "double 2 int" topshift = -1 ></>
+<Cd2l comment = "double 2 long" topshift = 0 ></>
+<Cf2d comment = "float 2 double" topshift = 1 ></>
+<Cf2i comment = "float 2 int" topshift = 0 ></>
+<Cf2l comment = "float 2 long" topshift = 1 ></>
+<Ci2d comment = "int 2 double" topshift = 1 ></>
+<Ci2f comment = "int 2 float" topshift = 0 ></>
+<Ci2l comment = "int 2 long" topshift = 1 ></>
+<Cl2d comment = "long 2 double" topshift = 0 ></>
+<Cl2f comment = "long 2 float" topshift = -1 ></>
+<Cl2i comment = "long 2 int" topshift = -1 ></>
+<Cui2d comment = "uint 2 double" topshift = 1 ></>
+<Cui2f comment = "uint 2 float" topshift = 0 ></>
+<Cui2l comment = "uint 2 long" topshift = 1 ></>
+
+<CAddULUL comment = "+" topshift = -2 ></>
+<CSubULUL comment = "-" topshift = -2 ></>
+<CMulULUL comment = "*" topshift = -2 ></>
+<CDivULUL comment = "/" topshift = -2 ></>
+<CModULUL comment = "%" topshift = -2 ></>
+<CAndULUL comment = "&" topshift = -2 ></>
+<COrULUL comment = "|" topshift = -2 ></>
+<CXorULUL comment = "^" topshift = -2 ></>
+<CLeftULUL comment = "<<" topshift = -2 ></>
+<CRightULUL comment = ">>" topshift = -2 ></>
+<CLessULUL comment = "<" topshift = -3 ></>
+<CGreaterULUL comment = ">" topshift = -3 ></>
+<CEqULUL comment = "==" topshift = -3 ></>
+<CNotUL comment = "~" topshift = 0 ></>
+
+<CIncLeftUL comment = "++" topshift = 1 ></>
+<CIncRightUL comment = "++" topshift = 1 ></>
+<CDecLeftUL comment = "--" topshift = 1 ></>
+<CDecRightUL comment = "--" topshift = 1 ></>
+<CAddUL comment = "+=" topshift = -1 ></>
+<CSubUL comment = "-=" topshift = -1 ></>
+<CMulUL comment = "*=" topshift = -1 ></>
+<CDivUL comment = "/=" topshift = -1 ></>
+<CModUL comment = "%" topshift = -1 ></>
+<CAndUL comment = "&=" topshift = -1 ></>
+<COrUL comment = "|=" topshift = -1 ></>
+<CXorUL comment = "&=" topshift = -1 ></>
+<CLeftUL comment = "<<=" topshift = -1 ></>
+<CRightUL comment = ">>=" topshift = -1 ></>
+
+<CMulLL comment = "*" topshift = -2 ></>
+<CDivLL comment = "/" topshift = -2 ></>
+<CModLL comment = "%" topshift = -2 ></>
+<CLeftLL comment = "<<=" topshift = -2 ></>
+<CRightLL comment = ">>=" topshift = -2 ></>
+<CSignL comment = "sign" topshift = 0 ></>
+<CLessLL comment = "<" topshift = -3 ></>
+<CGreaterLL comment = ">" topshift = -3 ></>
+
+<CMulL comment = "*=" topshift = -1 ></>
+<CDivL comment = "/=" topshift = -1 ></>
+<CModL comment = "%=" topshift = -1 ></>
+<CLeftL comment = "<<=" topshift = -1 ></>
+<CRightL comment = ">>=" topshift = -1 ></>
+
+<CAddFF comment = "+" topshift = -1 ></>
+<CSubFF comment = "-" topshift = -1 ></>
+<CMulFF comment = "*" topshift = -1 ></>
+<CDivFF comment = "/" topshift = -1 ></>
+<CSignF comment = "sign" topshift = 0 ></>
+<CLessFF comment = "<" topshift = -1 ></>
+<CGreaterFF comment = ">" topshift = -1 ></>
+<CEqFF comment = "==" topshift = -1 ></>
+
+<CIncLeftF comment = "++" topshift = 0 ></>
+<CIncRightF comment = "++" topshift = 0 ></>
+<CDecLeftF comment = "--" topshift = 0 ></>
+<CDecRightF comment = "--" topshift = 0 ></>
+<CAddF comment = "+=" topshift = -1 ></>
+<CSubF comment = "-=" topshift = -1 ></>
+<CMulF comment = "*=" topshift = -1 ></>
+<CDivF comment = "/=" topshift = -1 ></>
+   
+<CAddDD comment = "+" topshift = -2 ></>
+<CSubDD comment = "-" topshift = -2 ></>
+<CMulDD comment = "*" topshift = -2 ></>
+<CDivDD comment = "/" topshift = -2 ></>
+<CSignD comment = "sign" topshift = 0 ></>
+<CLessDD comment = "<" topshift = -3 ></>
+<CGreaterDD comment = ">" topshift = -3 ></>
+<CEqDD comment = "==" topshift = -3 ></>
+  
+<CIncLeftD comment = "++" topshift = 1 ></>
+<CIncRightD comment = "++" topshift = 1 ></>
+<CDecLeftD comment = "--" topshift = 1 ></>
+<CDecRightD comment = "--" topshift = 1 ></>
+<CAddD comment = "+=" topshift = -1 ></>
+<CSubD comment = "-=" topshift = -1 ></>
+<CMulD comment = "*=" topshift = -1 ></>
+<CDivD comment = "/=" topshift = -1 ></>
+
+<CIncLeftUB comment = "++" topshift = 0 ></>
+<CIncRightUB comment = "++" topshift = 0 ></>
+<CDecLeftUB comment = "--" topshift = 0 ></>
+<CDecRightUB comment = "--" topshift = 0 ></>
+<CAddUB comment = "+=" topshift = -1 ></>
+<CSubUB comment = "-=" topshift = -1 ></>
+<CMulUB comment = "*=" topshift = -1 ></>
+<CDivUB comment = "/=" topshift = -1 ></>
+<CModUB comment = "%=" topshift = -1 ></>
+<CAndUB comment = "&=" topshift = -1 ></>
+<COrUB comment = "|=" topshift = -1 ></>
+<CXorUB comment = "^=" topshift = -1 ></>
+<CLeftUB comment = "<<=" topshift = -1 ></>
+<CRightUB comment = ">>=" topshift = -1 ></>
+<CIncLeftUS comment = "++" topshift = 0 ></>
+<CIncRightUS comment = "++" topshift = 0 ></>
+<CDecLeftUS comment = "--" topshift = 0 ></>
+<CDecRightUS comment = "--" topshift = 0 ></>
+<CAddUS comment = "+=" topshift = -1 ></>
+<CSubUS comment = "-=" topshift = -1 ></>
+<CMulUS comment = "*=" topshift = -1 ></>
+<CDivUS comment = "/=" topshift = -1 ></>
+<CModUS comment = "%=" topshift = -1 ></>
+<CAndUS comment = "&=" topshift = -1 ></>
+<COrUS comment = "|=" topshift = -1 ></>
+<CXorUS comment = "^=" topshift = -1 ></>
+<CLeftUS comment = "<<=" topshift = -1 ></>
+<CRightUS comment = ">>=" topshift = -1 ></>
+
+<CCollectadd comment = "Run-time loading collection" cmdshift = 1 />
+      
+<-
+
+   
+CVarloadoff comment = "Load the pointer to value of parameter or variable with number ( cmd 1) + the offset ( cmd 2 )"
+    topshift = 1 cmdshift = 2 >
+    
+   SFinally,     // Метка перехода по исключению
+   SSetXDim:
+   SGetXDim:
+   SPtrToStack,  // Записать данные в стэк из указателя
+    
+</->

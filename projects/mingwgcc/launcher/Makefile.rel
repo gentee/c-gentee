@@ -1,0 +1,33 @@
+# A simple makefile generator by KiSoft, 2007. mailto: kisoft@rambler.ru
+# version: 0.3.11.11
+
+# Project Variables start
+CPP=mingw32-g++.exe
+CC=mingw32-gcc.exe
+LD=mingw32-g++.exe
+LIB=ar.exe
+WINDRES=windres.exe
+# Project Variables end
+
+# Target: Release
+
+OBJS_RELEASE=obj\Release\src\projects\launcher\launcher.o
+
+Release: bin\Release\launcher.exe
+
+bin\Release\launcher.exe: $(OBJS_RELEASE)
+	@echo Building executable bin\Release\launcher.exe
+	@mingw32-g++.exe  -o  $(Release)   -lgdi32 -luser32 -lkernel32 ..\gelibrt\Release\libgelibrt.a  -mwindows
+
+obj\Release\src\projects\launcher\launcher.o: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\projects\launcher\launcher.c
+	@echo Compiling: D:\ANO_PROJECTS\Project_cb\Gentee_3\src\projects\launcher\launcher.c
+	@mingw32-gcc.exe   -c D:\ANO_PROJECTS\Project_cb\Gentee_3\src\projects\launcher\launcher.c -o obj\Release\src\projects\launcher\launcher.o
+
+.PHONY: clean_Release
+
+clean_Release: 
+	@echo Delete $(OBJS_RELEASE) bin\Release\launcher.exe
+	-@del /f $(OBJS_RELEASE) bin\Release\launcher.exe
+
+
+

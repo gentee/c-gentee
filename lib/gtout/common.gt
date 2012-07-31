@@ -1,0 +1,86 @@
+/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* ID: common 03.11.06 0.0.A.  
+*
+* Summary: The common language settings.   
+*
+******************************************************************************/
+
+<-
+flag
+   W - htm for internet
+   
+ext - extension
+filename - custom filename. If it is empty then _IDNUM is deleted
+link - Relative link to this page
+->
+
+<style_A
+   flag = W ext = htm 
+   pattern = defhtm 
+   filename 
+   >
+</>
+
+<style_B
+   flag = W ext = html 
+   pattern = asis 
+   filename 
+   >
+</>
+
+<style_C inherit = style_A
+   navmenu = menusup headmenu = support >
+   <nav />
+</>
+
+<style_D inherit = style_A
+   navmenu = menubuy headmenu = purchase >
+   <nav />
+</>
+
+<style_E inherit = style_A
+   headmenu = opensource>
+   <nav />
+</>
+
+<style_F inherit = style_A text
+   navmenu = menuabout headmenu = license >
+   <nav />
+</>
+
+<style_FA inherit = style_A text
+   navmenu = menucontact headmenu = contact >
+   <nav />
+</>
+
+<style_FC inherit = style_A text
+   navmenu = menucommun headmenu = maillists >
+   <nav />
+</>
+
+
+<style_CI inherit = style_A
+   navmenu = menuprog headmenu = index_1 text>
+   <nav />
+</>
+
+<lang>
+   <en
+      htmlang = "en-us"
+      charset = "iso-8859-1"         
+   />
+   <ru
+      htmlang = "ru"
+      charset = "windows-1251"         
+   />
+</lang>
+
+

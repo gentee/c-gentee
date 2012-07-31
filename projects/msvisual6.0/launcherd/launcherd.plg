@@ -1,0 +1,33 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: launcherd - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\86C2~1\AppData\Local\Temp\RSP2A5C.tmp" with contents
+[
+/nologo /Gz /Zp1 /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "LAUNCHERD" /Fp"Release/launcherd.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"K:\gentee\Open Source\gentee\src\projects\launcher\launcher.c"
+]
+Creating command line "cl.exe @C:\Users\86C2~1\AppData\Local\Temp\RSP2A5C.tmp" 
+Creating temporary file "C:\Users\86C2~1\AppData\Local\Temp\RSP2A5D.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/launcherd.pdb" /machine:I386 /nodefaultlib /out:"../../../exe/res/linker/launcherd.exe" 
+".\Release\launcher.obj"
+"..\dll\gentee.lib"
+]
+Creating command line "link.exe @C:\Users\86C2~1\AppData\Local\Temp\RSP2A5D.tmp"
+<h3>Output Window</h3>
+Compiling...
+launcher.c
+Linking...
+
+
+
+<h3>Results</h3>
+launcherd.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

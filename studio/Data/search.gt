@@ -1,0 +1,17 @@
+<|search direct = 0 word = 0 
+     case = 1>
+   <*find>
+      unpack
+getdrives
+verifypath
+unpackdir
+macrox_getstr
+Pathsave
+Path
+Reg
+regget
+reggets
+</>
+   <*replace>
+      </>
+</search>

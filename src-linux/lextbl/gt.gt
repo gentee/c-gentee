@@ -1,0 +1,88 @@
+/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* ID: gt 18.10.06 0.0.A.
+*
+* Author: Alexey Krivonogov ( gentee )
+*
+* Summary: This file contains a description of the lexical table for
+  loading GT language data.
+*
+******************************************************************************/
+
+<gt prefix = "GT_" desc = "Loading GT data" gout = "..\..\lib\gt\lexgt.g">
+   <MAIN cmd = SKIP >
+      <_ ch = '<' state = ISBEGIN pos try push trycmd = TRYBEGIN />
+   </>   
+   <ISBEGIN ret >
+      <_ ch = '-' state = COMMENT itstate />
+      <_ ch = '*' state = STAR />
+      <_ ch = '|' state = VLINE />
+      <_ numname state = BEGIN itstate pushli />
+   </>   
+   <TRYBEGIN pop cmd = SKIP />
+   <COMMENT cmd = OK comment = Comments >
+      <_ cmd = OK pop multi = '->' />
+   </>   
+   <VLINE ret >
+      <_ ch = '*' state = STAR />
+      <_ numname state = BEGIN itstate pushli />
+   </>   
+   <STAR ret >
+      <_ ch = '|' state = VLINE />
+      <_ numname state = BEGIN itstate pushli />
+   </>   
+   <BEGIN state = ATTRIB stay comment = "Begin of the GT object">
+      <_ numname cmd = OK />
+   </>   
+   <ATTRIB cmd = SKIP >
+      <_ name state = NAME itstate pos />
+      <_ ch = '/' state = ISEND pos try trycmd = TRYISEND />
+      <_ ch = '=' state = EQUAL itstate pos />
+      <_ ch = '>' state = ENDATTR />
+   </>   
+   <NAME state = ATTRIB stay comment = "Identifier name">
+      <_ numname cmd = OK />
+   </>   
+   <EQUAL state = STRATTR itstate pos comment = "Equal sign">
+      <_ lespace cmd = SKIP />
+      <_ ch = '/>' state = ATTRIB stay />
+      <_ ch = '"' state = STRDQ itstate pos />
+      <_ ch = "'" state = STRQ itstate pos />
+   </>   
+   <STRATTR cmd = OK comment = "Value of the attribute">
+      <_ lespace ch = '>/' state = ATTRIB stay />
+   </>   
+   <STRDQ cmd = OK comment = "Value of the attribute in the double quotes">
+      <_ ch = '"' cmd = OK state = ATTRIB />
+   </>   
+   <STRQ cmd = OK comment = "Value of the attribute in the apostrophes">
+      <_ ch = "'" cmd = OK state = ATTRIB />
+   </>   
+   <ISEND ret >
+      <_ ch = '>' cmd = END itcmd pop popli />
+      <_ numname cmd = GTNAME />
+   </>
+   <TRYISEND state = ATTRIB cmd = SKIP />
+   <ENDATTR state = DATA itstate pos>
+      <_ lespace cmd = SKIP />
+      <_ ch = '<' state = ISBEGIN pos push try trycmd = TRYDATABEG />
+      <_ multi = '</' state = ISEND try trycmd = TRYWHAT />
+   </>   
+   <DATA cmd = OK comment = "Value of the GT object">
+      <_ multi = '</' state = ISEND try trycmd = TRYENDDATA />
+   </>   
+   <TRYENDDATA state = DATA cmd = OK />
+   <TRYWHAT state = DATA itstate />
+   <TRYDATABEG state = DATA itstate pop />
+   
+   <commands skip>
+      <END comment = "End of the GT object">
+   </commands>
+</gt>

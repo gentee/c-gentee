@@ -1,0 +1,42 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: ged - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\Alexey\AppData\Local\Temp\RSP4613.tmp" with contents
+[
+/nologo /Gz /Zp1 /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "GED_EXPORTS" /D "NOGENTEE" /Fp"Release/ged.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"K:\GENTEE\OPEN SOURCE\GENTEE\src\projects\ged\select.c"
+]
+Creating command line "cl.exe @C:\Users\Alexey\AppData\Local\Temp\RSP4613.tmp" 
+Creating temporary file "C:\Users\Alexey\AppData\Local\Temp\RSP4614.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib uuid.lib msvcrt.lib /nologo /dll /incremental:no /pdb:"Release/ged.pdb" /machine:I386 /nodefaultlib /def:"..\..\..\src\projects\ged\ged.def" /out:"..\..\..\exe\ged.dll" /implib:"Release/ged.lib" 
+".\Release\buf.obj"
+".\Release\compare.obj"
+".\Release\defines.obj"
+".\Release\fields.obj"
+".\Release\ged.obj"
+".\Release\memory.obj"
+".\Release\record.obj"
+".\Release\select.obj"
+".\Release\str.obj"
+".\Release\qsort.obj"
+]
+Creating command line "link.exe @C:\Users\Alexey\AppData\Local\Temp\RSP4614.tmp"
+<h3>Output Window</h3>
+Compiling...
+select.c
+Linking...
+   Creating library Release/ged.lib and object Release/ged.exp
+
+
+
+<h3>Results</h3>
+ged.dll - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

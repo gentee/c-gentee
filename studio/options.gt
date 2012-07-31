@@ -1,0 +1,98 @@
+﻿<history >
+ <_ name = "Help Perfect Automation" file = "K:\Gentee\Open Source\script\projects\gentee\Help Perfect Automation.pa" />
+ <_ name = "Customize Open & Save dialogs" file = "K:\gentee\Open Source\script\solutions\programs\Customize Open & Save dialogs.pa" />
+ <_ name = "System Info" file = "K:\Gentee\Open Source\script\solutions\samples\System Info.pa" />
+ <_ name = "New task" file = "K:\gentee\Open Source\script\projects\signtool.pa" />
+ <_ name = "PA & EXE to WWW" file = "K:\Gentee\Open Source\script\projects\gentee\PA & EXE to WWW.pa" />
+ <_ name = "Daily Flash" file = "K:\Gentee\Open Source\script\projects\home\Daily Flash.pa" />
+ <_ name = "Gentee RU to 1251" file = "K:\Gentee\Open Source\script\projects\gentee\Gentee RU to 1251.pa" />
+ <_ name = RapidShare file = "K:\Gentee\Open Source\script\projects\RapidShare.pa" />
+ <_ name = "New task" file = "K:\Gentee\Open Source\script\res\newproject.pa" />
+ <_ name = "View files list as HTML" file = "K:\Gentee\Open Source\script\solutions\programs\View files list as HTML.pa" />
+ <_ name = "Set attributes of files and folders" file = "K:\Gentee\Open Source\script\solutions\programs\Set attributes of files and folders.pa" />
+ <_ name = "Sizes of folder and subfolders" file = "K:\Gentee\Open Source\script\solutions\programs\Sizes of folder and subfolders.pa" />
+ <_ name = "Build & Version Perfect Automation" file = "K:\Gentee\Open Source\script\projects\gentee\Build & Version Perfect Automation.pa" />
+ <_ name = "Play macro" file = "K:\Gentee\Open Source\script\res\playmacro.pa" />
+ <_ name = "Play macro" file = "K:\Gentee\Open Source\script\res\playmacroexe.pa" />
+ <_ name = "Speed Select File" file = "K:\Gentee\Open Source\script\solutions\programs\Customize Open & Save dialogs.pa" />
+ <_ name = "FTP Perfect Automation" file = "K:\Gentee\Open Source\script\projects\gentee\FTP Perfect Automation.pa" />
+ <_ name = "Copy CD/DVD to Hard Drive" file = "K:\Gentee\Open Source\script\solutions\programs\Copy CD & DVD to Hard Drive.pa" />
+ <_ name = "Save parameters into Registry" file = "K:\Gentee\Open Source\script\solutions\samples\Save parameters into Registry.pa" />
+</>
+<fMain >
+ <CurForm >0</>
+ <WindowState >0</>
+ <Left >128</>
+ <Top >84</>
+ <Width >1058</>
+ <Height >749</>
+ <splScripts >456</>
+ <splCmds >198</>
+ <splCard >253</>
+ <Splitter0 >100</>
+ <Splitter1 >50</>
+ <splLauncher2 >220</>
+ <lvcolfilename >227</>
+ <lvcolfilename_order >1</>
+ <lvcolkeyword >147</>
+ <lvcolkeyword_order >2</>
+ <lvcoldesc >112</>
+ <lvcoldesc_order >4</>
+ <lvcollastrun >143</>
+ <lvcollastrun_order >5</>
+ <lvcolnextrun >83</>
+ <lvcolnextrun_order >3</>
+ <lvcolname >335</>
+ <lvcolname_order >0</>
+ <lvcolplaylist >500</>
+ <lvcolplaylist_order >0</>
+ <splScheduler >50</>
+ <splTop >180</>
+ <splLauncher >34</>
+ <lvschname >180</>
+ <lvschname_order >0</>
+ <lvschfilename >407</>
+ <lvschfilename_order >1</>
+ <lvschnextrun >130</>
+ <lvschnextrun_order >2</>
+ <lvschlastrun >151</>
+ <lvschlastrun_order >3</>
+ <lvschtriggers >130</>
+ <lvschtriggers_order >4</>
+ <lvschgroupname >210</>
+ <lvschgroupname_order >5</>
+ <splLTop >189</>
+ <lvcolname_sorted >1</>
+ <lvcolfilename_sorted >0</>
+ <lvcolkeyword_sorted >0</>
+ <lvcoldesc_sorted >0</>
+ <lvcollastrun_sorted >0</>
+ <lvcolnextrun_sorted >0</>
+ <lvschname_sorted >0</>
+ <lvschfilename_sorted >0</>
+ <lvschnextrun_sorted >0</>
+ <lvschlastrun_sorted >0</>
+ <lvschtriggers_sorted >0</>
+ <lvschgroupname_sorted >0</>
+</>
+<preferences >
+ <chbAutoRun >0</>
+ <chbTray >1</>
+ <chbRunMinimized >0</>
+ <chbRunOnce >0</>
+ <chbMinimize >0</>
+ <Language >english</>
+ <ExeFolder >C:\Users\Alexey\AppData\Local\Temp\Perfect Automation</>
+ <chbCache >0</>
+</>
+<record >
+ <keyboard >1</>
+ <mouse >1</>
+ <mousemove >1</>
+ <abscoord >1</>
+ <remactive >0</>
+ <name >$shortdate$-$shorttime$</>
+ <outdir >K:\Gentee\Open Source\script\records</>
+ <playdir >K:\Gentee\Open Source\script\records</>
+</>
+<automation >1</>

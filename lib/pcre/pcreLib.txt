@@ -1,0 +1,20 @@
+Function Descriptions
+
+
+Please refer to the prototype for the particular language you are using. 
+
+
+int pcre.match (str sPattern,int iOption)
+
+str sPattern    - Zero-terminated string containing the regular expression to be compiled
+int iOption     - Zero or more option bits
+
+Return -1 if error or the number of matches if ok
+
+int pcre.matchGetAll(str sText,str sPattern,int iOption,arr s of str)
+
+str sPattern    - Zero-terminated string containing the regular expression to be compiled
+int iOption     - Zero or more option bits
+arr s of str    - Where to put a result matched (array of str)
+
+Return -1 if error or the number of matches if ok

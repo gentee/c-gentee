@@ -1,0 +1,15 @@
+<|common lang = english>
+   <appwin left = 0 top = 19 width = 1217
+           height = 719 show = maximize></appwin>
+   <splitter left = 229 show = 1></splitter>
+   <filetab show = 1></filetab>
+   <tab = 3>
+   <*prj>Tutorial</prj>
+   <*comp>K:</comp>
+   <wins panel = 0 
+            vsplit = 544 
+            hsplit = 420 ></wins>
+   <curset>Editor</curset>
+   <launch savebefore = 2></launch>
+   <search current = 0></search>
+</common>

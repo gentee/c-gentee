@@ -1,0 +1,33 @@
+# A simple makefile generator by KiSoft, 2007. mailto: kisoft@rambler.ru
+# version: 0.3.11.11
+
+# Project Variables start
+CPP=wcl386.exe
+CC=wcl386.exe
+LD=wlink.exe
+LIB=wlib.exe
+WINDRES=wrc.exe
+# Project Variables end
+
+# Target: Release
+
+OBJS_RELEASE=obj\Release\src\projects\launcher\launcher.obj
+
+Release: bin\Release\launcher.exe
+
+bin\Release\launcher.exe: $(OBJS_RELEASE)
+	@echo Building executable bin\Release\launcher.exe
+	@wlink.exe option quiet   $(Release) name  library gdi32,user32,kernel32,..\gelibrt\Release\gelibrt.lib 
+
+obj\Release\src\projects\launcher\launcher.obj: ..\..\..\src\projects\launcher\launcher.c
+	@echo Compiling: ..\..\..\src\projects\launcher\launcher.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\projects\launcher\launcher.obj ..\..\..\src\projects\launcher\launcher.c
+
+.PHONY: clean_Release
+
+clean_Release: 
+	@echo Delete $(OBJS_RELEASE) bin\Release\launcher.exe
+	-@del /f $(OBJS_RELEASE) bin\Release\launcher.exe
+
+
+

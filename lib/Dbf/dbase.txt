@@ -1,0 +1,147 @@
+----------------------------------------------------------------------------
+Genaral Format of .dbf files in Xbase languages                    18-Nov-96
+----------------------------------------------------------------------------
+Applies for / supported by:
+
+   FS = FlagShip       D3 = dBaseIII+
+   Fb = FoxBase        D4 = dBaseIV
+   Fp = FoxPro         D5 = dBaseV
+   CL = Clipper
+
+
+1. DBF Structure
+================
+
+Byte   Description
+------+--------------------------------------
+0..n   .dbf header (see 2 for size, byte 8)
+n+1    1st record of fixed length (see 2&3)  \
+       2nd record (see 2 for size, byte 10)  \ if dbf is
+       ...                                   / not empty
+       last record                           /
+last   optional: 0x1a (eof byte)
+
+
+2. DBF Header (variable size, depending on field count)
+=======================================================
+
+Byte Size Contents Description                  Applies for (supported by)
+----+----+--------+----------------------------+-----------------------------
+00     1   0x03    plain .dbf                   FS, D3, D4, D5, Fb, Fp, CL
+           0x04    plain .dbf                   D4, D5  (FS)
+           0x05    plain .dbf                   D5, Fp  (FS)
+           0x43    with  .dbv memo var size     FS
+           0xB3    with  .dbv and .dbt memo     FS
+           0x83    with  .dbt memo              FS, D3, D4, D5, Fb, Fp, CL
+           0x8B    with  .dbt memo in D4 format D4, D5
+           0x8E    with  SQL table              D4, D5
+           0xF5    with  .fmp memo              Fp
+01     3  YYMMDD   Last update digits           all
+04     4  ulong    Number of records in file    all
+08     2  ushort   Header size in bytes         all
+10     2  ushort   Record size in bytes         all
+12     2   0,0     Reserved                     all
+14     1   0x01    Begin transaction            D4, D5
+           0x00    End Transaction              D4, D5
+           0x00    ignored                      FS, D3, Fb, Fp, CL
+15     1   0x01    Encryptpted                  D4, D5
+           0x00    normal visible               all
+16    12   0 (1)   multi-user environment use   D4,D5
+28     1   0x01    production index exists      Fp, D4, D5
+           0x00    index upon demand            all
+29     1   n       language driver ID           D4, D5
+           0x01    codepage  437 DOS USA        Fp
+           0x02    codepage  850 DOS Multi ling Fp
+           0x03    codepage 1251 Windows ANSI   Fp
+           0xC8    codepage 1250 Windows EE     Fp
+           0x00    ignored                      FS, D3, Fb, Fp, CL
+30     2   0,0     reserved                     all
+32    n*32         Field Descriptor, see (2a)   all
++1     1   0x0D    Header Record Terminator     all
+
+
+2a. Field descriptor array in dbf header (fix 32 bytes for each field)
+========================================
+
+Byte Size Contents Description                  Applies for (supported by)
+----+----+--------+----------------------------+-----------------------------
+0     11   ASCI    field name, 0x00 termin.     all
+11     1   ASCI    field type  (see 2b)         all
+12     4   n,n,n,n fld address in memory        D3
+           n,n,0,0 offset from record begin     Fp
+           0,0,0,0 ignored                      FS, D4, D5, Fb, CL
+16     1   byte    Field length, bin (see 2b)   all \ FS,CL: for C field type,
+17     1   byte    decimal count, bin           all / both used for fld lng
+18     2   0,0     reserved                     all
+20     1   byte    Work area ID                 D4, D5
+           0x00    unused                       FS, D3, Fb, Fp, CL
+21     2   n,n     multi-user dBase             D3, D4, D5
+           0,0     ignored                      FS, Fb, Fp, CL
+23     1   0x01    Set Fields                   D3, D4, D5
+           0x00    ignored                      FS, Fb, Fp, CL
+24     7   0..0    reserved                     all
+31     1   0x01    Field is in .mdx index       D4, D5
+           0x00    ignored                      FS, D3, Fb, Fp, CL
+
+
+2b. Field type and size in dbf header, field descriptor (1 byte)
+=======================================================
+
+  Size Type      Description/Storage            Applies for (supported by)
+------+---------+------------------------------+-----------------------------
+C 1..n Char      ASCII (OEM code page chars)    all
+                 rest= space, not \0 term.
+                 n = 1..64kb (using deci count) FS
+                 n = 1..32kb (using deci count) Fp, CL
+                 n = 1..254                     all
+D 8    Date      8 Ascii digits (0..9) in the   all
+                 YYYYMMDD format
+F 1..n Numeric   Ascii digits (-.0123456789)    FS, D4, D5, Fp
+                 variable pos. of float.point
+                 n = 1..20
+N 1..n Numeric   Ascii digits (-.0123456789)    all
+                 fix posit/no float.point
+                 n = 1..20                      FS, Fp, CL
+                 n = 1..18                      D3, D4, D5, Fb
+L 1    Logical   Ascii chars (YyNnTtFf space)   FS, D3, Fb, Fp, CL
+                 Ascii chars (YyNnTtFf ?)       D4, D5  (FS)
+M 10   Memo      10 digits repres. the start    all
+                 block posit. in .dbt file, or
+                 10spaces if no entry in memo
+V 10   Variable  Variable, bin/asc data in .dbv FS
+                 4bytes bin= start pos in memo
+                 4bytes bin= block size
+                 1byte     = subtype
+                 1byte     = reserved (0x1a)
+                 10spaces if no entry in .dbv
+P 10   Picture   binary data in .ftp            Fp
+                 structure like M
+B 10   Binary    binary data in .dbt            D5
+                 structure like M
+G 10   General   OLE objects                    D5, Fp
+                 structure like M
+2 2    short int binary int max +/- 32767       FS
+4 4    long int  binary int max +/- 2147483647  FS
+8 8    double    binary signed double IEEE      FS
+
+
+3. Each Dbf record (fix length)
+==================
+
+Byte   Size  Description                           Applies for (supported by)
+------+----+--------------------------------------+--------------------------
+0      1    deleted flag "*" or not deleted " "     all
+1..n   1..  x-times contents of fields, fixed       all
+            length, unterminated.
+            For n, see (2) byte 10..11
+
+
+---
+multisoft Datentechnik GmbH
+
+Phone  (+49-89) 649-0040    Fax (+49-89) 641-2974
+E-mail support@fship.com    WWW http://www.fship.com
+.
+
+
+

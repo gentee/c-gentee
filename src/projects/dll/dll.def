@@ -1,0 +1,23 @@
+LIBRARY   gentee
+EXPORTS
+	gentee_compile  @1
+	gentee_deinit   @2
+    gentee_init     @3
+    gentee_set      @4
+	gentee_load     @5
+    gentee_call     @6
+	gentee_getid    @7
+    gentee_ptr      @8
+	mem_alloc       @9
+	mem_free        @10
+	mem_len         @11
+	mem_copy        @12
+	mem_copyuntilzero  @13
+	mem_zero           @14
+	mem_cmpign         @15
+	str_pos2line       @16
+	str_printf         @17
+
+
+
+ 

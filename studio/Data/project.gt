@@ -1,0 +1,14 @@
+<*|defprj>
+   <#_ group>
+      <_ = "hello1" file = "..\samples\hello\hello.1.g" icon = file>
+      <_ = "hello2" file = "..\samples\hello\hello.2.g" icon = file>
+      <_ = "square1" file = "..\samples\square\square.1.g" icon = file>
+      <_ = "square2" file = "..\samples\square\square.2.g" icon = file>
+      <_ = "euclidean" file = "..\samples\easymath\euclidean.1.g" icon = file>
+      <_ = "factorial" file = "..\samples\easymath\factorial.2.g" icon = file>
+      <_ = "fibonaccireq" file = "..\samples\easymath\fibonaccireq.3.g" icon = file>
+      <_ = "fibonacci" file = "..\samples\easymath\fibonacci.4.g" icon = file>
+      <_ = "eratosthenes" file = "..\samples\primenumber\eratosthenes.1.g" icon = file>
+   "Tutorial"</>
+</defprj>
+

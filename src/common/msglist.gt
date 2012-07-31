@@ -1,0 +1,127 @@
+/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* ID: msglist 20.10.06 0.0.A.
+*
+* Author: Alexey Krivonogov ( gentee )
+*
+* Summary: The list of the message codes 
+*
+******************************************************************************/
+
+<- Information messages ->
+<MLoad comment = "Loading a file for compiling" pattern = "Loading %s" />
+<MStart comment = "Start compiling process" pattern = "Start compiling..." />
+<MEnd comment = "End compiling process" pattern = "End compiling." />
+
+<- Run-time error messages ->
+<MNotGE comment = "This is not GE execute code!" />
+<MCrcGE comment = "Wrong CRC of GE execute code!" />
+<MVerGE comment = "This GE version is not supported." />
+<MUnkGE comment = "Unknown GE command!"
+         pattern = "Unknown GE command. Offset = [ %lu : %X ]." />
+<MFileopen comment = "Cannot create/open a file" 
+                      pattern = "Cannot create/open file %s" />
+<MFileread comment = "Cannot read a file" pattern = "Cannot read file %s" />
+<MFilewrite comment = "Cannot write a file" pattern = "Cannot write file %s" />
+<MFullstack comment = "The stack is full"
+         pattern = "The stack is full. Stack size = [ %lu : %X ]." />
+<MNameexist comment = "Object with the same name has already existed"
+         pattern = "Object [ %lu : %X ] '%s' has been already used." />
+<MUndefcmd comment = "Empty bytecode command"
+         pattern = "Undefined (empty) command [ %lu : %X ] '%s'" />
+<MUnkbcode comment = "Unknown bytecode command"
+         pattern = "Unknown bytecode command [ %lu : %X ]." />
+          
+<- Compile error message ->
+<MAsleft comment = "Unacceptable variable." />
+<MAsright comment = "Unacceptable type." />
+<MAttrval comment = "The attribute requires a value"  
+          pattern = "The attribute '%s' requires a value" />
+<MCountpars comment = "The count of parameters is wrong" 
+          pattern = "The count of parameters is wrong in the function '%s'" />
+<MDblname comment = "Variable with the such name '%s' has already been defined"
+     pattern = "Variable with the such name '%s' has already been defined!" />
+<MDiftypes comment = "The type of the variable is different from the type of the object's item."/>     
+<MExpcomma comment = "A comma must be here" />     
+<MExpline comment = "Must be a new line here" />     
+<MExplogic comment = "A logic expression must be here" />     
+<MExplvalue comment = "The operand must be l-value" />
+<MExpmuch comment = "The expression is too much" />
+<MExpname comment = "Must be the name of the identifier here" />
+<MExpnonull comment = "The expression must return value." />
+<MExpoper comment = "The name of the operator is wrong" />
+<MExppoint comment = "Must be the dot '.' here" />
+<MExptype comment = "Must be the name of the type here" />
+<MExpopenbr comment = "Syntax error. There is not left parenthesis or bracket" />
+<MExpclosebr comment = "Syntax error. There is not right parenthesis or bracket" />
+<MRcurly comment = "Must be the right curly here" />
+<MExpuint comment = "The expression must return 'uint' value" />
+<MExpwhile comment = "Keyword 'while' must be here" />
+<MInherit  comment = "Cannot inherit from the specified type" />
+<MLcurly comment = "Must be the left curly here" />
+<MLongname comment = "The name of the identifier is too long" />
+<MLoopcmd comment = "This command can be used in 'for', 'while' operators"
+           pattern = "'%s' command can be used in 'for', 'while' operators" />
+<MMainpar comment = "Main or Entry function must not have parameters" />
+<MMustoper comment = "Must be an operand here" />
+<MMustret comment = "'return' must be in the function" 
+            pattern = "'return' must be in the '%s' function" />
+<MMuststr comment = "Must be a string value here" />            
+<MNoaddrfunc comment = "There are some functions with such name"
+              pattern = "There are some functions with the name '%s'"/>
+<MNofield comment = "There is not the such field in the structure"
+            pattern = "There is not the such field '%s' in the structure" />
+<MNokeyword comment = "It is impossible to use keyword here" />
+<MNotattrib comment = "There is not such attribute"
+            pattern = "There is not '%s' attribute for this command" />
+<MNotopenbr comment = "There is not a left parenthesis or bracket" />
+<MOftype comment = "This type cannot be specified with 'of' operator" />
+<MParquest comment = "The types of parameters in '?' operator must be same" />
+<MPropfield comment = "The property cannot have the same name as the field" />
+<MProppar comment = "The count of parameters is wrong in the 'property'" />
+<MPropoper comment = "Unacceptable operator for 'property'" />
+<MQuest comment = "The count of parameters in '?' operator is wrong" />
+<-MRedefine comment = "Object with this name has been already defined!"
+            pattern = "Object with the name '%s' has been already defined!" /->
+<MRedeflabel comment = "Label has already been defined"
+            pattern = "Label '%s' has already been defined" />
+<MRefield comment = "This field name has already been defined"
+            pattern = "This field name '%s' has already been defined" />
+<MResulttype comment = "Result function (method) cannot return a numeric type" />
+<MRettype comment = "The type of the return value is different from the definition" />
+<MSyntax comment = "Syntax error" pattern = "Syntax error: '%s'" />
+<MSublevel commen = "Subfunc can be defined in the main body of the function" />
+<MTypepars comment = "The value has the different type from the definition of the function" pattern = "The value has the different type from the definition of the function '%s'" />
+<MUndefmacro comment = "Undefined macroname"
+             pattern = "Undefined macroname '%s'" />
+<MUneof comment = "Unexpected end of file found in expression or operator" />
+<MUneofsb comment = "Unexpected end of the string or binary data" />
+<MUnexpoper comment = "Unexpected operand in the expression" />
+<MUnkbinch comment = "Unknown character in binary data"
+           pattern = "Unknown character in binary data '%c'" />
+<MUnkcmd comment = "Unknown Gentee command" 
+                   pattern = "Unknown Gentee command '%s'" />
+<MUnklabel comment = "Label was not defined" 
+                   pattern = "Label '%s' was not defined" />                    
+<MUnklex comment = "Unknown lexem." 
+                   pattern = "Unknown lexem '%s'" />
+<MUnkname comment = "Unknown name of the identifier" 
+                   pattern = "Unknown the name of the identifier '%s'" />
+<MUnkoper comment= "Function for this operation or method was not defined!" 
+          pattern= "Function for this operation or method '%s' was not defined!" />
+<MUnkprop comment =  "There is not the such 'property'" />
+<MUnksbcmd comment = "Unknown string or binary command"
+                   pattern ="Unknown string or binary command '\\%c'" />
+<MUnsmoper comment = "Unsupported macro operation or inadmissible macro types" 
+      pattern = "Unsupported macro operation '%s' or inadmissible macro types" />
+<MVarstr comment = "The variable must have 'str' type" />
+<MVaruint comment = "The variable must have 'uint' type" />
+<MWrongname comment = "Unacceptable name of the identifier or the macro" />
+

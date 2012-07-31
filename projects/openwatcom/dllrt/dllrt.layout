@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Release" />
+	<File name="..\..\..\src\genteeapi\gentee.h" open="0" top="0" tabpos="0">
+		<Cursor position="616" topLine="117" />
+	</File>
+	<File name="..\..\..\src\vm\vm.c" open="0" top="0" tabpos="0">
+		<Cursor position="5594" topLine="182" />
+	</File>
+</CodeBlocks_layout_file>

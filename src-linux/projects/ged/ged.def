@@ -1,0 +1,33 @@
+LIBRARY   ged
+EXPORTS
+	ged_create    @1
+	ged_close     @2
+	ged_open      @3
+	ged_findfield @4
+	ged_field     @5
+	ged_append    @6
+	ged_goto      @7
+	ged_eof       @8
+	ged_recno     @9
+	ged_isdel     @10
+	ged_fieldptr  @11
+	ged_getuint   @12
+	ged_getlong   @13
+	ged_getfloat  @14
+	ged_getdouble @15
+	ges_select    @16
+	ges_close     @17
+	ges_goto      @18
+	ges_eof       @19
+	ges_recno     @20
+	ges_updateindex  @21
+	ges_reverse      @22
+	ges_update       @23
+ 
+
+
+
+
+
+
+ 

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="gelibrt" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="Debug\libgelibrt" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj\Debug\" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-march=i586" />
+					<Add option="-Os" />
+					<Add option="-O1" />
+					<Add option="-ggdb1" />
+					<Add option="-DRUNTIME" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="Release\libgelibrt" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj\Release\" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-march=i586" />
+					<Add option="-Os" />
+					<Add option="-O3" />
+					<Add option="-Wall" />
+					<Add option="-DRUNTIME" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="..\..\..\src\Algorithm\qsort.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\Algorithm\qsort.h" />
+		<Unit filename="..\..\..\src\Algorithm\search.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\Algorithm\search.h" />
+		<Unit filename="..\..\..\src\bytecode\bytecode.h" />
+		<Unit filename="..\..\..\src\bytecode\cmdlist.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\bytecode\cmdlist.h" />
+		<Unit filename="..\..\..\src\bytecode\funclist.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\bytecode\funclist.h" />
+		<Unit filename="..\..\..\src\bytecode\ge.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\bytecode\ge.h" />
+		<Unit filename="..\..\..\src\bytecode\geload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\arr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\arr.h" />
+		<Unit filename="..\..\..\src\common\arrdata.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\arrdata.h" />
+		<Unit filename="..\..\..\src\common\buf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\buf.h" />
+		<Unit filename="..\..\..\src\common\collection.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\collection.h" />
+		<Unit filename="..\..\..\src\common\crc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\crc.h" />
+		<Unit filename="..\..\..\src\common\file.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\file.h" />
+		<Unit filename="..\..\..\src\common\hash.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\hash.h" />
+		<Unit filename="..\..\..\src\common\memory.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\memory.h" />
+		<Unit filename="..\..\..\src\common\mix.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\mix.h" />
+		<Unit filename="..\..\..\src\common\msg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\msg.h" />
+		<Unit filename="..\..\..\src\common\msglist.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\msglist.h" />
+		<Unit filename="..\..\..\src\common\number.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\number.h" />
+		<Unit filename="..\..\..\src\common\str.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\str.h" />
+		<Unit filename="..\..\..\src\common\types.h" />
+		<Unit filename="..\..\..\src\genteeapi\gentee.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\genteeapi\gentee.h" />
+		<Unit filename="..\..\..\src\os\user\defines.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\os\user\defines.h" />
+		<Unit filename="..\..\..\src\vm\vm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\vm\vm.h" />
+		<Unit filename="..\..\..\src\vm\vmload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\vm\vmload.h" />
+		<Unit filename="..\..\..\src\vm\vmmanage.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\vm\vmmanage.h" />
+		<Unit filename="..\..\..\src\vm\vmres.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\vm\vmres.h" />
+		<Unit filename="..\..\..\src\vm\vmrun.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\vm\vmrun.h" />
+		<Unit filename="..\..\..\src\vm\vmtype.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\vm\vmtype.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

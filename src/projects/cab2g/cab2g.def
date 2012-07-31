@@ -1,0 +1,12 @@
+LIBRARY   cab2g
+EXPORTS
+	gcabe_addfile     @1
+	gcabe_close       @2
+	gcabe_create      @3
+	gcabe_flushfolder @4
+	gcabd_create      @5
+	gcabd_destroy	  @6
+	gcabd_iscabinet   @7
+	gcabd_copy        @8
+
+ 

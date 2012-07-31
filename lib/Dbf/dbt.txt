@@ -1,0 +1,169 @@
+
+Xbase: Memo Field Files (*.dbt)
+DBT are storage for fulltext data. Data is stored in simple 512 byte blocks. If data is > 510 byte it will be stored in continuous blocks. 
+Only reference to the data is an pointer stored in the memo field in the datafile. The pointer is not displayed in dBASE. 
+If the pointer in a data file record is not empty dBASE will open a file with same name as the data file but with the extention .dbt. 
+
+The memo file header has only two values in its 512 bytes: 
+next available block 
+version number
+Rest of the header is garbage. 
+
+Next available block will always point the end of the file. Data can only be appended. 
+
+The only way to "compressing" a full text file and remove the deleted blocks is by using the COPY command. 
+
+dBASE III+
+
+    _______________________  _______
+ 0 | Number of next        |  ^  ^
+ 1 | available block       |  |  |
+ 2 | for appending data    |  | Header
+ 3 | (binary)              |  |  |
+   |-----------------------| _|__v__
+ 4 | ( Reserved )          |  |
+   |                       |  |
+   |                       |  |
+ 7 |                       |  |
+   |-----------------------|  |
+ 8 | ( Reserved )          |  |
+   :                       :  |
+15 |                       |  |
+   |-----------------------|  |
+16 | Version no.  (03h)    |  |
+   |-----------------------|  |
+17 | (i.e. garbage)        |  |
+   :                       : First block
+   :                       :  |
+511|                       |  |
+   |=======================| _v_____
+512|                       |  ^
+   |                       |  |
+   |                       | 512 Bytes
+   |                       | text blocks
+   :                       :  |
+   :                       :  |
+   |                       |  |
+   |-----------------------| _|_____
+   | Field terminator (1Ah)|  |  ^
+   |-----------------------|  |  |Terminating field
+   | Field terminator (1Ah)|  |  |within the block *1
+   |-----------------------| _|__v__
+   : ( Unused )            :  |
+1023                       :  |
+   |=======================| _v_____
+   |                       |  ^
+   |                       |  |
+   |                       | 512 Bytes
+   |                       | text blocks
+   :                       :  |
+   :                       :  |
+   |                       |  |
+   |                       | _v_____
+   |=======================|
+field terminator Is reported to use only one field terminator (1Ah) - (FoxPro, Fox??) 
+A memo field can be longer than the 512 byte block. It simply continues through the next block. The field is logically terminated by two End-of-file marks in the field. The reminder of the block is unused. 
+ 	Every time you re-write a memo field to the memo file in dBASE the field is APPENDED to the memo file (i.e. the file expands for each update). dBASE V for DOS (and perhaps others) may reuse the space from the deleted text, if memo size <= allocated number of block in dbt file.  
+There is NO marking of deleted data. Valid data can only be determined from the data file. 	
+The Memo file itself tells nothing about it's use. You need the corresponding DBF file to interpret the content of the memo file. Many of the clones and dBASE 5 have binary elements stored in the memo file marked with file type B or G. 
+dBASE IV
+
+    _______________________
+ 0 | Number of next        |  ^
+ 1 | available block       |  |
+ 2 | for appending data    | Header
+ 3 | (binary)              |  |
+   |-----------------------|  |
+ 4 | ( Reserved )          |  |
+   | Size of blocks      *1|  |
+   |                       |  |
+ 7 |                       |  |
+   |-----------------------|  |
+ 8 | DBF file name         |  |
+   | without extention     |  |
+   :                       :  |
+15 |                       |  |
+   |-----------------------|  |
+16 | Reserved   (00h)      |  |
+   |-----------------------|  |
+17 | ( Reserved )          |  |
+18 |                       |  |
+19 |                       |  |
+   |-----------------------|  |
+20 | Block length in bytes |  |
+21 |                     *4|  |
+   |-----------------------|  |
+22 | ( Reserved )          |  |
+   |                       |  |
+   | (i.e. garbage)        |  |
+   :                       :  |
+   :                       :  |
+511|                       |  |
+   |=======================| _v_____
+  1|                       |  ^                 Used block
+   |                       |  ^           __  |=======================|
+   |                       |  |          /   0| ( Reserved )          |
+   :                       :  |         /    1|                       |
+   :                       :  |        /     2|  FFh FFh 08h 00h      |
+   |                       |  |       /      3|                       |
+511|                       |  |      /        |-----------------------|
+   |=======================| _|_____/        4| Length of memo field  |
+  1|                       |  |              5|                       |
+   :                       :  |              6|                       |
+   :                       :  |              7|                       |
+   |                       |  |               |-----------------------|
+511|                       | _|_____         8| Memo data           *2|
+   |=======================|  |     \         :                       :
+   |                       |  |      \       N|                       |
+   |                       |  |       \_____  |=======================|
+   |                       |  |
+   |                       | 512 Bytes
+   |                       | text blocks
+   :                       :  |
+   :                       :  |                 Unused block
+   :                       :  |           __  |=======================|
+   :                       :  |          /   0| Pointer to next free  |
+   :                       :  |         /    1| block                 |
+   :                       :  |        /     2|                       |
+   |                       |  |       /      3|                       |
+511|                       |  |      /        |-----------------------|
+   |=======================| _|_____/        4| Pointer to next used  |
+  1|                       |  |              5| block                 |
+   :                       :  |              6|                       |
+   :                       :  |              7|                       |
+   |                       |  |               |-----------------------|
+511|                       | _|_____         8| ( Reserved )          |
+   |=======================|  |     \         :                       :
+  1|                       |  |      \       N|                       |
+   |                       |  |       \_____  |=======================|
+   |                       |  |
+   :                       :  |
+   |                       |  |
+   |-----------------------| _|_____
+   | Field terminator (1Ah)|  |  ^
+   |-----------------------|  |  |Terminating field
+   | Field terminator (1Ah)|  |  |within the block *3
+   |-----------------------| _|__v__
+   : ( Unused )            :  |
+511|                       :  |
+   |=======================| _v_____
+   |                       |  ^
+   |                       |  |
+   |                       | 512 Bytes
+   |                       | text blocks
+   :                       :  |
+   :                       :  |
+   |                       |  |
+   |                       | _v_____
+   |=======================|
+Size of blocks in memo file (SET BLOCKSIZE). Default is 512 bytes (FoxBase, dBASE IV ??) .
+End of text mark is 0Dh 0Ah and line breaks are 8Dh 0Ah 
+Field terminator Is reported to use only one field terminator (1Ah) - (FoxPro, Fox??).
+dBASE III files are marked as lenght = 1.
+A memo field can be longer than the 512 byte block. It simply continues through the next block. The field is logically terminated by two End-of-file marks in the field. The reminder of the block is unused. 
+
+WARNING ! ! !  DO *NOT* attempt to treat these binary data as simple text ! ! !  
+
+
+<< What to check when opening a .DBF File << 	^Index^ 	>> FoxPro Object and Memo Field Files (*.fpt) >> 	
+Edited by: Erik Bachmann [2004-11-08/02:52:12] 	URL: http://www.clicketyclick.dk/databases/xbase/format/dbt.html#DBT_STRUCT

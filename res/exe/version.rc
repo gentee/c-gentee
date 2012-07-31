@@ -1,0 +1,41 @@
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+1 VERSIONINFO
+ FILEVERSION 3,6,3,0
+ PRODUCTVERSION 3,6,3,0
+ FILEFLAGSMASK 0x3fL
+ FILEFLAGS 0x2L
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040901b5"
+        BEGIN
+            VALUE "Comments", "http://www.gentee.com\0"
+            VALUE "CompanyName", "The Gentee Group\0"
+            VALUE "FileDescription", "Gentee Programming Language\0"
+            VALUE "FileVersion", "3.6.3\0"
+            VALUE "InternalName", "gentee\0"
+            VALUE "LegalCopyright", "Copyright © 2006-10 The Gentee Group\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "gentee.exe\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "Gentee\0"
+            VALUE "ProductVersion", "3.6.3\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 437
+    END
+END
+
+IDI_APP                 ICON    DISCARDABLE     "..\icons\gentee.ico"
+

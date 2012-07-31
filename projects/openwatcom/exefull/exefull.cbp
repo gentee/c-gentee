@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="exefull" />
+		<Option pch_mode="2" />
+		<Option compiler="ow" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin\Debug\gentee" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="1" />
+				<Option compiler="ow" />
+				<Compiler>
+					<Add option="-ox" />
+					<Add option="-os" />
+					<Add option="-d2" />
+					<Add option="-fpi" />
+					<Add option="-4s" />
+					<Add option="-cc" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="..\..\..\res\exe" />
+				</ResourceCompiler>
+				<Linker>
+					<Add library="..\gelib\Debug\gelib.lib" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin\Release\gentee" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="1" />
+				<Option compiler="ow" />
+				<Compiler>
+					<Add option="-ox" />
+					<Add option="-os" />
+					<Add option="-ol" />
+					<Add option="-fpi" />
+					<Add option="-4s" />
+					<Add option="-cc" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="..\..\..\res\exe" />
+				</ResourceCompiler>
+				<Linker>
+					<Add library="..\gelib\Release\gelib.lib" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-wx" />
+		</Compiler>
+		<Unit filename="..\..\..\res\exe\version.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="..\..\..\src\projects\exe\exe.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

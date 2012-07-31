@@ -1,0 +1,12 @@
+LIBRARY   genteert
+EXPORTS
+    gentee_deinit   @1
+    gentee_init     @2
+    gentee_set      @3
+    gentee_load     @4
+    gentee_call     @5
+    gentee_getid    @6
+    gentee_ptr      @7
+
+
+

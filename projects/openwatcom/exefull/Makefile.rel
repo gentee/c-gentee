@@ -1,0 +1,37 @@
+# A simple makefile generator by KiSoft, 2007. mailto: kisoft@rambler.ru
+# version: 0.3.11.11
+
+# Project Variables start
+CPP=wcl386.exe
+CC=wcl386.exe
+LD=wlink.exe
+LIB=wlib.exe
+WINDRES=wrc.exe
+# Project Variables end
+
+# Target: Release
+
+OBJS_RELEASE=obj\Release\src\projects\exe\exe.obj obj\Release\res\exe\version.res
+
+Release: bin\Release\gentee.exe
+
+bin\Release\gentee.exe: $(OBJS_RELEASE)
+	@echo Building console executable bin\Release\gentee.exe
+	@wlink.exe option quiet   $(Release) name  library ..\gelib\Release\gelib.lib 
+
+obj\Release\src\projects\exe\exe.obj: ..\..\..\src\projects\exe\exe.c
+	@echo Compiling: ..\..\..\src\projects\exe\exe.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\projects\exe\exe.obj ..\..\..\src\projects\exe\exe.c
+
+obj\Release\res\exe\version.res: ..\..\..\res\exe\version.rc
+	@echo Compiling: ..\..\..\res\exe\version.rc
+	@wrc.exe -q -r -fo=obj\Release\res\exe\version.res  ..\..\..\res\exe\version.rc
+
+.PHONY: clean_Release
+
+clean_Release: 
+	@echo Delete $(OBJS_RELEASE) bin\Release\gentee.exe
+	-@del /f $(OBJS_RELEASE) bin\Release\gentee.exe
+
+
+

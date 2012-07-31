@@ -1,0 +1,99 @@
+/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* ID: gtdo 18.10.06 0.0.A.
+*
+* Author: Alexey Krivonogov ( gentee )
+*
+* Summary: This file contains a description of the lexical table for
+  processing GT language data.
+*
+******************************************************************************/
+
+<gtdo prefix = "GTDO_" desc = "Processing GT data" gout = "..\..\lib\gt2\lexgtdo.g"
+      xbinout = "..\..\lib\gt\lexgtdo.lex">
+   <MAIN state = TEXT itstate pos>
+      <_ ch = '&' state = AMP try pos trycmd = AMPTRY />
+      <_ ch = '#' state = SIGN itstate pos />
+   </>  
+   <TEXT cmd = OK comment = "Simple text" >
+      <_ ch = '#&' state = MAIN stay />
+   </>  
+   <SIGN state = MAIN stay comment = "# character">
+      <_ ch = '/' numname state = NAME pos itstate />
+      <_ ch = '.' cmd = DOT itcmd pos />
+   </>  
+   <NAME state = MAIN stay comment = "Macro name after #">
+      <_ ch = '=' cmd = PARCALL itcmd state = MAIN />
+      <_ ch = '/' numname cmd = OK />
+      <_ ch = '(' state = LP itstate pos />
+      <_ ch = '[' state = LSP itstate pos />
+      <_ ch = ':' state = COLON itstate pos />
+      <_ ch = '.' state = SIGN stay />
+   </>  
+   <AMP ret >
+      <_ ch = 'Xx' state = ISHEX />
+      <_ ch = '#' state = ISPAR />
+      <_ hexmulti = '5C0D0A' cmd = SKIP state = MAIN />
+      <_ hexmulti = '5C0A' cmd = SKIP state = MAIN />
+   </>  
+   <ISHEX ret >
+      <_ numhex state = HEXOK />
+   </>  
+   <HEXOK ret >
+      <_ ch = ';' cmd = HEX itcmd state = MAIN />
+      <_ numhex cmd = SKIP />
+   </>  
+   <ISPAR ret >
+      <_ range = '09' state = PAROK />
+   </>  
+   <PAROK ret >
+      <_ ch = ';' cmd = PAR itcmd state = MAIN />
+      <_ range = '09' cmd = SKIP />
+   </>  
+   <LP state = PARTEXT itstate pos comment = "Left parenthesis after macroname">
+      <_ lespace state = SPACE itstate pos />
+      <_ ch = ',' cmd = COMMA itcmd pos />
+      <_ ch = ')' cmd = RP itcmd pos state = MAIN />
+      <_ ch = '"' itstate pos state = DQ />
+      <_ ch = "'" itstate pos state = Q />
+   </>  
+   <LSP state = PARSTEXT itstate pos comment = "Left parenthesis after macroname">
+      <_ ch = ']' cmd = RSP itcmd pos state = MAIN />
+      <_ multi = '][' cmd = COMMA itcmd pos state = LSP />
+   </>  
+   <COLON cmd = OK comment = "Text until new string">
+      <_ hexmulti = '0D0A' state = MAIN stay />
+   </>  
+   <PARTEXT cmd = OK comment = "Simple text inside ()">
+      <_ ch = '),' lespace state = LP stay />
+   </>  
+   <PARSTEXT cmd = OK comment = "Simple text inside []">
+      <_ ch = '[]' state = LSP stay pair/>
+   </>  
+   <SPACE state = LP stay comment = "Characters less or equal space inside ()">
+      <_ lespace cmd = OK />
+   </>  
+   <DQ cmd = OK comment = "Text with double-quotes inside ()">
+      <_ ch = '"' cmd = OK state = LP />
+   </>  
+   <Q cmd = OK comment = "Text with '' inside ()">
+      <_ ch = "'" cmd = OK state = LP />
+   </>  
+   <AMPTRY itstate state = TEXT >
+   </>  
+   <commands skip>
+      <DOT  comment = "Dot in the name of the macro" />
+      <HEX  comment = "Hexadecimal value of the character &xff;" />
+      <PAR  comment = "Number of the parameter &#1;" />
+      <COMMA comment = "The comma between parameters" />
+      <RP comment = "The right parenthesis" />
+      <RSP comment = "The right parenthesis" />
+   </commands>
+</gtdo>

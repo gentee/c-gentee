@@ -1,0 +1,1773 @@
+Content-Type: multipart/related; start=<op.mhtml.1234880554281.806bf876162ab21d@10.104.0.59>; boundary=----------pyKpvUJirNFybREQpzxPNj
+Content-Location: http://zlib.net.ru/
+Subject: =?utf-8?Q?zlib=20-=20=D0=B1=D0=B8=D0=B1=D0=BB=D0=B8=D0=BE=D1=82=D0=B5=D0=BA=D0=B0=20=D0=B4=D0=BB=D1=8F=20=D1=81=D0=B6=D0=B0=D1=82=D0=B8=D1=8F=20=D0=BE=D0=B1=D1=89=D0=B5=D0=B3=D0=BE=20=D0=BD=D0=B0=D0=B7=D0=BD=D0=B0=D1=87=D0=B5=D0=BD=D0=B8=D1=8F=20=D0=B2=D0=B5=D1=80=D1=81=D0=B8=D0=B8=201.1.4?=
+MIME-Version: 1.0
+
+------------pyKpvUJirNFybREQpzxPNj
+Content-Disposition: inline; filename=default.htm
+Content-Type: text/html; charset=windows-1251; name=default.htm
+Content-Id: <op.mhtml.1234880554281.806bf876162ab21d@10.104.0.59>
+Content-Location: http://zlib.net.ru/
+Content-Transfer-Encoding: 8bit
+
+<html>
+<head>
+<!-- Meta http equivalent was here                                     -->
+<title>zlib - библиотека для сжатия общего назначения версии 1.1.4</title>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-106891-3";
+urchinTracker();
+</script>
+
+<script language="JavaScript">
+<!--
+function mail_to(name, domain)
+{
+  document.write("<a class=\"link\" href=\"mail" + "to:" + name +
+                 "&#64;" + domain + "\">");
+}
+//-->
+</script>
+</head>
+<body bgcolor="White" text="Black" vlink="Red" alink="Navy" link="Red" style="font-family: Arial;">
+<h1> Руководство по библиотеке zlib 1.1.4 </h1>
+<hr>
+<a name="Contents"><h2>Содержание</h2>
+<table width="100%" border="0">
+<tr>
+<td width="80%">
+<ol type="I">
+<li> <a href="#Prologue">Пролог</a>
+<li> <a href="#Introduction">Введение</a>
+<li> <a href="#Utility functions">Прикладные функции</a>
+<li> <a href="#Basic functions">Основные функции</a>
+<li> <a href="#Advanced functions">Расширенные функции</a>
+<li> <a href="#Checksum functions">Функции подсчета контрольных сумм</a>
+<li> <a href="#struct z_stream_s">Структура z_stream_s</a>
+<li> <a href="#Constants">Константы</a>
+<li> <a href="#Misc">Разное</a>
+</ol>
+</td>
+<td width="20%" valign="top">
+<fieldset style="padding: 15;">
+<legend>
+<img src="psa.gif" border="0">
+</legend>
+Предложения от модных салонов:
+<ul style="margin-top: 0; margin-bottom: 0;">
+<li><a href="http://www.elza.ru">свадебные платья</a>
+<!--
+<li><a href="http://alisa-svadba.ru">вечерние платья</a>
+<li><a href="http://beatris.kiev.ua/">свадебные платья</a>
+-->
+</ul>
+</fieldset>
+</td>
+</tr>
+</table>
+<hr>
+<a name="Prologue"><h2> Пролог </h2>
+  'zlib' библиотека для сжатия общего назначения версии 1.1.4, 11 марта 2002 года
+  <p>
+  Copyright (C) 1995-2005 Jean-loup Gailly и Mark Adler
+  <p>
+  Эта библиотека поставляется 'как есть', без каких-либо явных или подразумеваемых гарантий.
+  Ни при каких обстоятельствах авторы не несут какой-либо ответственности в случае потери данных
+  вследствие использования данной библиотеки.
+  <p>
+  Разрешается всем использовать эту библиотеку для любых целей,
+  в том числе и для коммерческих приложений, а также изменять ее и распространять свободно 
+  при соблюдении следующих условий:
+  <ol>
+   <li>Оригинал библиотеки не должен быть искажен; вы не должны заявлять, что именно вы написали 
+     оригинальную библиотеку. 
+     Если вы используете эту библиотеку в своем программном продукте, то ссылка 
+     на авторов библиотеки была бы желательна, но это не является обязательным требованием.
+   <li> Измененные версии исходных текстов должны быть отчетливо маркированы 
+        и не должны выдаваться за оригинал библиотеки.
+   <li> Эти замечания не могут быть удалены либо изменены при каком-либо варианте распространения исходных текстов.
+  </ol>
+
+  <dl>
+  <dt>Jean-loup Gailly        
+  <dd><script>mail_to("jloup","gzip.org");</script>jloup&#64;gzip&#46;org</a>
+  <dt>Mark Adler
+  <dd><script>mail_to("madler","alumni.caltech.edu");</script>
+      madler&#64;alumni.caltech.edu</a>
+  </dl>
+
+  Формат данных, который используется библиотекой zlib, описан в RFC (Request for
+  Comments) с 1950 по 1952 в файлах
+  <a href="http://www.ietf.org/rfc/rfc1950.txt">
+  rfc1950.txt </a>
+  (zlib формат), 
+  <a href="http://www.ietf.org/rfc/rfc1951.txt">
+  rfc1951.txt </a>
+  (формат <a href="#deflate">сжатия</a>) и  
+  <a href="http://www.ietf.org/rfc/rfc1952.txt">
+  rfc1952.txt </a>
+  (gzip формат).
+  <p>
+  Это руководство создано на основе zlib.h, автор -
+  <script>mail_to("piaip","csie.ntu.edu.tw");</script> piaip </a>, перевел на русский <script>mail_to("onyshchuk","gmail&#46;com");</script>Н.Онищук</a>.
+  <p>
+  Посетите <a href="http://www.zlib.org">
+  http://www.zlib.org</a> 
+  - официальный сайт библиотеки zlib.
+  <p>
+
+<hr>
+<a name="Introduction"><h2> Введение </h2>
+     Библиотека сжатия 'zlib' предоставляет функции компрессии и декомпрессии в памяти,
+     включая проверку целостности несжатых данных. Эта версия библиотеки поддерживает 
+     только один метод сжатия (дефляцию), в последствии другие алгоритмы будут 
+     добавлены с тем же потоковым интерфейсом.
+  <p>
+     Сжатие может быть выполнено за один проход, если буферы достаточно большие
+     (к примеру, если входной файл проецируется в память), или же сжатие может быть 
+     выполнено путем многократных вызовов функции компрессии. В последнем случае
+     приложение должно обеспечить несколько больший входной буфер и возможно 
+     больший выходной  буфер перед каждым вызовом функции компрессии.
+  <p>
+     Библиотека также поддерживает чтение и запись файлов в формате gzip (.gz)
+     с интерфейсом похожим на используемый в stdio.
+  <p>
+     Библиотека не инсталлирует каких-либо хуков, обработчиков сигналов и сообщений.
+     Декодер проверяет структуру компрессованных данных, так что библиотека не рухнет,
+     даже если ей на вход будут поданы искаженные данные.
+  <p>
+
+<hr>
+<a name="Utility functions"><h2> Прикладные функции </h2>
+     Нижеследующие прикладные функции реализованы на основе 
+     <a href="#Basic functions">основных потоко-ориентированных функций</a>. 
+   Чтобы упростить интерфейс, некоторые опции заменены предопределенными значениями  
+   (степень сжатия, объем используемой памяти, стандартные функции распределения памяти).
+   Исходный код этих прикладных функций может быть легко модифицирован, 
+   если вам понадобятся какие-либо специальные опции.
+<h3> Перечень функций </h3>
+<ul>
+<li> int  <a href="#compress">compress</a> (Bytef *dest,   uLongf *destLen, const Bytef *source, uLong sourceLen);
+<li> int  <a href="#compress2">compress2</a> (Bytef *dest,   uLongf *destLen, const Bytef *source, uLong sourceLen, int level);
+<li> int  <a href="#uncompress">uncompress</a> (Bytef *dest,   uLongf *destLen, const Bytef *source, uLong sourceLen);
+<li> typedef voidp gzFile;
+<li>  gzFile  <a href="#gzopen">gzopen</a>  (const char *path, const char *mode);
+<li> gzFile  <a href="#gzdopen">gzdopen</a>  (int fd, const char *mode);
+<li> int  <a href="#gzsetparams">gzsetparams</a> (gzFile file, int level, int strategy);
+<li> int     <a href="#gzread">gzread</a>  (gzFile file, voidp buf, unsigned len);
+<li> int     <a href="#gzwrite">gzwrite</a> (gzFile file, const voidp buf, unsigned len);
+<li> int VA   <a href="#gzprintf">gzprintf</a> (gzFile file, const char *format, ...);
+<li> int  <a href="#gzputs">gzputs</a> (gzFile file, const char *s);
+<li> char *  <a href="#gzgets">gzgets</a> (gzFile file, char *buf, int len);
+<li> int     <a href="#gzputc">gzputc</a> (gzFile file, int c);
+<li> int     <a href="#gzgetc">gzgetc</a> (gzFile file);
+<li> int     <a href="#gzflush">gzflush</a> (gzFile file, int flush);
+<li> z_off_t     <a href="#gzseek">gzseek</a> (gzFile file, z_off_t offset, int whence);
+<li> z_off_t     <a href="#gztell">gztell</a> (gzFile file);
+<li> int     <a href="#gzrewind">gzrewind</a> (gzFile file);
+<li> int  <a href="#gzeof">gzeof</a> (gzFile file);
+<li> int     <a href="#gzclose">gzclose</a> (gzFile file);
+<li> const char *  <a href="#gzerror">gzerror</a> (gzFile file, int *errnum);
+</ul>
+<h3> Описание функций </h3>
+<dl>
+<font color="Blue"><dt> int  <a name="compress">compress</a> (Bytef *dest,   uLongf *destLen, const Bytef *source, uLong sourceLen);</font>
+<dd>
+     Сжимает данные из исходного буфера в буфер назначения. 
+   sourceLen содержит длину в байтах исходного буфера.
+   Перед вызовом функции, destLen должен содержать максимальный размер буфера назначения,
+   который должен быть по крайней мере на 0.1% больше чем sourceLen плюс 12 байт. 
+   После вызова функции, destLen содержит актуальный размер сжатого буфера.<br>
+     Эта функция может быть использована для <a href="#compress">компрессии</a> всего файла 
+   за один проход, если этот входной файл спроецирован в память.<br>
+
+   Функция <a href="#compress">compress</a> возвращает: <ul> 
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха 
+   <li><a href="#Z_MEM_ERROR">Z_MEM_ERROR</a> если недостаточно памяти 
+   <li><a href="#Z_BUF_ERROR">Z_BUF_ERROR</a> если недостаточно места в буфере назначения
+   </ul><p>
+
+<font color="Blue"><dt> int  <a name="compress2">compress2</a> (Bytef *dest,   uLongf *destLen, const Bytef *source, uLong sourceLen, int level);</font>
+<dd>
+     Сжимает данные из исходного буфера в буфер назначения. Параметр level
+   имеет то же значение, что и в <a href="#deflateInit">deflateInit</a>.  
+   sourceLen содержит длину в байтах исходного буфера.
+   Перед вызовом функции, destLen должен содержать максимальный размер буфера назначения,
+   который должен быть по крайней мере на 0.1% больше чем sourceLen плюс 12 байт. 
+   После вызова функции, destLen содержит актуальный размер сжатого буфера.<br>
+
+   Функция <a href="#compress2">compress2</a> возвращает: <ul>
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха 
+   <li><a href="#Z_MEM_ERROR">Z_MEM_ERROR</a> если недостаточно памяти 
+   <li><a href="#Z_BUF_ERROR">Z_BUF_ERROR</a> если недостаточно места в буфере назначения
+   <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если level параметр неправильный
+   </ul><p>
+
+<font color="Blue"><dt> int  <a name="uncompress">uncompress</a> (Bytef *dest,   uLongf *destLen, const Bytef *source, uLong sourceLen);</font>
+<dd>
+     Декомпрессирует исходный буфер в буфер назначения. 
+   sourceLen содержит длину в байтах исходного буфера.
+   Перед вызовом функции, destLen должен содержать максимальный размер буфера назначения,
+   который должен быть достаточно большим, чтобы вместить полностью несжатые данные.
+   (Размер несжатых данных должен быть предварительно сохранен компрессором и передан
+   декомпрессору посредством других способов, описание которых выходит за рамки данной библиотеки.) 
+   После вызова функции, destLen содержит актуальный размер несжатых данных.<br>
+   Эта функция может быть использована для всего файла за один проход, 
+   если этот файл спроецирован в память.<br>
+
+   Функция <a href="#uncompress">uncompress</a> возвращает: <ul> 
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха 
+   <li><a href="#Z_MEM_ERROR">Z_MEM_ERROR</a> если недостаточно памяти 
+   <li><a href="#Z_BUF_ERROR">Z_BUF_ERROR</a> если недостаточно места в буфере назначения
+   <li><a href="#Z_DATA_ERROR">Z_DATA_ERROR</a> если входные данные были повреждены
+   </ul><p>
+
+<dt> typedef voidp gzFile;
+<dd> <p>
+
+<font color="Blue"><dt>  gzFile  <a name="gzopen">gzopen</a>  (const char *path, const char *mode);</font>
+<dd>
+     Открывает gzip (.gz) файл для чтения или записи. Режим открытия задается также, как и у функции
+   fopen ("rb" или "wb") но кроме этого может также включать степень сжатия
+   ("wb9") или стратегию: 'f' для отфильтрованных данных ("wb6f"), 'h' для сжатия только 
+   по Хаффману ("wb1h"). Более подробно параметры выбора стратегии описаны в функции 
+   <a href="#deflateInit2">deflateInit2</a>.<br>
+
+   Функция <a href="#gzopen">gzopen</a> может также применяться для чтения файлов не в формате gzip, 
+   в этом случае <a href="#gzread">gzread</a> будет читать данные из файла напрямую, 
+   без декомпрессии.<br>
+
+   Функция <a href="#gzopen">gzopen</a> возвращает NULL, если файл не может быть открыт или если 
+   недостаточно памяти для компрессии\декопрессии. В переменной errno будет выставлено 
+   соответствующее <a href="#state">состояние</a>, т.о. можно распознать эти 2 случая 
+   (Если errno равна 0, то это соответствует ошибке zlib <a href="#Z_MEM_ERROR">Z_MEM_ERROR</a>).
+   <p>
+
+<font color="Blue"><dt> gzFile  <a name="gzdopen">gzdopen</a>  (int fd, const char *mode);</font>
+<dd>
+   Функция <a href="#gzdopen">gzdopen</a>() ассоциирует gzFile с дескриптором fd.  
+   Дескрипторы файлов получают вызовом функций вроде open, dup, creat, pipe или fileno 
+   (в случае, если файл был предварительно открыт с помощью fopen).
+   Параметр mode такой же, как и в <a href="#gzopen">gzopen</a>.<br>
+   Если впоследствии вызвать <a href="#gzclose">gzclose</a> с возвращенным значением gzFile, 
+   то будет также закрыт и файл с дескриптором fd, подобно вызову fclose(fdopen(fd), mode).
+   Если же нужно сохранить файл fd открытым, используйте <a href="#gzdopen">gzdopen</a>(dup(fd), mode).<br>
+   Функция <a href="#gzdopen">gzdopen</a> возвращает NULL, если недостаточно памяти для компрессии\декопрессии.
+   <p>
+
+<font color="Blue"><dt> int  <a name="gzsetparams">gzsetparams</a> (gzFile file, int level, int strategy);</font>
+<dd>
+     Динамически обновляет степень сжатия или стратегию. Что означают эти параметры можно посмотреть 
+   в описании функции <a href="#deflateInit2">deflateInit2</a>.<br>
+   Функция <a href="#gzsetparams">gzsetparams</a> возвращает: <ul> 
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха
+   <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если файл не открыт для записи.
+   </ul><p>
+
+<font color="Blue"><dt> int     <a name="gzread">gzread</a>  (gzFile file, voidp buf, unsigned len);</font>
+<dd>
+     Читает переданное количество байт несжатых данных из компресованного файла.
+   Если входной файл не в формате gzip, то <a href="#gzread">gzread</a> просто копирует 
+   переданное ей количество байт в буфер.<br>
+   Функция <a href="#gzread">gzread</a> возвращает количество байт некомпрессованных данных
+   реально прочитанных из файла (0 для конца файла и -1 в случае ошибки).
+   <p>
+
+<font color="Blue"><dt> int     <a name="gzwrite">gzwrite</a> (gzFile file, const voidp buf, unsigned len);</font>
+<dd>
+     Записывает переданное количество байт несжатых данных в компресованный файл.<br>
+   Функция <a href="#gzwrite">gzwrite</a> возвращает реальное количество байт несжатых данных, 
+   которое было записано в файл. (0 в случае ошибки).
+   <p>
+
+<font color="Blue"><dt> int VA   <a name="gzprintf">gzprintf</a> (gzFile file, const char *format, ...);</font>
+<dd>
+     Конвертирует, форматирует и записывает аргументы в сжатый gzFile файл, в соответствии форматной строкой,
+   подобно fprintf.<br>
+   Функция <a href="#gzprintf">gzprintf</a> возвращает реальное количество байт несжатых данных, 
+   которое было записано в файл. (0 в случае ошибки).
+   <p>
+
+<font color="Blue"><dt> int  <a name="gzputs">gzputs</a> (gzFile file, const char *s);</font>
+<dd>
+      Записывает передаваемую строку (заканчивающуюся нулевым символом) в сжатый файл. Последний нулевой 
+   символ не записывается.<br>
+   Функция <a href="#gzputs">gzputs</a> возвращает количество записанных символов, или -1 в случае ошибки.
+   <p>
+
+<font color="Blue"><dt> char *  <a name="gzgets">gzgets</a> (gzFile file, char *buf, int len);</font>
+<dd>
+   Читает данные из сжатого файла, пока не будет прочитано len-1 символов, 
+   или не встретиться символ перевода каретки, который скопируется в буфер, 
+   или не будет достигнут конец файла, строка в этом случае будет заканчиваться 
+   нулевым символом.<br>
+   Функция <a href="#gzgets">gzgets</a> возвращает buf, или <a href="#Z_NULL">Z_NULL</a> in case of error.
+   <p>
+
+<font color="Blue"><dt> int     <a name="gzputc">gzputc</a> (gzFile file, int c);</font>
+<dd>
+
+      Записывает в сжатый файл параметр c, конвертируя его в unsigned char.<br>
+   Функция <a href="#gzputc">gzputc</a> возвращает значение, которое было записано
+   или -1 в случае ошибки.
+   <p>
+
+<font color="Blue"><dt> int     <a name="gzgetc">gzgetc</a> (gzFile file);</font>
+<dd>
+      Читает один байт из сжатого файла.<br> 
+   Функция <a href="#gzgetc">gzgetc</a> возвращает прочитанный байт или 
+   -1 в случае ошибки или достижения конца файла.
+   <p>
+
+<font color="Blue"><dt> int     <a name="gzflush">gzflush</a> (gzFile file, int flush);</font>
+<dd>
+     Сбрасывает все буферы записи в сжатый файл. Параметр flush такой же, что и в функции
+   <a href="#deflate">deflate</a>(). Возвращаемое значение - код ошибки zlib (см. 
+   функцию <a href="#gzerror">gzerror</a> ниже).<br>
+   Функция <a href="#gzflush">gzflush</a> возвращает <a href="#Z_OK">Z_OK</a> 
+   если параметр flush установлен в <a href="#Z_FINISH">Z_FINISH</a> 
+   и если все буфера могут быть сброшены.<br>
+   Функция <a href="#gzflush">gzflush</a> должна вызываться только в случаях крайней 
+   необходимости, т.к. она может ухудшить компрессию.
+   <p>
+
+<font color="Blue"><dt> z_off_t  <a name="gzseek">gzseek</a> (gzFile file, z_off_t offset, int whence);</font>
+<dd>
+      Устанавливает начальную позицию для последующего вызова 
+   <a href="#gzread">gzread</a> или <a href="#gzwrite">gzwrite</a> на заданном 
+   сжатом файле. Параметр offset представляет количество байт в несжатом потоке данных.
+   Параметр whence такой же, что и в lseek(2); значение SEEK_END не поддерживается.<br>
+     Если файл открыт для чтения, эта функция эмулируется, что может происходить чрезвычайно 
+   медленно. Если файл открыт для записи, то поддерживается только смещение вперед.
+   Если при сжатии <a href="#gzseek">gzseek</a> попадется последовательность нулей, то указатель 
+   будет смещен на новую стартовую позицию.<br>
+   Функция <a href="#gzseek">gzseek</a> возвращает текущее положение курсора, измеряемое в байтах от начала 
+   некомпресованного потока данных, или -1 в случае ошибки, в частности, если файл был открыт для записи 
+   и новую позицию курсора нужно расположить перед текущей позицией.
+   <p>
+
+<font color="Blue"><dt> int     <a name="gzrewind">gzrewind</a> (gzFile file);</font>
+<dd>
+     "Перематывает" текущий файл. Эта функция поддерживается только при чтении.<br>
+   Функция <a href="#gzrewind">gzrewind</a>(file) эквивалентна вызову (int)<a href="#gzseek">gzseek</a>(file, 0L, SEEK_SET)
+   <p>
+
+<font color="Blue"><dt> z_off_t     <a name="gztell">gztell</a> (gzFile file);</font>
+<dd>
+     Возвращает начальную позицию для следующего вызова <a href="#gzread">gzread</a> или <a href="#gzwrite">gzwrite</a>
+   на данном сжатом файле. Эта позиция представляет количество байт в несжатом потоке данных.<br>
+   Функция <a href="#gztell">gztell</a>(file) эквивалентна вызову <a href="#gzseek">gzseek</a>(file, 0L, SEEK_CUR)
+   <p>
+
+<font color="Blue"><dt> int  <a name="gzeof">gzeof</a> (gzFile file);</font>
+<dd>
+     Возвращает 1 если во время предыдущего чтения был достигнут конец файла, иначе возвращает 0.
+   <p>
+
+<font color="Blue"><dt> int     <a name="gzclose">gzclose</a> (gzFile file);</font>
+<dd>
+     В случае необходимости сбрасывает в файл все открытые буфера, закрывает сжатый файл
+   и сбрасывает все состояния (<a href="#state">state</a>) компрессии\декомпрессии.<br> 
+   Возвращает код ошибки zlib (см. функцию <a href="#gzerror">gzerror</a> ниже).
+   <p>
+
+<font color="Blue"><dt> const char *  <a name="gzerror">gzerror</a> (gzFile file, int *errnum);</font>
+<dd>
+     Возвращает текстовое сообщение о последней ошибке, которая произошла на заданном сжатом файле. 
+   Параметр errnum выставлен в код ошибки zlib. Если ошибка произошла на уровне файловой системы,
+   а не в библиотеке сжатия, то errnum выставляется в <a href="#Z_ERRNO">Z_ERRNO</a> 
+   и приложение может использовать errno для того, чтобы получить расширенную диагностику.
+   <p>
+</dl>
+<hr>
+<a name="Basic functions"><h2> Основные функции </h2>
+<h3> Перечень функций </h3>
+<ul>
+<li>  const char *  <a href="#zlibVersion">zlibVersion</a> (void);
+<li>  int  <a href="#deflateInit">deflateInit</a> (<a href="#z_streamp">z_streamp</a> strm, int level);
+<li>  int  <a href="#deflate">deflate</a> (<a href="#z_streamp">z_streamp</a> strm, int flush);
+<li>  int  <a href="#deflateEnd">deflateEnd</a> (<a href="#z_streamp">z_streamp</a> strm);
+<li>  int  <a href="#inflateInit">inflateInit</a> (<a href="#z_streamp">z_streamp</a> strm);
+<li>  int  <a href="#inflate">inflate</a> (<a href="#z_streamp">z_streamp</a> strm, int flush);
+<li>  int  <a href="#inflateEnd">inflateEnd</a> (<a href="#z_streamp">z_streamp</a> strm);
+</ul>
+
+<h3> Описание функций </h3>
+<dl>
+<font color="Blue"><dt>  const char *  <a name="zlibVersion">zlibVersion</a> (void);</font>
+<dd> Приложение может сравнить возвращаемое значение <a href="#zlibVersion">zlibVersion</a> и ZLIB_VERSION для большей уверенности.
+   Если будет отличаться первый символ, то текущий код библиотеки несовместим с хедером zlib.h, используемым приложением.
+   Эта проверка делается автоматически функциями <a href="#deflateInit">deflateInit</a> и <a href="#inflateInit">inflateInit</a>.
+   <p>
+
+<font color="Blue"><dt> int  <a name="deflateInit">deflateInit</a> (<a href="#z_streamp">z_streamp</a> strm, int level);</font>
+<dd>
+     Инциализирует для сжатия внутреннюю переменную потока <a href="#state">state</a>. Поля 
+   <a href="#zalloc">zalloc</a>, <a href="#zfree">zfree</a> и <a href="#opaque">opaque</a> 
+   должны быть инициализированы перед вызовом.
+   Если <a href="#zalloc">zalloc</a> и <a href="#zfree">zfree</a> выставлены в <a href="#Z_NULL">Z_NULL</a>, 
+   <a href="#deflateInit">deflateInit</a> обновит их т.о., чтобы использовались стандартные функции 
+   управления памятью.<br>
+
+     Степень сжатия level должен быть выставлен в <a href="#Z_DEFAULT_COMPRESSION">Z_DEFAULT_COMPRESSION</a>, 
+   или находится между 0 и 9: 1 дает лучшую скорость, 9 наибольшее сжатие, 0 означает отсутствие сжатия 
+   (все входные данные просто копируются блоком за раз).<br>
+
+   <a href="#Z_DEFAULT_COMPRESSION">Z_DEFAULT_COMPRESSION</a> означает компромисс по умолчанию между 
+   скоростью и степенью сжатия (текущее значение эквивалентно значению 6 параметра level).<br>
+
+   <a href="#deflateInit">deflateInit</a> возвращает: <ul> 
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха 
+   <li><a href="#Z_MEM_ERROR">Z_MEM_ERROR</a> если недостаточно памяти 
+   <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если неверно выставлен параметр level
+   <li><a href="#Z_VERSION_ERROR">Z_VERSION_ERROR</a> если версия библиотеки zlib (<a href="#zlib_version">zlib_version</a>) 
+   несовместима с версией, на которую рассчитывает приложение (ZLIB_VERSION).
+   </ul>
+   <a href="#msg">msg</a> выставляется в null, если нет никаких сообщений об ошибках.<br>  
+   <a href="#deflateInit">deflateInit</a> не выполняет никакого сжатия,
+   сжатие выполняется функцией <a href="#deflate">deflate</a>().
+   <p>
+
+<font color="Blue"><dt>  int  <a name="deflate">deflate</a> (<a href="#z_streamp">z_streamp</a> strm, int flush);</font>
+<dd>
+    <a href="#deflate">deflate</a> сжимает столько данных, сколько возможно
+  и останавливается, когда входной буфер опустошается или когда переполнится выходной буфер. 
+  Может вносить некоторую задержку в пополнение выходного буфера (т.е. когда читается входной буфер 
+  без какой-либо записи в выходной) за исключением тех случаев, когда производится форсированное 
+  сбрасывание данных в буфера.<br>
+
+    Подробная семантика описана ниже. <a href="#deflate">deflate</a> выполняет одно или несколько следующих
+  действий:
+
+  <ul>
+  <li> 
+       Сжимает входной поток начиная с позиции <a href="#next_in">next_in</a>, обновляет <a href="#next_in">next_in</a> 
+    и <a href="#avail_in">avail_in</a> соответственно. Если не весь входной поток может быть обработан
+    (из-за нехватки места в выходном буфере), <a href="#next_in">next_in</a> и <a href="#avail_in">avail_in</a> 
+    актуализируются и последующая обработка будет начата с этого же места при следующем вызове <a href="#deflate">deflate</a>().
+
+  <li> 
+       Сохраняет выходной поток начиная с <a href="#next_out">next_out</a>, обновляя  
+    <a href="#next_out">next_out</a> и <a href="#avail_out">avail_out</a>
+    соответственно. Это действие форсируется, если параметр flush не нулевой.
+    Частый вызов функции с ненулевым параметром flush ухудшает степень сжатия, 
+    так что этот параметр нужно использовать только тогда, когда это действительно необходимо.
+    (к примеру, в интерактивных приложениях). В некоторых случаях выходной буфер может сбрасываться,
+    даже если параметр flush и не выставлен.
+  </ul>
+
+  Перед вызовом <a href="#deflate">deflate</a>(), приложение должно убедиться, что хотя бы одно из этих действий 
+  (сжатие\запись) возможно, т.е. инициализированы входной или выходные буферы, а также обновлены поля 
+  <a href="#avail_in">avail_in</a> или <a href="#avail_out">avail_out</a> соответственно; 
+  <a href="#avail_out">avail_out</a> никогда не должен равняться нулю перед вызовом функции.
+  Приложение может читать из выходного буфера, когда захочет, к примеру, когда выходной буфер полон,
+  (т.е. <a href="#avail_out">avail_out</a> == 0), или после каждого вызова <a href="#deflate">deflate</a>(). 
+  Если <a href="#deflate">deflate</a> возвращает <a href="#Z_OK">Z_OK</a>
+  с нулевым <a href="#avail_out">avail_out</a>, то функцию нужно вызывать заново, предварительно обеспечив 
+  свободное место в выходном буфере, т.к. не все сжатые данные были записаны. 
+  <p>
+
+    Если параметр flush выставлен в <a href="#Z_SYNC_FLUSH">Z_SYNC_FLUSH</a>, то все уже сжатые данные 
+  будут сброшены в выходной буфер, который будет выровнен по байту, т.о. что 
+  декомпрессор сможет получить доступ к этим данным в любой момент. (В частности, 
+  <a href="#avail_in">avail_in</a> выставляется в ноль после вызова, если предварительно не было обеспечено 
+  достаточно места в выходном буфере.) Сбрасывание буферов может ухудшить степень сжатия для некоторых алгоритмов, 
+  поэтому применять его следует только при необходимости.
+  <p>
+
+    Если параметр flush выставлен в <a href="#Z_FULL_FLUSH">Z_FULL_FLUSH</a>, то все буфера сбрасываются 
+  также, как и при <a href="#Z_SYNC_FLUSH">Z_SYNC_FLUSH</a>, переменная <a href="#state">state</a> сбрасывается т.о., 
+  что декомпрессия может быть возоблена с этого же место, если предыдущие сжатые данные были повреждены или 
+  требуется произвольный доступ к данным. Чрезмерно частое использование <a href="#Z_FULL_FLUSH">Z_FULL_FLUSH</a> 
+  может серьезно ухудшить сжатие.
+  <p>
+
+    Если <a href="#deflate">deflate</a> завершилась с <a href="#avail_out">avail_out</a> == 0, то необходимо 
+  вновь вызвать эту же функцию с тем же значением параметра flush и большим размером выходного буфера
+  (с обновленным <a href="#avail_out">avail_out</a>), если же сброс выходных буферов прошел успешно 
+  (<a href="#deflate">deflate</a> возвращается с ненулевым <a href="#avail_out">avail_out</a>).
+  <p>
+
+    Если параметр flush выставлен в <a href="#Z_FINISH">Z_FINISH</a>, то обработается входной буфер,
+  результат сбросится в выходной буфер и <a href="#deflate">deflate</a> завершится с <a href="#Z_STREAM_END">Z_STREAM_END</a> 
+  если было достаточно места в выходном буфере; если <a href="#deflate">deflate</a> завершилась с <a href="#Z_OK">Z_OK</a>, 
+  то необходимо вновь вызвать эту же функцию с <a href="#Z_FINISH">Z_FINISH</a> и большим размером выходного буфера
+  (обновленным <a href="#avail_out">avail_out</a>) но с теми же входными данными, т.е пока функция не завершится с 
+  <a href="#Z_STREAM_END">Z_STREAM_END</a> или не произойдет ошибка. После завершения 
+  <a href="#deflate">deflate</a> с результатом <a href="#Z_STREAM_END">Z_STREAM_END</a>, единственными доступными операциями 
+  над потоком являются <a href="#deflateReset">deflateReset</a> или <a href="#deflateEnd">deflateEnd</a>.
+  <p>
+  
+    <a href="#Z_FINISH">Z_FINISH</a> может быть использован сразу после <a href="#deflateInit">deflateInit</a> 
+  если все сжатие может быть выполнено за один вызов. В этом случае значение поля <a href="#avail_out">avail_out</a> 
+  должно быть на 0.1% больше <a href="#avail_in">avail_in</a> плюс 12 байт.  Если <a href="#deflate">deflate</a> 
+  не вернула <a href="#Z_STREAM_END">Z_STREAM_END</a>, то она должна быть вызвана повторно, как было описано выше.
+  <p>
+
+    <a href="#deflate">deflate</a>() выставляет strm-&gt <a href="#adler">adler</a> в контрольную сумма <a href="#adler32">adler32</a> всех 
+  всех прочитанных данных (т.е, <a href="#total_in">total_in</a> байт).
+  <p>
+
+    <a href="#deflate">deflate</a>() может обновлять <a href="#data_type">data_type</a> если она сможет достоверно 
+  определить тип входных данных (<a href="#Z_ASCII">Z_ASCII</a> или <a href="#Z_BINARY">Z_BINARY</a>). В случае неопределенности 
+  данные рассматриваются как бинарные. Это поле является справочным и ни в коем случае не влияет на алгоритмы сжатия.
+  <p>
+
+  Функция <a href="#deflate">deflate</a>() возвращает: <ul>
+  <li><a href="#Z_OK">Z_OK</a> если удалось что-то сделать (т.е. что-то обработали с входа и что-то записали на выход)
+  <li><a href="#Z_STREAM_END">Z_STREAM_END</a> если был обработан весь поток входных данных и все результаты сброшены в выходной буфер
+  (только если flush выставлен в <a href="#Z_FINISH">Z_FINISH</a>)
+  <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если переменная потока <a href="#state">state</a> была 
+  неверно инициализирована (к примеру, если <a href="#next_in">next_in</a> или <a href="#next_out">next_out</a> были NULL) 
+  <li><a href="#Z_BUF_ERROR">Z_BUF_ERROR</a> если нет возможности работать с буферами
+  (к примеру <a href="#avail_in">avail_in</a> или <a href="#avail_out">avail_out</a> равнялись нулю).
+  </ul>
+  <p>
+
+<font color="Blue"><dt>  int  <a name="deflateEnd">deflateEnd</a> (<a href="#z_streamp">z_streamp</a> strm);</font>
+<dd>
+     Освобождает память, выделенную под все динамические массивы.
+   Эта функция разрушает данные в необработанном входном буфере
+   и не сбрасывает результаты в выходной буфер.
+   <p>
+
+   Функция <a href="#deflateEnd">deflateEnd</a> возвращает: <ul>
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха
+   <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если переменная потока <a href="#state">state</a> была  неверно инициализирована
+   <li><a href="#Z_DATA_ERROR">Z_DATA_ERROR</a> если буфера были преждевременно освобождены
+   (т.е. был разрушен входной или выходной буфер). 
+   </ul><p>
+   В случае ошибки <a href="#msg">msg</a> может быть выставлена, но будет указывать на статическую строку
+   (которую не нужно освобождать).
+   <p>
+
+<font color="Blue"><dt>  int  <a name="inflateInit">inflateInit</a> (<a href="#z_streamp">z_streamp</a> strm);</font>
+<dd>     
+	Инициализирует внутреннюю переменную потока <a href="#state">state</a> для декомпрессии. 
+   Поля <a href="#next_in">next_in</a>, <a href="#avail_in">avail_in</a>, <a href="#zalloc">zalloc</a>, <a href="#zfree">zfree</a> и 
+   <a href="#opaque">opaque</a> должны быть инициализированы приложением перед вызовом функции. 
+   Если <a href="#next_in">next_in</a> не равен <a href="#Z_NULL">Z_NULL</a> и <a href="#avail_in">avail_in</a> 
+   бостаточно большой (точное значение зависит от метода сжатия), <a href="#inflateInit">inflateInit</a> 
+   определяет способ сжатия по zlib заголовку и соответственным образом инициализирует все структуры; 
+   если эту функцию не вызывать, то приложение затормозится при первом вызове <a href="#inflate">inflate</a>.  
+   Если <a href="#zalloc">zalloc</a> и <a href="#zfree">zfree</a> выставлены в <a href="#Z_NULL">Z_NULL</a>, 
+   <a href="#inflateInit">inflateInit</a> обновит их т.о., что будут использоваться стандартные для приложения 
+   функции управления памятью.
+   <p>
+
+   Функция <a href="#inflateInit">inflateInit</a> возвращает: <ul>
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха
+   <li><a href="#Z_MEM_ERROR">Z_MEM_ERROR</a> если не хватило памяти
+   <li><a href="#Z_VERSION_ERROR">Z_VERSION_ERROR</a> если версия zlib библиотеки не совпадает с 
+   версией, на которую рассчитывает приложение.  
+   </ul><p>
+   <a href="#msg">msg</a> выставляется в NULL, если нет каких-либо сообщений об ошибке.
+   <a href="#inflateInit">inflateInit</a> не выполняет какой-либо декомпрессии, кроме чтения 
+   zlib заголовка, если тот присутствует. Декомпрессия осуществляется функцией <a href="#inflate">inflate</a>().  
+   (Т.о. <a href="#next_in">next_in</a> и <a href="#avail_in">avail_in</a> могут быть модифицированы, но 
+   <a href="#next_out">next_out</a> и <a href="#avail_out">avail_out</a> остаются неизменными.)
+   <p>
+
+<font color="Blue"><dt>  int  <a name="inflate">inflate</a> (<a href="#z_streamp">z_streamp</a> strm, int flush);</font>
+<dd>
+    <a href="#inflate">inflate</a> декомпрессует столько данных, сколько это возможно сделать и останавливается тогда, 
+  когда будет исчерпан входной буфер или будет переполнен выходной. Она может вносить некоторую задержку 
+  в пополнение выходного потока (когда осуществляется чтение входного потока без какого-либо сброса данных в выходной)
+  за исключением случаев, когда используется параметр flush для сброса данных в выходной буфер.
+  <p>
+
+  Подробная семантика описана  ниже. <a href="#inflate">inflate</a> выполняет одно или все действия:
+
+  <ul>
+  <li> Декомпрессирует входные данные, начиная с позиции <a href="#next_in">next_in</a>, обновляя <a href="#next_in">next_in</a> и <a href="#avail_in">avail_in</a>
+    соответственно. Если не все входные данные могут быть обработаны (к примеру из-за недостаточного 
+    размера выходного буфера), <a href="#next_in">next_in</a> обновляется и дальнейшая декомпрессия начнется 
+    с этого же места при следующем вызове <a href="#inflate">inflate</a>().
+
+  <li> Сбрасывает результат в выходной буфер, начиная с <a href="#next_out">next_out</a>, обновляя <a href="#next_out">next_out</a> и <a href="#avail_out">avail_out</a> 
+    соответственно. <a href="#inflate">inflate</a>() сбрасывает столько итоговых данных, сколько это возможно, т.е. 
+    пока есть данные во входном буфере и есть свободное место в выходном. (Детали относительно параметра flush описаны ниже).
+  </ul> <p>
+
+  Перед вызовом <a href="#inflate">inflate</a>(), приложение должно убедиться, что как минимум одно из действий возможно,
+  обеспечивая данные для декомпрессии на входе, считывая результаты на выходе, и обновляя соответствующие параметры - next_* и avail_*.
+  Приложение может считывать декомпрессованые данные на выходе когда потребуется, к примеру, когда выходной буфер станет заполнен
+  (т.е. <a href="#avail_out">avail_out</a> == 0), или после каждого вызова <a href="#inflate">inflate</a>(). 
+  Если <a href="#inflate">inflate</a> вернет <a href="#Z_OK">Z_OK</a> с нулевым <a href="#avail_out">avail_out</a>, 
+  то функцию нужно вызвать заново, обеспечив достаточно места в выходно буфере, чтобы в него можно было записать уже декомпресованые данные.
+  <p>
+
+    Если параметр flush выставлен в <a href="#Z_SYNC_FLUSH">Z_SYNC_FLUSH</a>, то <a href="#inflate">inflate</a> 
+  сбрасывает в выходной буфер столько декомпресованых данных, сколько возможно. 
+  
+  Поведение функции <a href="#inflate">inflate</a> не определено для значений параметра flush,
+  отличающихся от <a href="#Z_SYNC_FLUSH">Z_SYNC_FLUSH</a> или <a href="#Z_FINISH">Z_FINISH</a>, 
+  хотя текущая реализация в любом случае сбрасывает столько информации в выходной буфер, сколько это возможно
+  <p>
+
+  Функция <a href="#inflate">inflate</a>() может вызываться до тех пор, пока не вернет <a href="#Z_STREAM_END">Z_STREAM_END</a> 
+  или код ошибки. Однако, если вся декомпрессия может быть произведена за за один вызов, то 
+  параметр flush должен быть выставлен в <a href="#Z_FINISH">Z_FINISH</a>. 
+  В этом случае обрабатывается весь входной буфер и все обработанные данные сбрасываются в выходной; 
+  <a href="#avail_out">avail_out</a> должен быть достаточно большой, чтобы вместить все декомпресованные данные. 
+  (Для этих целей размер несжатых данных может быть сохранен компрессором). Следующая операция над потоком должна быть 
+  <a href="#inflateEnd">inflateEnd</a> чтобы сбросить состояние декомпрессии - <a href="#state">state</a>. 
+  Использование параметра <a href="#Z_FINISH">Z_FINISH</a> не является обязательным, но может быть полезным 
+  для единичного вызова <a href="#inflate">inflate</a>(), что бы последняя могла оптимизировать скорость и ресурсы для декомпрессии.
+  <p>
+
+     Если на этом этапе потребуется словарь (см. <a href="#inflateSetDictionary">inflateSetDictionary</a> ниже), то функция
+  <a href="#inflate">inflate</a> выставит strm-&gt;<a href="#adler">adler</a> в <a href="#adler32">adler32</a> контрольную сумму 
+  выбранного компрессором словаря и вернет <a href="#Z_NEED_DICT">Z_NEED_DICT</a>; в противном случае функция
+  выставит strm-&gt;<a href="#adler">adler</a> в <a href="#adler32">adler32</a> контрольную сумму всех 
+  декомпресованных данных (т.е. <a href="#total_out">total_out</a> байт) и вернет <a href="#Z_OK">Z_OK</a>, 
+  <a href="#Z_STREAM_END">Z_STREAM_END</a> или код ошибки, как описано ниже. В конце потока <a href="#inflate">inflate</a>()
+  проверяет на равенство посчитанную ей <a href="#adler32">adler32</a> контрольную сумму и такую же сумму,
+  посчитанную компрессором и в случае совпадения возвращает <a href="#Z_STREAM_END">Z_STREAM_END</a>.
+  <p>
+
+  Функция <a href="#inflate">inflate</a>() возвращает: <ul> 
+  <li><a href="#Z_OK">Z_OK</a> если хоть что-то было сделано (либо прочитано из входного буфера или записано в выходной)
+  <li><a href="#Z_STREAM_END">Z_STREAM_END</a> если был достигнут конец входного буфера и все 
+  декомпресованные данные были сброшены в выходной буфер.
+  <li><a href="#Z_NEED_DICT">Z_NEED_DICT</a> если начиная с текущего положения понадобился существующий словарь.
+  <li><a href="#Z_DATA_ERROR">Z_DATA_ERROR</a> если входные данные были повреждены (входной поток не соответствует zlib формату
+  или  неправильна <a href="#adler32">adler32</a> контрольная сумма) 
+  <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если структура потока неправильно инициализирована
+  (к примеру <a href="#next_in">next_in</a> или <a href="#next_out">next_out</a> равны NULL) 
+  <li><a href="#Z_MEM_ERROR">Z_MEM_ERROR</a> если недостаточно памяти 
+  <li><a href="#Z_BUF_ERROR">Z_BUF_ERROR</a> если ничего сделать нельзя или если недостаточно места в 
+  выходном буфере при использовании параметра <a href="#Z_FINISH">Z_FINISH</a>. 
+  </ul><p>
+  Если функция вернет <a href="#Z_DATA_ERROR">Z_DATA_ERROR</a>, то приложение в последствии может вызвать <a href="#inflateSync">inflateSync</a> 
+  чтобы найти неповрежденный блок для декомпрессии.
+  <p>
+
+<font color="Blue"><dt>  int  <a name="inflateEnd">inflateEnd</a> (<a href="#z_streamp">z_streamp</a> strm);</font>
+<dd>
+     Освобождает все динамические структуры потока. Эта функция разрушает все данные во входном буфере и ничего не сбрасывает в выходной.
+   <p>
+
+   Функция <a href="#inflateEnd">inflateEnd</a> возвращает: <ul>
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха
+   <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если переменная потока <a href="#state">state</a>
+   находится в неправильном состоянии. 
+   </ul><p>
+   В случае ошибки <a href="#msg">msg</a> может быть выставлена, но будет указывать на статический буфер
+   (который не нужно освобождать).
+</dl>
+<hr>
+<a name="Advanced functions"><h2> Расширенные функции </h2>
+    Эти функции могут быть востребованы только в некоторых специальных приложениях.
+<h3> Перечень функций </h3>
+<ul>
+<li> int  <a href="#deflateInit2">deflateInit2</a> (<a href="#z_streamp">z_streamp</a> strm, int  level, int  method, int  windowBits, int  memLevel, int  strategy);
+<li> int  <a href="#deflateSetDictionary">deflateSetDictionary</a> (<a href="#z_streamp">z_streamp</a> strm, const Bytef *dictionary, uInt  dictLength);
+<li> int  <a href="#deflateCopy">deflateCopy</a> (<a href="#z_streamp">z_streamp</a> dest, <a href="#z_streamp">z_streamp</a> source);
+<li> int  <a href="#deflateReset">deflateReset</a> (<a href="#z_streamp">z_streamp</a> strm);
+<li> int  <a href="#deflateParams">deflateParams</a> (<a href="#z_streamp">z_streamp</a> strm, int level, int strategy);
+<li> int  <a href="#inflateInit2">inflateInit2</a> (<a href="#z_streamp">z_streamp</a> strm, int  windowBits);
+<li> int  <a href="#inflateSetDictionary">inflateSetDictionary</a> (<a href="#z_streamp">z_streamp</a> strm, const Bytef *dictionary, uInt  dictLength);
+<li> int  <a href="#inflateSync">inflateSync</a> (<a href="#z_streamp">z_streamp</a> strm);
+<li> int  <a href="#inflateReset">inflateReset</a> (<a href="#z_streamp">z_streamp</a> strm);
+
+</ul>
+<h3> Описание функций </h3>
+<dl>
+<font color="Blue"><dt>  int  <a name="deflateInit2">deflateInit2</a> (<a href="#z_streamp">z_streamp</a> strm, int level, int method, int  windowBits, int  memLevel, int  strategy);</font>
+
+<dd> Это другая версия <a href="#deflateInit">deflateInit</a> с большим количеством опций компрессии. 
+   Поля <a href="#next_in">next_in</a>, <a href="#zalloc">zalloc</a>, <a href="#zfree">zfree</a> и <a href="#opaque">opaque</a> 
+   должны быть инициализированы приложением до вызова функции.<p>
+
+   Параметр method задает метод сжатия. В текущей версии библиотеки должен равняться <a href="#Z_DEFLATED">Z_DEFLATED</a>.
+   <p>
+
+   Параметр windowBits является базой двух логарифмов размера окна
+   (размер буфера истории). Должен быть в диапазоне 8..15 для текущей версии библиотеки. 
+   Большие значения этого параметра улучшают сжатие и увеличивают объем используемой памяти.
+   При использовании функции <a href="#deflateInit">deflateInit</a> этот параметр равняется 15.
+   <p>
+
+   Параметр memLevel определяет сколько памяти может быть распределено для внутренней 
+   переменной сжатия <a href="#state">state</a>. memLevel=1 использует минимум мамяти, но 
+   выполняется медленно и уменьшает степень сжатия; memLevel=9 использует максимум памяти
+   с оптимальной скоростью сжатия. Значение по умолчанию - 8. Подробности работы с памятью и варианты 
+   использования параметров windowBits и memLevel описаны в файле zconf.h.
+   <p>
+
+   Параметр strategy определяет алгоритм сжатия. Используйте значение 
+   <a href="#Z_DEFAULT_STRATEGY">Z_DEFAULT_STRATEGY</a> для обыкновенных данных, <a href="#Z_FILTERED">Z_FILTERED</a> 
+   для данных, обработанных фильтром (или предиктором), или <a href="#Z_HUFFMAN_ONLY">Z_HUFFMAN_ONLY</a> 
+   чтобы явно указать к использованию только кодирование по Хаффману (никаких строк вообще).  
+   Отфильтрованные данные содержат главным образом малые значения с каким-то случайным распределением. 
+   В этом случае в качестве алгоритма сжатия будет использован наилучший - <a href="#compress">compress</a>. 
+   Эффект от применения <a href="#Z_FILTERED">Z_FILTERED</a> заключается в форсировании кодирования по Хаффману 
+   и меньшем использовании строкового сравнения; это что-то среднее между Z_DEFAULT и <a href="#Z_HUFFMAN_ONLY">Z_HUFFMAN_ONLY</a>. 
+   Параметр strategy влияет только на степень сжатия.<p>
+
+   Функция <a href="#deflateInit2">deflateInit2</a> возвращает: <ul>
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха
+   <li><a href="#Z_MEM_ERROR">Z_MEM_ERROR</a> если недостаточно памяти 
+   <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если какой-либо параметр был выставлен неправильно 
+   (к примеру метод сжатия). 
+   </ul><p>
+   <a href="#msg">msg</a> выставляется в NULL если не было никаких сообщений об ошибках. 
+   <a href="#deflateInit2">deflateInit2</a> не выполняет какой-либо компрессии: это делает <a href="#deflate">deflate</a>().
+   <p>
+                            
+<font color="Blue"><dt> int  <a name="deflateSetDictionary">deflateSetDictionary</a> (<a href="#z_streamp">z_streamp</a> strm, const Bytef *dictionary, uInt  dictLength);</font>
+<dd>
+   Инициализирует словарь на основе указанной последовательности байт без какой-либо компрессии\декомпресии.
+   Эта функция должна вызываться сразу после <a href="#deflateInit">deflateInit</a>, <a href="#deflateInit2">deflateInit2</a> или <a href="#deflateReset">deflateReset</a>, 
+   и перед первым вызовом <a href="#deflate">deflate</a>. Компрессор и декомпрессор должны использовать 
+   строго один и тот же словарь (см. <a href="#inflateSetDictionary">inflateSetDictionary</a>).<p>
+
+   Словарь должен содержать строки (последовательности байт) которые будут встречаться позже в данных для компрессии.
+   Предпочтительно, чтобы наиболее часто встречающиеся строки располагались ближе к концу словаря. 
+   Использование словаря наиболее полезно в случаях, когда данные для сжатия небольшие и могут быть 
+   спрогнозированы с хорошей точностью; в этом случае данные могут быть сжаты лучше, если сравнивать с вариантом, 
+   при котором пустой словарь.<p>
+
+   В зависимости от размера и структуры входных данных <a href="#deflateInit">deflateInit</a> или 
+   <a href="#deflateInit2">deflateInit2</a> могут фактически игнорировать часть словаря, к примеру, 
+   если размер словаря больше, чем размер окна в <a href="#deflate">deflate</a> или deflate2. 
+   Т.о. строки, которые чаще встречаются, должны располагаться ближе к концу словаря, а не к началу.<p>
+
+     После возвращения из этой функции strm-&gt;<a href="#adler">adler</a> будет выставлен в Adler32 контрольную сумму 
+   словаря; декомпрессор впоследствии может использовать это значение для того, чтобы идентифицировать 
+   словарь, который был использован компрессором. (Adler32 контрольная сумма считается по всему словарю, даже если  
+   компрессор использовал только часть словаря.)<p>
+
+   Функция <a href="#deflateSetDictionary">deflateSetDictionary</a> возвращает: <ul>
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха 
+   <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если какой-либо параметр был неправильный 
+   (к примеру dictionary был выставлен в NULL) или переменная потока <a href="#state">state</a> была неправильно инициализирована
+   (к примеру, если <a href="#deflate">deflate</a> уже вызывалась для этого потока или если в качестве метода сжатия выбран bsort). 
+   </ul><p>
+   Функция <a href="#deflateSetDictionary">deflateSetDictionary</a> не выполняет какой-либо компрессии, это будет делать 
+   <a href="#deflate">deflate</a>().<p>
+
+<font color="Blue"><dt> int  <a name="deflateCopy">deflateCopy</a> (<a href="#z_streamp">z_streamp</a> dest, <a href="#z_streamp">z_streamp</a> source);</font>
+<dd>
+   Инициализизирует выходной поток как полную копию входного потока.<p>
+
+   Эта функция может быть полезна, когда опробуется несколько стратегий сжатия, к примеру, 
+   когда входные данные разными способами предварительно обрабатываются. Потоки, которые в последствии окажутся не нужны,
+   требуется освободить с помощью функции <a href="#deflateEnd">deflateEnd</a>. 
+   Заметьте, что <a href="#deflateCopy">deflateCopy</a> дублирует внутреннюю переменную <a href="#state">state</a>, 
+   которая может быть достаточно большой, так что такой подход может оказаться медленным и потребовать 
+   больших затрат памяти.<p>
+
+   Функция <a href="#deflateCopy">deflateCopy</a> возвращает: <ul>
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха  
+   <li><a href="#Z_MEM_ERROR">Z_MEM_ERROR</a> если недостаточно памяти
+   <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если переменная потока <a href="#state">state</a> была неверно инициализирована 
+   (к примеру поле <a href="#zalloc">zalloc</a> равняется NULL). 
+   </ul><p>
+   <a href="#msg">msg</a> остается неизменной и в входном и в выходном потоке.<p>
+
+<font color="Blue"><dt> int  <a name="deflateReset">deflateReset</a> (<a href="#z_streamp">z_streamp</a> strm);</font>
+<dd> 
+   Эта функция эквивалентна <a href="#deflateEnd">deflateEnd</a> вызываемой после <a href="#deflateInit">deflateInit</a>,
+   но не освобождает данные во внутренней переменной <a href="#state">state</a>.
+   После вызова этой функции поток сохраняет переменную степени сжатия level и все прочие атрибуты
+   которые были выставлены функцией <a href="#deflateInit2">deflateInit2</a>.<p>
+
+   Функция <a href="#deflateReset">deflateReset</a> возвращает: <ul>
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха  
+   <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если переменная потока <a href="#state">state</a> была неверно инициализирована 
+   (к примеру поле <a href="#zalloc">zalloc</a> или <a href="#state">state</a> равнялись NULL). 
+   </ul><p>
+
+<font color="Blue"><dt> int  <a name="deflateParams">deflateParams</a> (<a href="#z_streamp">z_streamp</a> strm, int level, int strategy);</font>
+<dd>
+   Динамически обновляет параметры сжатия level и strategy. Смысл этих параметров такой же что и при вызове <a href="#deflateInit2">deflateInit2</a>.  
+   Функция может использоваться к примеру в тех случаях, когда различные фрагменты входных данных 
+   могут потребовать различной стратегии. Если переменная level была изменена, то декомпрессор будет ориентироваться на 
+   старое значение до следующего вызова <a href="#deflate">deflate</a>().<p>
+
+   Перед вызовом <a href="#deflateParams">deflateParams</a>, переменная потока <a href="#state">state</a> 
+   должна быть инициализирована также как и перед вызовом <a href="#deflate">deflate</a>(), 
+   чтобы впоследствии текущий входной поток мог быть сжат и сброшен в выходной буфер. 
+   В частности, поле strm-&gt;<a href="#avail_out">avail_out</a> должно быть не нулевым.<p>
+
+   Функция <a href="#deflateParams">deflateParams</a> возвращает: <ul>
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха  
+   <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если переменная входного потока <a href="#state">state</a> 
+   была неверно инициализирована или был неверный какой-либо из параметров 
+   <a href="#Z_BUF_ERROR">Z_BUF_ERROR</a> если strm-&gt;avail_out был равен нулю.
+   </ul><p>
+
+<font color="Blue"><dt> int  <a name="inflateInit2">inflateInit2</a> (<a href="#z_streamp">z_streamp</a> strm, int  windowBits);</font>
+
+<dd>     
+   Это другая версия функции <a href="#inflateInit">inflateInit</a> с дополнительными параметрами. 
+   Поля <a href="#next_in">next_in</a>, <a href="#avail_in">avail_in</a>, <a href="#zalloc">zalloc</a>, <a href="#zfree">zfree</a> and <a href="#opaque">opaque</a> 
+   должны быть инициализированы приложением перед вызовом функции.<p>
+
+     The windowBits parameter является базой двух логарифмов максимального размера окна 
+   (размер буфера истории). Должен находится в диапазоне от 8..15 для текущей версии библиотеки. 
+   Значение по умолчанию - 15, если используется альтернативная версия функции - <a href="#inflateInit">inflateInit</a>.
+   Если сжатый поток с большим размером окна подается на вход, <a href="#inflate">inflate</a>() вернется с кодом ошибки
+   <a href="#Z_DATA_ERROR">Z_DATA_ERROR</a> вместо попытки выделить память для большего окна.<p>
+
+   Функция <a href="#inflateInit2">inflateInit2</a> возвращает: <ul>
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха
+   <li><a href="#Z_MEM_ERROR">Z_MEM_ERROR</a> если недостаточно памяти 
+   <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если какой-либо входной параметр неправильный
+   </ul><p>
+
+   <a href="#msg">msg</a> выставляется в NULL, если нет каких-либо сообщений об ошибке.  
+   <a href="#inflateInit2">inflateInit2</a> не выполняет какой-либо декомпрессии, кроме чтения zlib заголовка, если тот присутствует.
+   Декомпрессию будет производить <a href="#inflate">inflate</a>(). (Т.о. поля <a href="#next_in">next_in</a> и <a href="#avail_in">avail_in</a> могут быть модифицированы, 
+   но <a href="#next_out">next_out</a> и <a href="#avail_out">avail_out</a> остануться неизменными.)<p>
+
+<font color="Blue"><dt>  int  <a name="inflateSetDictionary">inflateSetDictionary</a> (<a href="#z_streamp">z_streamp</a> strm, const Bytef *dictionary, uInt  dictLength);</font>
+<dd>
+   Инициализирует словарь для декомпрессии по заданной последовательности байт. 
+   Эта функция должна вызываться сразу после <a href="#inflate">inflate</a>, если та вернет <a href="#Z_NEED_DICT">Z_NEED_DICT</a>. 
+   Словарь, выбранный компрессором, может быть идентифицирован по Adler32 контрольной сумме.
+   Компрессор и декомпрессор должны использовать строго один и тот же словарь (см. <a href="#deflateSetDictionary">deflateSetDictionary</a>).<p>
+
+   Функция <a href="#inflateSetDictionary">inflateSetDictionary</a> возвращает: <ul>
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха
+   <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если какой-либо параметр неправильный, (к примеру dictionary равняется NULL) 
+   или переменная потока <a href="#state">state</a> неверно инициализирована 
+   <li><a href="#Z_DATA_ERROR">Z_DATA_ERROR</a> если заданный словарь не совпадает (неверная Adler32 контрольная сумма). 
+   </ul><p>
+   Функция <a href="#inflateSetDictionary">inflateSetDictionary</a> не выполняет какой-либо декомпрессии, это выполняется последующим вызовом <a href="#inflate">inflate</a>().<p>
+
+<font color="Blue"><dt> int  <a name="inflateSync">inflateSync</a> (<a href="#z_streamp">z_streamp</a> strm);</font>
+
+<dd>
+    Пропускает неправильные фрагменты сжатых данных (см. выше описание <a href="#deflate">deflate</a> с параметром <a href="#Z_FULL_FLUSH">Z_FULL_FLUSH</a>). 
+  Кроме неправильных фрагментов может пропустить также все входные данные. В выходной поток ничего не сбрасывает.<p>
+
+  Функция <a href="#inflateSync">inflateSync</a> возвращает: <ul> 
+  <li><a href="#Z_OK">Z_OK</a> если фрагменты для пропуска были найдены 
+  <li><a href="#Z_BUF_ERROR">Z_BUF_ERROR</a> если ничего нет во входном буфере
+  <li><a href="#Z_DATA_ERROR">Z_DATA_ERROR</a> если не было найдено фрагментов для пропуска 
+  <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если структура потока была повреждена
+  </ul><p>
+  В случае успеха приложение может сохранить текущий указатель <a href="#total_in">total_in</a>, который 
+  будет показывать сколько правильных сжатых данных было обнаружено. В случае ошибки приложение может 
+  повторно вызвать <a href="#inflateSync">inflateSync</a>, подавая на вход новые данные, пока не будет найден
+  неповрежденный фрагмент, или не закончатся данные на входе.<p>
+
+<font color="Blue"><dt> int  <a name="inflateReset">inflateReset</a> (<a href="#z_streamp">z_streamp</a> strm);</font>
+<dd>
+     Эта функция эквивалентна <a href="#inflateEnd">inflateEnd</a> вызываемой после <a href="#inflateInit">inflateInit</a>,
+   но она не освобождает все массивы внутренней переменной <a href="#state">state</a>.
+   Поток сохраняет все атрибуты, которые были выставлены в функции <a href="#inflateInit2">inflateInit2</a>.
+   <p>
+
+   Функция <a href="#inflateReset">inflateReset</a> возвращает: <ul> 
+   <li><a href="#Z_OK">Z_OK</a> в случае успеха
+   <li><a href="#Z_STREAM_ERROR">Z_STREAM_ERROR</a> если переменная потока <a href="#state">state</a> 
+   была неверно инициализирована (к примеру поля <a href="#zalloc">zalloc</a> или <a href="#state">state</a> были равны NULL).
+   </ul><p>
+</dl>
+
+<hr>
+<a name="Checksum functions"><h2> Функции подсчета контрольных сумм </h2>
+   Эти функции не имеют отношения к сжатию, но они все равно экспортируются, 
+   поскольку могут быть полезны приложению, в котором используется библиотека сжатия.
+
+<h3> Перечень функций </h3>
+<ul>
+<li> uLong  <a href="#adler32">adler32</a> (uLong <a href="#adler">adler</a>, const Bytef *buf, uInt len);
+<li> uLong  <a href="#crc32">crc32</a>   (uLong crc, const Bytef *buf, uInt len);
+</ul>
+<h3> Описание функций </h3>
+<dl>
+<font color="Blue"><dt> uLong  <a name="adler32">adler32</a> (uLong <a href="#adler">adler</a>, const Bytef *buf, uInt len);</font>
+<dd>
+     Обновляет передаваемую Adler-32 контрольную сумму массива buf[0..len-1] и возвращает 
+   обновленную контрольную сумму. Если buf равняется NULL, функция вернет начальное значение контрольной суммы.
+   <p>
+   Adler-32 контрольная сумма так же надежна, как и посчитанная функцией CRC32, но может быть высчитана 
+   намного быстрее. Пример использования:
+   <pre>
+
+     uLong <a href="#adler">adler</a> = <a href="#adler32">adler32</a>(0L, <a href="#Z_NULL">Z_NULL</a>, 0);
+
+     while (read_buffer(buffer, length) != EOF) {
+       <a href="#adler">adler</a> = <a href="#adler32">adler32</a>(<a href="#adler">adler</a>, buffer, length);
+     }
+     if (<a href="#adler">adler</a> != original_adler) error();
+   </pre>
+
+<font color="Blue"><dt> uLong  <a name="crc32">crc32</a>   (uLong crc, const Bytef *buf, uInt len);</font>
+<dd>
+     Обновляет передаваемую контрольную сумму массива buf[0..len-1] и возвращает 
+   обновленную контрольную сумму. Если buf равняется NULL, функция вернет начальное значение контрольной суммы. 
+   Пример использования:
+   <pre>
+
+     uLong crc = <a href="#crc32">crc32</a>(0L, <a href="#Z_NULL">Z_NULL</a>, 0);
+
+     while (read_buffer(buffer, length) != EOF) {
+       crc = <a href="#crc32">crc32</a>(crc, buffer, length);
+     }
+     if (crc != original_crc) error();
+   </pre>
+</dl>
+<hr>
+<a name="struct z_stream_s"><h2> struct z_stream_s </h2>
+Объявление структуры:
+<font color="Blue">
+<a name="z_stream_s">
+<pre>
+typedef struct z_stream_s {
+    Bytef    *<a name="next_in">next_in</a>;  /* next input byte */
+    uInt     <a name="avail_in">avail_in</a>;  /* number of bytes available at <a href="#next_in">next_in</a> */
+    uLong    <a name="total_in">total_in</a>;  /* total nb of input bytes read so far */
+
+    Bytef    *<a name="next_out">next_out</a>; /* next output byte should be put there */
+    uInt     <a name="avail_out">avail_out</a>; /* remaining free space at <a href="#next_out">next_out</a> */
+    uLong    <a name="total_out">total_out</a>; /* total nb of bytes output so far */
+
+    char     *<a name="msg">msg</a>;      /* last error message, NULL if no error */
+    struct internal_state FAR *<a name="state">state</a>; /* not visible by applications */
+
+    alloc_func <a name="zalloc">zalloc</a>;  /* used to allocate the internal <a href="#state">state</a> */
+    free_func  <a name="zfree">zfree</a>;   /* used to free the internal <a href="#state">state</a> */
+    voidpf     <a name="opaque">opaque</a>;  /* private data object passed to <a href="#zalloc">zalloc</a> and <a href="#zfree">zfree</a> */
+
+    int     <a name="data_type">data_type</a>;  /* best guess about the data type: ascii or binary */
+    uLong   <a name="adler">adler</a>;      /* <a href="#adler32">adler32</a> value of the uncompressed data */
+    uLong   <a name="reserved">reserved</a>;   /* <a href="#reserved">reserved</a> for future use */
+} <a href="#z_stream_s">z_stream</a> ;
+
+typedef <a href="#z_stream_s">z_stream</a> FAR * <a name="z_streamp">z_streamp</a>;  я 
+</pre>
+</font>
+   Приложение должно обновлять <a href="#next_in">next_in</a> и <a href="#avail_in">avail_in</a> когда 
+   <a href="#avail_in">avail_in</a> сбрасывается в ноль. Также нужно обновлять <a href="#next_out">next_out</a> и 
+   <a href="#avail_out">avail_out</a> когда <a href="#avail_out">avail_out</a> сбрасывается в ноль. 
+   Приложение должно инициализировать <a href="#zalloc">zalloc</a>, <a href="#zfree">zfree</a> и
+   <a href="#opaque">opaque</a> поля перед вызовом init-функций. Все остальные поля заполняются 
+   библиотекой и не должны модифицироваться приложением.<p>
+
+   Параметр <a href="#opaque">opaque</a>, подготовленный приложением, будет передаваться в качестве 
+   первого параметра при вызове функций <a href="#zalloc">zalloc</a> и <a href="#zfree">zfree</a>. 
+   Он может быть полезен при более тонком управлении потреблением памяти. Библиотека сжатия ничего о параметре 
+   <a href="#opaque">opaque</a> не знает.<p>
+
+   <a href="#zalloc">zalloc</a> должна вернуть <a href="#Z_NULL">Z_NULL</a> если не смогла выделить достаточно 
+   памяти. Если библиотека zlib используется в многопоточном приложении, <a href="#zalloc">zalloc</a> и <a href="#zfree">zfree</a> 
+   должны быть потокобезопасными. <p>
+
+   В 16-битной системе, функции <a href="#zalloc">zalloc</a> и <a href="#zfree">zfree</a> должны иметь возможность
+   выделить вплоть до 65536 байт, не понадобиться выделять больше памяти, если будет определен макрос 
+   MAXSEG_64K (см.zconf.h). ВНИМАНИЕ: В MSDOS, указатели, возвращаемые <a href="#zalloc">zalloc</a> 
+   для объектов превышающих 65536 байт *должны* иметь смещение нормализованное относительно 0. 
+   Функции выделения памяти по умолчанию из этой библиотеки обеспечивают это (см. zutil.c). 
+   Чтобы уменьшить потребление памяти и предотвратить выделение памяти для объектов свыше 64K, 
+   путем ухудшения сжатия, скомпилируйте библиотеку с ключом -DMAX_WBITS=14 (см. zconf.h).
+   <p>
+
+   Поля <a href="#total_in">total_in</a> и <a href="#total_out">total_out</a> могут пригодится для визуализации процесса сжатия.
+   После сжатия, <a href="#total_in">total_in</a> содержит полный размер несжатых данных и может быть сохранен 
+   для использования декомпрессором (для частного случая, когда декомпрессию нужно будет 
+   осуществить за один вызов).<p>
+
+<hr>
+<a name="Constants"><h2> Константы </h2>
+Константы идут без комментариев, только для справки.
+<font color="Blue">
+<pre>
+#define <a name="Z_NO_FLUSH">Z_NO_FLUSH</a>      0
+#define <a name="Z_PARTIAL_FLUSH">Z_PARTIAL_FLUSH</a> 1 
+	/* will be removed, use <a href="#Z_SYNC_FLUSH">Z_SYNC_FLUSH</a> instead */
+#define <a name="Z_SYNC_FLUSH">Z_SYNC_FLUSH</a>    2
+#define <a name="Z_FULL_FLUSH">Z_FULL_FLUSH</a>    3
+#define <a name="Z_FINISH">Z_FINISH</a>        4
+/* Allowed flush values ; see <a href="#deflate">deflate</a>() below for details */
+
+#define <a name="Z_OK">Z_OK</a>            0
+#define <a name="Z_STREAM_END">Z_STREAM_END</a>    1
+#define <a name="Z_NEED_DICT">Z_NEED_DICT</a>     2
+#define <a name="Z_ERRNO">Z_ERRNO</a>        (-1)
+#define <a name="Z_STREAM_ERROR">Z_STREAM_ERROR</a> (-2)
+#define <a name="Z_DATA_ERROR">Z_DATA_ERROR</a>   (-3)
+#define <a name="Z_MEM_ERROR">Z_MEM_ERROR</a>    (-4)
+#define <a name="Z_BUF_ERROR">Z_BUF_ERROR</a>    (-5)
+#define <a name="Z_VERSION_ERROR">Z_VERSION_ERROR</a> (-6)
+/* Return codes for the compression/decompression functions. Negative
+ * values are errors, positive values are used for special but normal events.
+ */
+
+#define <a name="Z_NO_COMPRESSION">Z_NO_COMPRESSION</a>         0
+#define <a name="Z_BEST_SPEED">Z_BEST_SPEED</a>             1
+#define <a name="Z_BEST_COMPRESSION">Z_BEST_COMPRESSION</a>       9
+#define <a name="Z_DEFAULT_COMPRESSION">Z_DEFAULT_COMPRESSION</a>  (-1)
+/* compression levels */
+
+#define <a name="Z_FILTERED">Z_FILTERED</a>            1
+#define <a name="Z_HUFFMAN_ONLY">Z_HUFFMAN_ONLY</a>        2
+#define <a name="Z_DEFAULT_STRATEGY">Z_DEFAULT_STRATEGY</a>    0
+/* compression strategy ; see <a href="#deflateInit2">deflateInit2</a>() below for details */
+
+#define <a name="Z_BINARY">Z_BINARY</a>   0
+#define <a name="Z_ASCII">Z_ASCII</a>    1
+#define <a name="Z_UNKNOWN">Z_UNKNOWN</a>  2
+/* Possible values of the <a href="#data_type">data_type</a> field */
+
+#define <a name="Z_DEFLATED">Z_DEFLATED</a>   8
+/* The <a href="#deflate">deflate</a> compression method (the only one supported in this version) */
+
+#define <a name="Z_NULL">Z_NULL</a>  0  /* for initializing <a href="#zalloc">zalloc</a>, <a href="#zfree">zfree</a>, <a href="#opaque">opaque</a> */
+
+#define <a name="zlib_version">zlib_version</a> <a href="#zlibVersion">zlibVersion</a>()
+/* for compatibility with versions less than 1.0.2 */
+</pre>
+</font>
+
+<hr>
+<a name="Misc"><h2> Разное </h2>
+ <a href="#deflateInit">deflateInit</a> и <a href="#inflateInit">inflateInit</a> 
+ являются макросами, которые позволяют сравнить версию библиотеки с версией, которую компилятор 
+ обнаруживает в <a href="#z_stream_s">z_stream</a>.
+ <p>
+ Прочие функции, которые экспортируются из библиотеки:
+ <dl>
+ <font color="Blue"><dt> const char   *  <a name="zError">zError</a>           (int err);</font>
+ <font color="Blue"><dt> int             <a name="inflateSyncPoint">inflateSyncPoint</a> (<a href="#z_streamp">z_streamp</a> z);</font>
+ <font color="Blue"><dt> const uLongf *  <a name="get_crc_table">get_crc_table</a>    (void);</font>
+ </dl>
+ <hr>
+ <font size="-1">
+ Последнее обновление руководства - 13 апреля 2002<br>
+ Последнее обновление перевода - 22 декабря 2005
+ </font>
+
+</body>
+</html>
+
+------------pyKpvUJirNFybREQpzxPNj
+Content-Disposition: inline; filename=urchin.js
+Content-Type: text/javascript; name=urchin.js
+Content-Location: http://www.google-analytics.com/urchin.js
+Content-Transfer-Encoding: 8bit
+
+//-- Google Analytics Urchin Module
+//-- Copyright 2007 Google, All Rights Reserved.
+
+//-- Urchin On Demand Settings ONLY
+var _uacct="";			// set up the Urchin Account
+var _userv=1;			// service mode (0=local,1=remote,2=both)
+
+//-- UTM User Settings
+var _ufsc=1;			// set client info flag (1=on|0=off)
+var _udn="auto";		// (auto|none|domain) set the domain name for cookies
+var _uhash="on";		// (on|off) unique domain hash for cookies
+var _utimeout="1800";   	// set the inactive session timeout in seconds
+var _ugifpath="/__utm.gif";	// set the web path to the __utm.gif file
+var _utsp="|";			// transaction field separator
+var _uflash=1;			// set flash version detect option (1=on|0=off)
+var _utitle=1;			// set the document title detect option (1=on|0=off)
+var _ulink=0;			// enable linker functionality (1=on|0=off)
+var _uanchor=0;			// enable use of anchors for campaign (1=on|0=off)
+var _utcp="/";			// the cookie path for tracking
+var _usample=100;		// The sampling % of visitors to track (1-100).
+
+//-- UTM Campaign Tracking Settings
+var _uctm=1;			// set campaign tracking module (1=on|0=off)
+var _ucto="15768000";		// set timeout in seconds (6 month default)
+var _uccn="utm_campaign";	// name
+var _ucmd="utm_medium";		// medium (cpc|cpm|link|email|organic)
+var _ucsr="utm_source";		// source
+var _uctr="utm_term";		// term/keyword
+var _ucct="utm_content";	// content
+var _ucid="utm_id";		// id number
+var _ucno="utm_nooverride";	// don't override
+
+//-- Auto/Organic Sources and Keywords
+var _uOsr=new Array();
+var _uOkw=new Array();
+_uOsr[0]="google";	_uOkw[0]="q";
+_uOsr[1]="yahoo";	_uOkw[1]="p";
+_uOsr[2]="msn";		_uOkw[2]="q";
+_uOsr[3]="aol";		_uOkw[3]="query";
+_uOsr[4]="aol";		_uOkw[4]="encquery";
+_uOsr[5]="lycos";	_uOkw[5]="query";
+_uOsr[6]="ask";		_uOkw[6]="q";
+_uOsr[7]="altavista";	_uOkw[7]="q";
+_uOsr[8]="netscape";	_uOkw[8]="query";
+_uOsr[9]="cnn";	_uOkw[9]="query";
+_uOsr[10]="looksmart";	_uOkw[10]="qt";
+_uOsr[11]="about";	_uOkw[11]="terms";
+_uOsr[12]="mamma";	_uOkw[12]="query";
+_uOsr[13]="alltheweb";	_uOkw[13]="q";
+_uOsr[14]="gigablast";	_uOkw[14]="q";
+_uOsr[15]="voila";	_uOkw[15]="rdata";
+_uOsr[16]="virgilio";	_uOkw[16]="qs";
+_uOsr[17]="live";	_uOkw[17]="q";
+_uOsr[18]="baidu";	_uOkw[18]="wd";
+_uOsr[19]="alice";	_uOkw[19]="qs";
+_uOsr[20]="yandex";	_uOkw[20]="text";
+_uOsr[21]="najdi";	_uOkw[21]="q";
+_uOsr[22]="aol";	_uOkw[22]="q";
+_uOsr[23]="club-internet"; _uOkw[23]="query";
+_uOsr[24]="mama";	_uOkw[24]="query";
+_uOsr[25]="seznam";	_uOkw[25]="q";
+_uOsr[26]="search";	_uOkw[26]="q";
+_uOsr[27]="wp";	_uOkw[27]="szukaj";
+_uOsr[28]="onet";	_uOkw[28]="qt";
+_uOsr[29]="netsprint";	_uOkw[29]="q";
+_uOsr[30]="google.interia";	_uOkw[30]="q";
+_uOsr[31]="szukacz";	_uOkw[31]="q";
+_uOsr[32]="yam";	_uOkw[32]="k";
+_uOsr[33]="pchome";	_uOkw[33]="q";
+_uOsr[34]="kvasir";	_uOkw[34]="searchExpr";
+_uOsr[35]="sesam";	_uOkw[35]="q";
+_uOsr[36]="ozu"; _uOkw[36]="q";
+_uOsr[37]="terra"; _uOkw[37]="query";
+_uOsr[38]="nostrum"; _uOkw[38]="query";
+_uOsr[39]="mynet"; _uOkw[39]="q";
+_uOsr[40]="ekolay"; _uOkw[40]="q";
+_uOsr[41]="search.ilse"; _uOkw[41]="search_for";
+
+//-- Auto/Organic Keywords to Ignore
+var _uOno=new Array();
+//_uOno[0]="urchin";
+//_uOno[1]="urchin.com";
+//_uOno[2]="www.urchin.com";
+
+//-- Referral domains to Ignore
+var _uRno=new Array();
+//_uRno[0]=".urchin.com";
+
+//-- **** Don't modify below this point ***
+var _uff,_udh,_udt,_ubl=0,_udo="",_uu,_ufns=0,_uns=0,_ur="-",_ufno=0,_ust=0,_ubd=document,_udl=_ubd.location,_udlh="",_uwv="1.3";
+var _ugifpath2="http://www.google-analytics.com/__utm.gif";
+if (_udl.hash) _udlh=_udl.href.substring(_udl.href.indexOf('#'));
+if (_udl.protocol=="https:") _ugifpath2="https://ssl.google-analytics.com/__utm.gif";
+if (!_utcp || _utcp=="") _utcp="/";
+function urchinTracker(page) {
+ if (_udl.protocol=="file:") return;
+ if (_uff && (!page || page=="")) return;
+ var a,b,c,xx,v,z,k,x="",s="",f=0,nv=0;
+ var nx=" expires="+_uNx()+";";
+ var dc=_ubd.cookie;
+ _udh=_uDomain();
+ if (!_uVG()) return;
+ _uu=Math.round(Math.random()*2147483647);
+ _udt=new Date();
+ _ust=Math.round(_udt.getTime()/1000);
+ a=dc.indexOf("__utma="+_udh+".");
+ b=dc.indexOf("__utmb="+_udh);
+ c=dc.indexOf("__utmc="+_udh);
+ if (_udn && _udn!="") { _udo=" domain="+_udn+";"; }
+ if (_utimeout && _utimeout!="") {
+  x=new Date(_udt.getTime()+(_utimeout*1000));
+  x=" expires="+x.toGMTString()+";";
+ }
+ if (_ulink) {
+  if (_uanchor && _udlh && _udlh!="") s=_udlh+"&";
+  s+=_udl.search;
+  if(s && s!="" && s.indexOf("__utma=")>=0) {
+   if (!(_uIN(a=_uGC(s,"__utma=","&")))) a="-";
+   if (!(_uIN(b=_uGC(s,"__utmb=","&")))) b="-";
+   if (!(_uIN(c=_uGC(s,"__utmc=","&")))) c="-";
+   v=_uGC(s,"__utmv=","&");
+   z=_uGC(s,"__utmz=","&");
+   k=_uGC(s,"__utmk=","&");
+   xx=_uGC(s,"__utmx=","&");
+   if ((k*1) != ((_uHash(a+b+c+xx+z+v)*1)+(_udh*1))) {_ubl=1;a="-";b="-";c="-";xx="-";z="-";v="-";}
+   if (a!="-" && b!="-" && c!="-") f=1;
+   else if(a!="-") f=2;
+  }
+ }
+ if(f==1) {
+  _ubd.cookie="__utma="+a+"; path="+_utcp+";"+nx+_udo;
+  _ubd.cookie="__utmb="+b+"; path="+_utcp+";"+x+_udo;
+  _ubd.cookie="__utmc="+c+"; path="+_utcp+";"+_udo;
+ } else if (f==2) {
+  a=_uFixA(s,"&",_ust);
+  _ubd.cookie="__utma="+a+"; path="+_utcp+";"+nx+_udo;
+  _ubd.cookie="__utmb="+_udh+"; path="+_utcp+";"+x+_udo;
+  _ubd.cookie="__utmc="+_udh+"; path="+_utcp+";"+_udo;
+  _ufns=1;
+ } else if (a>=0 && b>=0 && c>=0) {
+   b = _uGC(dc,"__utmb="+_udh,";");
+   b = ("-" == b) ? _udh : b;  
+  _ubd.cookie="__utmb="+b+"; path="+_utcp+";"+x+_udo;
+ } else {
+  if (a>=0) a=_uFixA(_ubd.cookie,";",_ust);
+  else {
+   a=_udh+"."+_uu+"."+_ust+"."+_ust+"."+_ust+".1";
+   nv=1;
+  }
+  _ubd.cookie="__utma="+a+"; path="+_utcp+";"+nx+_udo;
+  _ubd.cookie="__utmb="+_udh+"; path="+_utcp+";"+x+_udo;
+  _ubd.cookie="__utmc="+_udh+"; path="+_utcp+";"+_udo;
+  _ufns=1;
+ }
+ if (_ulink && xx && xx!="" && xx!="-") {
+   xx=_uUES(xx);
+   if (xx.indexOf(";")==-1) _ubd.cookie="__utmx="+xx+"; path="+_utcp+";"+nx+_udo;
+ }
+ if (_ulink && v && v!="" && v!="-") {
+  v=_uUES(v);
+  if (v.indexOf(";")==-1) _ubd.cookie="__utmv="+v+"; path="+_utcp+";"+nx+_udo;
+ }
+ var wc=window;
+ var c=_ubd.cookie;
+ if(wc && wc.gaGlobal && wc.gaGlobal.dh==_udh){
+  var g=wc.gaGlobal;
+  var ua=c.split("__utma="+_udh+".")[1].split(";")[0].split(".");
+  if(g.sid)ua[3]=g.sid;
+  if(nv>0){
+   ua[2]=ua[3];
+   if(g.vid){
+    var v=g.vid.split(".");
+    ua[0]=v[0];
+    ua[1]=v[1];
+   }
+  }
+  _ubd.cookie="__utma="+_udh+"."+ua.join(".")+"; path="+_utcp+";"+nx+_udo;
+ }
+ _uInfo(page);
+ _ufns=0;
+ _ufno=0;
+ if (!page || page=="") _uff=1;
+}
+function _uGH() {
+ var hid;
+ var wc=window;
+ if (wc && wc.gaGlobal && wc.gaGlobal.hid) {
+  hid=wc.gaGlobal.hid;
+ } else {
+  hid=Math.round(Math.random()*0x7fffffff);
+  if (!wc.gaGlobal) wc.gaGlobal={};
+  wc.gaGlobal.hid=hid;
+ }
+ return hid;
+}
+function _uInfo(page) {
+ var p,s="",dm="",pg=_udl.pathname+_udl.search;
+ if (page && page!="") pg=_uES(page,1);
+ _ur=_ubd.referrer;
+ if (!_ur || _ur=="") { _ur="-"; }
+ else {
+  dm=_ubd.domain;
+  if(_utcp && _utcp!="/") dm+=_utcp;
+  p=_ur.indexOf(dm);
+  if ((p>=0) && (p<=8)) { _ur="0"; }
+  if (_ur.indexOf("[")==0 && _ur.lastIndexOf("]")==(_ur.length-1)) { _ur="-"; }
+ }
+ s+="&utmn="+_uu;
+ if (_ufsc) s+=_uBInfo();
+ if (_uctm) s+=_uCInfo();
+ if (_utitle && _ubd.title && _ubd.title!="") s+="&utmdt="+_uES(_ubd.title);
+ if (_udl.hostname && _udl.hostname!="") s+="&utmhn="+_uES(_udl.hostname);
+ if (_usample && _usample != 100) s+="&utmsp="+_uES(_usample);
+ s+="&utmhid="+_uGH();
+ s+="&utmr="+_ur;
+ s+="&utmp="+pg;
+ if ((_userv==0 || _userv==2) && _uSP()) {
+  var i=new Image(1,1);
+  i.src=_ugifpath+"?"+"utmwv="+_uwv+s;
+  i.onload=function() { _uVoid(); }
+ }
+ if ((_userv==1 || _userv==2) && _uSP()) {
+  var i2=new Image(1,1);
+  i2.src=_ugifpath2+"?"+"utmwv="+_uwv+s+"&utmac="+_uacct+"&utmcc="+_uGCS();
+  i2.onload=function() { _uVoid(); }
+ }
+ return;
+}
+function _uVoid() { return; }
+function _uCInfo() {
+ if (!_ucto || _ucto=="") { _ucto="15768000"; }
+ if (!_uVG()) return;
+ var c="",t="-",t2="-",t3="-",o=0,cs=0,cn=0,i=0,z="-",s="";
+ if (_uanchor && _udlh && _udlh!="") s=_udlh+"&";
+ s+=_udl.search;
+ var x=new Date(_udt.getTime()+(_ucto*1000));
+ var dc=_ubd.cookie;
+ x=" expires="+x.toGMTString()+";";
+ if (_ulink && !_ubl) {
+  z=_uUES(_uGC(s,"__utmz=","&"));
+  if (z!="-" && z.indexOf(";")==-1) { _ubd.cookie="__utmz="+z+"; path="+_utcp+";"+x+_udo; return ""; }
+ }
+ z=dc.indexOf("__utmz="+_udh+".");
+ if (z>-1) { z=_uGC(dc,"__utmz="+_udh+".",";"); }
+ else { z="-"; }
+ t=_uGC(s,_ucid+"=","&");
+ t2=_uGC(s,_ucsr+"=","&");
+ t3=_uGC(s,"gclid=","&");
+ if ((t!="-" && t!="") || (t2!="-" && t2!="") || (t3!="-" && t3!="")) {
+  if (t!="-" && t!="") c+="utmcid="+_uEC(t);
+  if (t2!="-" && t2!="") { if (c != "") c+="|"; c+="utmcsr="+_uEC(t2); }
+  if (t3!="-" && t3!="") { if (c != "") c+="|"; c+="utmgclid="+_uEC(t3); }
+  t=_uGC(s,_uccn+"=","&");
+  if (t!="-" && t!="") c+="|utmccn="+_uEC(t);
+  else c+="|utmccn=(not+set)";
+  t=_uGC(s,_ucmd+"=","&");
+  if (t!="-" && t!="") c+="|utmcmd="+_uEC(t);
+  else  c+="|utmcmd=(not+set)";
+  t=_uGC(s,_uctr+"=","&");
+  if (t!="-" && t!="") c+="|utmctr="+_uEC(t);
+  else { t=_uOrg(1); if (t!="-" && t!="") c+="|utmctr="+_uEC(t); }
+  t=_uGC(s,_ucct+"=","&");
+  if (t!="-" && t!="") c+="|utmcct="+_uEC(t);
+  t=_uGC(s,_ucno+"=","&");
+  if (t=="1") o=1;
+  if (z!="-" && o==1) return "";
+ }
+ if (c=="-" || c=="") { c=_uOrg(); if (z!="-" && _ufno==1)  return ""; }
+ if (c=="-" || c=="") { if (_ufns==1)  c=_uRef(); if (z!="-" && _ufno==1)  return ""; }
+ if (c=="-" || c=="") {
+  if (z=="-" && _ufns==1) { c="utmccn=(direct)|utmcsr=(direct)|utmcmd=(none)"; }
+  if (c=="-" || c=="") return "";
+ }
+ if (z!="-") {
+  i=z.indexOf(".");
+  if (i>-1) i=z.indexOf(".",i+1);
+  if (i>-1) i=z.indexOf(".",i+1);
+  if (i>-1) i=z.indexOf(".",i+1);
+  t=z.substring(i+1,z.length);
+  if (t.toLowerCase()==c.toLowerCase()) cs=1;
+  t=z.substring(0,i);
+  if ((i=t.lastIndexOf(".")) > -1) {
+   t=t.substring(i+1,t.length);
+   cn=(t*1);
+  }
+ }
+ if (cs==0 || _ufns==1) {
+  t=_uGC(dc,"__utma="+_udh+".",";");
+  if ((i=t.lastIndexOf(".")) > 9) {
+   _uns=t.substring(i+1,t.length);
+   _uns=(_uns*1);
+  }
+  cn++;
+  if (_uns==0) _uns=1;
+  _ubd.cookie="__utmz="+_udh+"."+_ust+"."+_uns+"."+cn+"."+c+"; path="+_utcp+"; "+x+_udo;
+ }
+ if (cs==0 || _ufns==1) return "&utmcn=1";
+ else return "&utmcr=1";
+}
+function _uRef() {
+ if (_ur=="0" || _ur=="" || _ur=="-") return "";
+ var i=0,h,k,n;
+ if ((i=_ur.indexOf("://"))<0 || _uGCse()) return "";
+ h=_ur.substring(i+3,_ur.length);
+ if (h.indexOf("/") > -1) {
+  k=h.substring(h.indexOf("/"),h.length);
+  if (k.indexOf("?") > -1) k=k.substring(0,k.indexOf("?"));
+  h=h.substring(0,h.indexOf("/"));
+ }
+ h=h.toLowerCase();
+ n=h;
+ if ((i=n.indexOf(":")) > -1) n=n.substring(0,i);
+ for (var ii=0;ii<_uRno.length;ii++) {
+  if ((i=n.indexOf(_uRno[ii].toLowerCase())) > -1 && n.length==(i+_uRno[ii].length)) { _ufno=1; break; }
+ }
+ if (h.indexOf("www.")==0) h=h.substring(4,h.length);
+ return "utmccn=(referral)|utmcsr="+_uEC(h)+"|"+"utmcct="+_uEC(k)+"|utmcmd=referral";
+}
+function _uOrg(t) {
+ if (_ur=="0" || _ur=="" || _ur=="-") return "";
+ var i=0,h,k;
+ if ((i=_ur.indexOf("://"))<0 || _uGCse()) return "";
+ h=_ur.substring(i+3,_ur.length);
+ if (h.indexOf("/") > -1) {
+  h=h.substring(0,h.indexOf("/"));
+ }
+ for (var ii=0;ii<_uOsr.length;ii++) {
+  if (h.toLowerCase().indexOf(_uOsr[ii].toLowerCase()) > -1) {
+   if ((i=_ur.indexOf("?"+_uOkw[ii]+"=")) > -1 || (i=_ur.indexOf("&"+_uOkw[ii]+"=")) > -1) {
+    k=_ur.substring(i+_uOkw[ii].length+2,_ur.length);
+    if ((i=k.indexOf("&")) > -1) k=k.substring(0,i);
+    for (var yy=0;yy<_uOno.length;yy++) {
+     if (_uOno[yy].toLowerCase()==k.toLowerCase()) { _ufno=1; break; }
+    }
+    if (t) return _uEC(k);
+    else return "utmccn=(organic)|utmcsr="+_uEC(_uOsr[ii])+"|"+"utmctr="+_uEC(k)+"|utmcmd=organic";
+   }
+  }
+ }
+ return "";
+}
+function _uGCse() {
+ var h,p;
+ h=p=_ur.split("://")[1];
+ if(h.indexOf("/")>-1) {
+  h=h.split("/")[0];
+  p=p.substring(p.indexOf("/")+1,p.length);
+ }
+ if(p.indexOf("?")>-1) {
+  p=p.split("?")[0];
+ }
+ if(h.toLowerCase().indexOf("google")>-1) {
+  if(_ur.indexOf("?q=")>-1 || _ur.indexOf("&q=")>-1) {
+   if (p.toLowerCase().indexOf("cse")>-1) {
+    return true;
+   }
+  }
+ }
+}
+function _uBInfo() {
+ var sr="-",sc="-",ul="-",fl="-",cs="-",je=1;
+ var n=navigator;
+ if (self.screen) {
+  sr=screen.width+"x"+screen.height;
+  sc=screen.colorDepth+"-bit";
+ } else if (self.java) {
+  var j=java.awt.Toolkit.getDefaultToolkit();
+  var s=j.getScreenSize();
+  sr=s.width+"x"+s.height;
+ }
+ if (n.language) { ul=n.language.toLowerCase(); }
+ else if (n.browserLanguage) { ul=n.browserLanguage.toLowerCase(); }
+ je=n.javaEnabled()?1:0;
+ if (_uflash) fl=_uFlash();
+ if (_ubd.characterSet) cs=_uES(_ubd.characterSet);
+ else if (_ubd.charset) cs=_uES(_ubd.charset);
+ return "&utmcs="+cs+"&utmsr="+sr+"&utmsc="+sc+"&utmul="+ul+"&utmje="+je+"&utmfl="+fl;
+}
+function __utmSetTrans() {
+ var e;
+ if (_ubd.getElementById) e=_ubd.getElementById("utmtrans");
+ else if (_ubd.utmform && _ubd.utmform.utmtrans) e=_ubd.utmform.utmtrans;
+ if (!e) return;
+ var l=e.value.split("UTM:");
+ var i,i2,c;
+ if (_userv==0 || _userv==2) i=new Array();
+ if (_userv==1 || _userv==2) { i2=new Array(); c=_uGCS(); }
+
+ for (var ii=0;ii<l.length;ii++) {
+  l[ii]=_uTrim(l[ii]);
+  if (l[ii].charAt(0)!='T' && l[ii].charAt(0)!='I') continue;
+  var r=Math.round(Math.random()*2147483647);
+  if (!_utsp || _utsp=="") _utsp="|";
+  var f=l[ii].split(_utsp),s="";
+  if (f[0].charAt(0)=='T') {
+   s="&utmt=tran"+"&utmn="+r;
+   f[1]=_uTrim(f[1]); if(f[1]&&f[1]!="") s+="&utmtid="+_uES(f[1]);
+   f[2]=_uTrim(f[2]); if(f[2]&&f[2]!="") s+="&utmtst="+_uES(f[2]);
+   f[3]=_uTrim(f[3]); if(f[3]&&f[3]!="") s+="&utmtto="+_uES(f[3]);
+   f[4]=_uTrim(f[4]); if(f[4]&&f[4]!="") s+="&utmttx="+_uES(f[4]);
+   f[5]=_uTrim(f[5]); if(f[5]&&f[5]!="") s+="&utmtsp="+_uES(f[5]);
+   f[6]=_uTrim(f[6]); if(f[6]&&f[6]!="") s+="&utmtci="+_uES(f[6]);
+   f[7]=_uTrim(f[7]); if(f[7]&&f[7]!="") s+="&utmtrg="+_uES(f[7]);
+   f[8]=_uTrim(f[8]); if(f[8]&&f[8]!="") s+="&utmtco="+_uES(f[8]);
+  } else {
+   s="&utmt=item"+"&utmn="+r;
+   f[1]=_uTrim(f[1]); if(f[1]&&f[1]!="") s+="&utmtid="+_uES(f[1]);
+   f[2]=_uTrim(f[2]); if(f[2]&&f[2]!="") s+="&utmipc="+_uES(f[2]);
+   f[3]=_uTrim(f[3]); if(f[3]&&f[3]!="") s+="&utmipn="+_uES(f[3]);
+   f[4]=_uTrim(f[4]); if(f[4]&&f[4]!="") s+="&utmiva="+_uES(f[4]);
+   f[5]=_uTrim(f[5]); if(f[5]&&f[5]!="") s+="&utmipr="+_uES(f[5]);
+   f[6]=_uTrim(f[6]); if(f[6]&&f[6]!="") s+="&utmiqt="+_uES(f[6]);
+  }
+  if (_udl.hostname && _udl.hostname!="") s+="&utmhn="+_uES(_udl.hostname);
+  if (_usample && _usample != 100) s+="&utmsp="+_uES(_usample);
+
+  if ((_userv==0 || _userv==2) && _uSP()) {
+   i[ii]=new Image(1,1);
+   i[ii].src=_ugifpath+"?"+"utmwv="+_uwv+s;
+   i[ii].onload=function() { _uVoid(); }
+  }
+  if ((_userv==1 || _userv==2) && _uSP()) {
+   i2[ii]=new Image(1,1);
+   i2[ii].src=_ugifpath2+"?"+"utmwv="+_uwv+s+"&utmac="+_uacct+"&utmcc="+c;
+   i2[ii].onload=function() { _uVoid(); }
+  }
+ }
+ return;
+}
+function _uFlash() {
+ var f="-",n=navigator;
+ if (n.plugins && n.plugins.length) {
+  for (var ii=0;ii<n.plugins.length;ii++) {
+   if (n.plugins[ii].name.indexOf('Shockwave Flash')!=-1) {
+    f=n.plugins[ii].description.split('Shockwave Flash ')[1];
+    break;
+   }
+  }
+ } else {
+  var fl;
+  try {
+   fl = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.7");
+   f = fl.GetVariable("$version");
+  } catch(e) {}
+  if (f == "-") {
+   try {
+    fl = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.6");
+    f = "WIN 6,0,21,0";
+    fl.AllowScriptAccess = "always";
+    f = fl.GetVariable("$version");
+   } catch(e) {}
+  }
+  if (f == "-") {
+   try {
+    fl = new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
+    f = fl.GetVariable("$version");
+   } catch(e) {}
+  }
+  if (f != "-") {
+   f = f.split(" ")[1].split(",");
+   f = f[0] + "." + f[1] + " r" + f[2];
+  }
+ }
+ return f;
+}
+function __utmLinkerUrl(l,h) {
+ var p,k,a="-",b="-",c="-",x="-",z="-",v="-";
+ var dc=_ubd.cookie;
+ var iq = l.indexOf("?");
+ var ih = l.indexOf("#");
+ var url=l;
+ if (dc) {
+  a=_uES(_uGC(dc,"__utma="+_udh+".",";"));
+  b=_uES(_uGC(dc,"__utmb="+_udh,";"));
+  c=_uES(_uGC(dc,"__utmc="+_udh,";"));
+  x=_uES(_uGC(dc,"__utmx="+_udh,";"));
+  z=_uES(_uGC(dc,"__utmz="+_udh+".",";"));
+  v=_uES(_uGC(dc,"__utmv="+_udh+".",";"));
+  k=(_uHash(a+b+c+x+z+v)*1)+(_udh*1);
+  p="__utma="+a+"&__utmb="+b+"&__utmc="+c+"&__utmx="+x+"&__utmz="+z+"&__utmv="+v+"&__utmk="+k;
+ }
+ if (p) {
+  if (h && ih>-1) return;
+  if (h) { url=l+"#"+p; }
+  else {
+   if (iq==-1 && ih==-1) url=l+"?"+p;
+   else if (ih==-1) url=l+"&"+p;
+   else if (iq==-1) url=l.substring(0,ih-1)+"?"+p+l.substring(ih);
+   else url=l.substring(0,ih-1)+"&"+p+l.substring(ih);
+  }
+ }
+ return url;
+}
+function __utmLinker(l,h) {
+ if (!_ulink || !l || l=="") return;
+ _udl.href=__utmLinkerUrl(l,h);
+}
+function __utmLinkPost(f,h) {
+ if (!_ulink || !f || !f.action) return;
+ f.action=__utmLinkerUrl(f.action, h);
+ return;
+}
+function __utmSetVar(v) {
+ if (!v || v=="") return;
+ if (!_udo || _udo == "") {
+  _udh=_uDomain();
+  if (_udn && _udn!="") { _udo=" domain="+_udn+";"; }
+ }
+ if (!_uVG()) return;
+ var r=Math.round(Math.random() * 2147483647);
+ _ubd.cookie="__utmv="+_udh+"."+_uES(v)+"; path="+_utcp+"; expires="+_uNx()+";"+_udo;
+ var s="&utmt=var&utmn="+r;
+ if (_usample && _usample != 100) s+="&utmsp="+_uES(_usample);
+ if ((_userv==0 || _userv==2) && _uSP()) {
+  var i=new Image(1,1);
+  i.src=_ugifpath+"?"+"utmwv="+_uwv+s;
+  i.onload=function() { _uVoid(); }
+ }
+ if ((_userv==1 || _userv==2) && _uSP()) {
+  var i2=new Image(1,1);
+  i2.src=_ugifpath2+"?"+"utmwv="+_uwv+s+"&utmac="+_uacct+"&utmcc="+_uGCS();
+  i2.onload=function() { _uVoid(); }
+ }
+}
+function _uGCS() {
+ var t,c="",dc=_ubd.cookie;
+ if ((t=_uGC(dc,"__utma="+_udh+".",";"))!="-") c+=_uES("__utma="+t+";+");
+ if ((t=_uGC(dc,"__utmx="+_udh,";"))!="-") c+=_uES("__utmx="+t+";+");
+ if ((t=_uGC(dc,"__utmz="+_udh+".",";"))!="-") c+=_uES("__utmz="+t+";+");
+ if ((t=_uGC(dc,"__utmv="+_udh+".",";"))!="-") c+=_uES("__utmv="+t+";");
+ if (c.charAt(c.length-1)=="+") c=c.substring(0,c.length-1);
+ return c;
+}
+function _uGC(l,n,s) {
+ if (!l || l=="" || !n || n=="" || !s || s=="") return "-";
+ var i,i2,i3,c="-";
+ i=l.indexOf(n);
+ i3=n.indexOf("=")+1;
+ if (i > -1) {
+  i2=l.indexOf(s,i); if (i2 < 0) { i2=l.length; }
+  c=l.substring((i+i3),i2);
+ }
+ return c;
+}
+function _uDomain() {
+ if (!_udn || _udn=="" || _udn=="none") { _udn=""; return 1; }
+ if (_udn=="auto") {
+  var d=_ubd.domain;
+  if (d.substring(0,4)=="www.") {
+   d=d.substring(4,d.length);
+  }
+  _udn=d;
+ }
+ _udn = _udn.toLowerCase(); 
+ if (_uhash=="off") return 1;
+ return _uHash(_udn);
+}
+function _uHash(d) {
+ if (!d || d=="") return 1;
+ var h=0,g=0;
+ for (var i=d.length-1;i>=0;i--) {
+  var c=parseInt(d.charCodeAt(i));
+  h=((h << 6) & 0xfffffff) + c + (c << 14);
+  if ((g=h & 0xfe00000)!=0) h=(h ^ (g >> 21));
+ }
+ return h;
+}
+function _uFixA(c,s,t) {
+ if (!c || c=="" || !s || s=="" || !t || t=="") return "-";
+ var a=_uGC(c,"__utma="+_udh+".",s);
+ var lt=0,i=0;
+ if ((i=a.lastIndexOf(".")) > 9) {
+  _uns=a.substring(i+1,a.length);
+  _uns=(_uns*1)+1;
+  a=a.substring(0,i);
+  if ((i=a.lastIndexOf(".")) > 7) {
+   lt=a.substring(i+1,a.length);
+   a=a.substring(0,i);
+  }
+  if ((i=a.lastIndexOf(".")) > 5) {
+   a=a.substring(0,i);
+  }
+  a+="."+lt+"."+t+"."+_uns;
+ }
+ return a;
+}
+function _uTrim(s) {
+  if (!s || s=="") return "";
+  while ((s.charAt(0)==' ') || (s.charAt(0)=='\n') || (s.charAt(0,1)=='\r')) s=s.substring(1,s.length);
+  while ((s.charAt(s.length-1)==' ') || (s.charAt(s.length-1)=='\n') || (s.charAt(s.length-1)=='\r')) s=s.substring(0,s.length-1);
+  return s;
+}
+function _uEC(s) {
+  var n="";
+  if (!s || s=="") return "";
+  for (var i=0;i<s.length;i++) {if (s.charAt(i)==" ") n+="+"; else n+=s.charAt(i);}
+  return n;
+}
+function __utmVisitorCode(f) {
+ var r=0,t=0,i=0,i2=0,m=31;
+ var a=_uGC(_ubd.cookie,"__utma="+_udh+".",";");
+ if ((i=a.indexOf(".",0))<0) return;
+ if ((i2=a.indexOf(".",i+1))>0) r=a.substring(i+1,i2); else return "";  
+ if ((i=a.indexOf(".",i2+1))>0) t=a.substring(i2+1,i); else return "";  
+ if (f) {
+  return r;
+ } else {
+  var c=new Array('A','B','C','D','E','F','G','H','J','K','L','M','N','P','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9');
+  return c[r>>28&m]+c[r>>23&m]+c[r>>18&m]+c[r>>13&m]+"-"+c[r>>8&m]+c[r>>3&m]+c[((r&7)<<2)+(t>>30&3)]+c[t>>25&m]+c[t>>20&m]+"-"+c[t>>15&m]+c[t>>10&m]+c[t>>5&m]+c[t&m];
+ }
+}
+function _uIN(n) {
+ if (!n) return false;
+ for (var i=0;i<n.length;i++) {
+  var c=n.charAt(i);
+  if ((c<"0" || c>"9") && (c!=".")) return false;
+ }
+ return true;
+}
+function _uES(s,u) {
+ if (typeof(encodeURIComponent) == 'function') {
+  if (u) return encodeURI(s);
+  else return encodeURIComponent(s);
+ } else {
+  return escape(s);
+ }
+}
+function _uUES(s) {
+ if (typeof(decodeURIComponent) == 'function') {
+  return decodeURIComponent(s);
+ } else {
+  return unescape(s);
+ }
+}
+function _uVG() {
+ if((_udn.indexOf("www.google.") == 0 || _udn.indexOf(".google.") == 0 || _udn.indexOf("google.") == 0) && _utcp=='/' && _udn.indexOf("google.org")==-1) {
+  return false;
+ }
+ return true;
+}
+function _uSP() {
+ var s=100;
+ if (_usample) s=_usample;
+ if(s>=100 || s<=0) return true;
+ return ((__utmVisitorCode(1)%10000)<(s*100));
+}
+function urchinPathCopy(p){
+ var d=document,nx,tx,sx,i,c,cs,t,h,o;
+ cs=new Array("a","b","c","v","x","z");
+ h=_uDomain(); if (_udn && _udn!="") o=" domain="+_udn+";";
+ nx=_uNx()+";";
+ tx=new Date(); tx.setTime(tx.getTime()+(_utimeout*1000));
+ tx=tx.toGMTString()+";";
+ sx=new Date(); sx.setTime(sx.getTime()+(_ucto*1000));
+ sx=sx.toGMTString()+";";
+ for (i=0;i<6;i++){
+  t=" expires=";
+  if (i==1) t+=tx; else if (i==2) t=""; else if (i==5) t+=sx; else t+=nx;
+  c=_uGC(d.cookie,"__utm"+cs[i]+"="+h,";");
+  if (c!="-") d.cookie="__utm"+cs[i]+"="+c+"; path="+p+";"+t+o;
+ }
+}
+function _uCO() {
+ if (!_utk || _utk=="" || _utk.length<10) return;
+ var d='www.google.com';
+ if (_utk.charAt(0)=='!') d='analytics.corp.google.com';
+ _ubd.cookie="GASO="+_utk+"; path="+_utcp+";"+_udo;
+ var sc=document.createElement('script');
+ sc.type='text/javascript';
+ sc.id="_gasojs";
+ sc.src='https://'+d+'/analytics/reporting/overlay_js?gaso='+_utk+'&'+Math.random();
+ document.getElementsByTagName('head')[0].appendChild(sc);  
+}
+function _uGT() {
+ var h=location.hash, a;
+ if (h && h!="" && h.indexOf("#gaso=")==0) {
+  a=_uGC(h,"gaso=","&");
+ } else {
+  a=_uGC(_ubd.cookie,"GASO=",";");
+ }
+ return a;
+}
+var _utk=_uGT();
+if (_utk && _utk!="" && _utk.length>10 && _utk.indexOf("=")==-1) {
+ if (window.addEventListener) {
+  window.addEventListener('load', _uCO, false); 
+ } else if (window.attachEvent) { 
+  window.attachEvent('onload', _uCO);
+ }
+}
+
+function _uNx() {
+  return (new Date((new Date()).getTime()+63072000000)).toGMTString();
+}
+
+------------pyKpvUJirNFybREQpzxPNj
+Content-Disposition: inline; filename=psa.gif
+Content-Type: image/gif; name=psa.gif
+Content-Location: http://zlib.net.ru/psa.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhdAARAMQAAO/v7xAQEN/f3yAgIJ+fnzAwMI+Pj3BwcGBgYK+vr8/Pz1BQ
+UEBAQL+/v4CAgAAAAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAB0ABEAAAX/ICSOZGmeaKqubOu+cCzP
+dG3feK7vfO+TAofQ0WgRX4Bfr+GINR4FxuCRYDEILQCjqNw5Hs4Hd8CANASGYtCQ
+NAtEhKOIiYUYHuxRUK4QMN9zDnUADQAGeYaCI4mAfQR1cIJtQXFgEHF5Kk9jCxAP
+UwcJUAMBbw9NCAEMD1h3qweeD2IiAgEDBbMMBQNTChAHDwwBBWZQq2UFqqcQtbdU
+EFJQIw7KCBAAAcMBYMDCZZrGU1XBImTXAdanAqy/AxAD1gawmyNPCA2+0AMAAPDr
+TU8IBPwFJlgCLqmSSIEWoM2cKlHsPPC1AIwUgQ5R2BMCaJmnJtDKnHoiS9ZHEvRG
+0xzYFqAKg28vU46c9eXSlGUvRdTMSSJBMlUQagYFowAXOXBcRng0hy2dg3VYBCSB
+Z2feLFpsFJgTxs/fsoD0vgAg0KcihIT6QpYIACsigYkQzCZIAOBL0hMplYIUtavU
+SQTBgLp6AEsBFC7NVjURxmtWt2HFitRM5o2ZLVwuv40glYwYgM7bCEppqCIIoGlJ
+17TxGAcSnRFxHKKRE/NpPUXMbDO51nqRAduXINESFCSJIQMK9jrIpEMAMAM6eHaZ
+/kIBAwQZbRyARb279+/gw4vfEQIAOw==
+
+------------pyKpvUJirNFybREQpzxPNj--

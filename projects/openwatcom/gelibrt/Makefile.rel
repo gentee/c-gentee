@@ -1,0 +1,137 @@
+# A simple makefile generator by KiSoft, 2007. mailto: kisoft@rambler.ru
+# version: 0.3.11.11
+
+# Project Variables start
+CPP=wcl386.exe
+CC=wcl386.exe
+LD=wlink.exe
+LIB=wlib.exe
+WINDRES=wrc.exe
+# Project Variables end
+
+# Target: Release
+
+OBJS_RELEASE=obj\Release\src\Algorithm\qsort.obj obj\Release\src\Algorithm\search.obj obj\Release\src\bytecode\cmdlist.obj obj\Release\src\bytecode\funclist.obj obj\Release\src\bytecode\ge.obj obj\Release\src\bytecode\geload.obj obj\Release\src\common\arr.obj obj\Release\src\common\arrdata.obj obj\Release\src\common\buf.obj obj\Release\src\common\collection.obj obj\Release\src\common\crc.obj obj\Release\src\common\file.obj obj\Release\src\common\hash.obj obj\Release\src\common\memory.obj obj\Release\src\common\mix.obj obj\Release\src\common\msg.obj obj\Release\src\common\msglist.obj obj\Release\src\common\number.obj obj\Release\src\common\str.obj obj\Release\src\genteeapi\gentee.obj obj\Release\src\os\user\defines.obj obj\Release\src\vm\vm.obj obj\Release\src\vm\vmload.obj obj\Release\src\vm\vmmanage.obj obj\Release\src\vm\vmres.obj obj\Release\src\vm\vmrun.obj obj\Release\src\vm\vmtype.obj
+
+Release: Release\gelibrt.lib
+
+Release\gelibrt.lib: $(OBJS_RELEASE)
+	@echo Building static library Release\gelibrt.lib
+	@wlib.exe -q  $(Release)
+
+obj\Release\src\Algorithm\qsort.obj: ..\..\..\src\Algorithm\qsort.c
+	@echo Compiling: ..\..\..\src\Algorithm\qsort.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\Algorithm\qsort.obj ..\..\..\src\Algorithm\qsort.c
+
+obj\Release\src\Algorithm\search.obj: ..\..\..\src\Algorithm\search.c
+	@echo Compiling: ..\..\..\src\Algorithm\search.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\Algorithm\search.obj ..\..\..\src\Algorithm\search.c
+
+obj\Release\src\bytecode\cmdlist.obj: ..\..\..\src\bytecode\cmdlist.c
+	@echo Compiling: ..\..\..\src\bytecode\cmdlist.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\bytecode\cmdlist.obj ..\..\..\src\bytecode\cmdlist.c
+
+obj\Release\src\bytecode\funclist.obj: ..\..\..\src\bytecode\funclist.c
+	@echo Compiling: ..\..\..\src\bytecode\funclist.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\bytecode\funclist.obj ..\..\..\src\bytecode\funclist.c
+
+obj\Release\src\bytecode\ge.obj: ..\..\..\src\bytecode\ge.c
+	@echo Compiling: ..\..\..\src\bytecode\ge.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\bytecode\ge.obj ..\..\..\src\bytecode\ge.c
+
+obj\Release\src\bytecode\geload.obj: ..\..\..\src\bytecode\geload.c
+	@echo Compiling: ..\..\..\src\bytecode\geload.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\bytecode\geload.obj ..\..\..\src\bytecode\geload.c
+
+obj\Release\src\common\arr.obj: ..\..\..\src\common\arr.c
+	@echo Compiling: ..\..\..\src\common\arr.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\arr.obj ..\..\..\src\common\arr.c
+
+obj\Release\src\common\arrdata.obj: ..\..\..\src\common\arrdata.c
+	@echo Compiling: ..\..\..\src\common\arrdata.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\arrdata.obj ..\..\..\src\common\arrdata.c
+
+obj\Release\src\common\buf.obj: ..\..\..\src\common\buf.c
+	@echo Compiling: ..\..\..\src\common\buf.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\buf.obj ..\..\..\src\common\buf.c
+
+obj\Release\src\common\collection.obj: ..\..\..\src\common\collection.c
+	@echo Compiling: ..\..\..\src\common\collection.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\collection.obj ..\..\..\src\common\collection.c
+
+obj\Release\src\common\crc.obj: ..\..\..\src\common\crc.c
+	@echo Compiling: ..\..\..\src\common\crc.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\crc.obj ..\..\..\src\common\crc.c
+
+obj\Release\src\common\file.obj: ..\..\..\src\common\file.c
+	@echo Compiling: ..\..\..\src\common\file.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\file.obj ..\..\..\src\common\file.c
+
+obj\Release\src\common\hash.obj: ..\..\..\src\common\hash.c
+	@echo Compiling: ..\..\..\src\common\hash.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\hash.obj ..\..\..\src\common\hash.c
+
+obj\Release\src\common\memory.obj: ..\..\..\src\common\memory.c
+	@echo Compiling: ..\..\..\src\common\memory.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\memory.obj ..\..\..\src\common\memory.c
+
+obj\Release\src\common\mix.obj: ..\..\..\src\common\mix.c
+	@echo Compiling: ..\..\..\src\common\mix.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\mix.obj ..\..\..\src\common\mix.c
+
+obj\Release\src\common\msg.obj: ..\..\..\src\common\msg.c
+	@echo Compiling: ..\..\..\src\common\msg.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\msg.obj ..\..\..\src\common\msg.c
+
+obj\Release\src\common\msglist.obj: ..\..\..\src\common\msglist.c
+	@echo Compiling: ..\..\..\src\common\msglist.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\msglist.obj ..\..\..\src\common\msglist.c
+
+obj\Release\src\common\number.obj: ..\..\..\src\common\number.c
+	@echo Compiling: ..\..\..\src\common\number.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\number.obj ..\..\..\src\common\number.c
+
+obj\Release\src\common\str.obj: ..\..\..\src\common\str.c
+	@echo Compiling: ..\..\..\src\common\str.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\str.obj ..\..\..\src\common\str.c
+
+obj\Release\src\genteeapi\gentee.obj: ..\..\..\src\genteeapi\gentee.c
+	@echo Compiling: ..\..\..\src\genteeapi\gentee.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\genteeapi\gentee.obj ..\..\..\src\genteeapi\gentee.c
+
+obj\Release\src\os\user\defines.obj: ..\..\..\src\os\user\defines.c
+	@echo Compiling: ..\..\..\src\os\user\defines.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\os\user\defines.obj ..\..\..\src\os\user\defines.c
+
+obj\Release\src\vm\vm.obj: ..\..\..\src\vm\vm.c
+	@echo Compiling: ..\..\..\src\vm\vm.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\vm\vm.obj ..\..\..\src\vm\vm.c
+
+obj\Release\src\vm\vmload.obj: ..\..\..\src\vm\vmload.c
+	@echo Compiling: ..\..\..\src\vm\vmload.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\vm\vmload.obj ..\..\..\src\vm\vmload.c
+
+obj\Release\src\vm\vmmanage.obj: ..\..\..\src\vm\vmmanage.c
+	@echo Compiling: ..\..\..\src\vm\vmmanage.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\vm\vmmanage.obj ..\..\..\src\vm\vmmanage.c
+
+obj\Release\src\vm\vmres.obj: ..\..\..\src\vm\vmres.c
+	@echo Compiling: ..\..\..\src\vm\vmres.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\vm\vmres.obj ..\..\..\src\vm\vmres.c
+
+obj\Release\src\vm\vmrun.obj: ..\..\..\src\vm\vmrun.c
+	@echo Compiling: ..\..\..\src\vm\vmrun.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\vm\vmrun.obj ..\..\..\src\vm\vmrun.c
+
+obj\Release\src\vm\vmtype.obj: ..\..\..\src\vm\vmtype.c
+	@echo Compiling: ..\..\..\src\vm\vmtype.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\vm\vmtype.obj ..\..\..\src\vm\vmtype.c
+
+.PHONY: clean_Release
+
+clean_Release: 
+	@echo Delete $(OBJS_RELEASE) Release\gelibrt.lib
+	-@del /f $(OBJS_RELEASE) Release\gelibrt.lib
+
+
+

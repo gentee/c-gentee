@@ -1,0 +1,201 @@
+/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* ID: gentee 18.10.06 0.0.A.
+*
+* Author: Alexey Krivonogov ( gentee )
+*
+* Summary: Gentee's lexical table for compiler
+*
+******************************************************************************/
+
+<gentee prefix = "G_" desc = "Gentee sources" cout = "..\lex\lexgentee.c">
+   <MAIN cmd = SKIP >
+      <_ ch = '.?@' cmd = OPERCHAR pos itcmd value/> 
+      <_ ch = '~' cmd = OPERCHAR pos itcmd value/> 
+      <_ hexch = '0A' cmd = LINE pos itcmd />
+      <_ hexch = '0D' state = ISLINE pos />
+      <_ ch = '/' state = ISCOMMENT pos/>
+      <_ ch = '!=*' state = ISEQUAL pos/>
+      <_ ch = '^' state = ISEQUAL pos/>
+      <_ ch = '+' state = ISPLUS pos/>
+      <_ ch = '-' state = ISMINUS pos/>
+      <_ ch = '<' state = ISLESS pos/>
+      <_ ch = '>' state = ISGREAT pos/>
+      <_ ch = '\' state = IGNLINE pos />
+      <_ ch = '%' state = ISPERTRY pos stay />
+      <_ ch = '&' state = ISAND pos/>
+      <_ ch = '|' state = ISOR pos/>
+      <_ name state = NAME pos itstate keyword/>
+      <_ ch = '$' state = ISMACRO pos />
+      <_ ch = '"' state = STRING pos itstate push />
+      <_ ch = "'" state = BINARY pos itstate push />
+      <_ ch = '0' pos cmd = NUMBER state = ISNUMBER itcmd />
+      <_ range = '19' pos cmd = NUMBER state = DECIMAL itcmd /> 
+      <_ ch = ',()' cmd = OPERCHAR pos itcmd value/>
+      <_ ch = '{}' cmd = OPERCHAR pos itcmd value/>
+      <_ ch = ':;' cmd = SYSCHAR pos itcmd value/>
+      <_ ch = '[]' cmd = OPERCHAR pos itcmd value/> 
+   </>   
+   <ISTEXT state = TEXTSTR itstate stay pos comment = "Text string must be the second!">
+   </>
+   <IGNLINE state = MAIN stay comment = "Ignore line character \">
+      <_ hexch = '0D' cmd = SKIP />
+      <_ hexch = '0A' cmd = SKIP state = MAIN />
+   </>
+   <ISLINE state = MAIN stay >
+      <_ hexch = '0A' cmd = LINE itcmd state = MAIN />
+   </>
+   <ISCOMMENT cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '*' state = COMMENT />
+      <_ ch = '/' state = LINECOMMENT />
+      <_ ch = '=' cmd = OPERCHAR itcmd state = MAIN value />
+   </>
+   <COMMENT cmd = SKIP comment = "Comment /* ... */">
+      <_ multi = '*/' cmd = SKIP state = MAIN />
+   </>
+   <LINECOMMENT cmd = SKIP comment = "Comment //... ">
+      <_ hexch = '0D0A' state = MAIN stay />
+   </>
+   <NAME state = MAIN stay comment = "Name identifier">
+      <_ numname cmd = OK />
+   </>
+   <MACRONAME state = MAIN stay comment = "MacroName identifier">
+      <_ numname cmd = OK />
+      <_ ch = '$' cmd = OK state = MAIN />
+   </>
+   <ISMACRO state = MAIN stay >
+      <_ name state = MACRONAME cmd = MACRO itcmd />
+      <_ ch = '"' state = MACROSTR itstate /> 
+   </>
+   <ISNUMBER state = MAIN stay >
+      <_ range = '09' state = DECIMAL cmd = OK />
+      <_ ch = 'xX' state = HEX cmd = OK />
+      <_ ch = 'bB' state = BIN cmd = OK />
+      <_ ch = 'lL' cmd = OK state = MAIN />
+      <_ ch = 'dD' cmd = OK state = MAIN />
+      <_ ch = 'fF' cmd = OK state = MAIN />
+      <_ ch = 'eE' cmd = OK state = EXPONENT />
+      <_ ch = '.' cmd = OK state = DOUBLE />
+   </>
+   <DECIMAL state = MAIN stay >
+      <_ range = '09' cmd = OK />
+      <_ ch = 'lL' cmd = OK state = MAIN />
+      <_ ch = 'dD' cmd = OK state = MAIN />
+      <_ ch = 'fF' cmd = OK state = MAIN />
+      <_ ch = 'eE' cmd = OK state = EXPONENT />
+      <_ ch = '.' cmd = OK state = DOUBLE />
+   </>
+   <HEX state = MAIN stay >
+      <_ numhex cmd = OK />
+      <_ ch = 'lL' cmd = OK state = MAIN />
+   </>
+   <BIN state = MAIN stay >
+      <_ ch = '01' cmd = OK />
+      <_ ch = 'lL' cmd = OK state = MAIN />
+   </>
+   <DOUBLE state = MAIN stay >
+      <_ ch = 'dD' cmd = OK state = MAIN />
+      <_ ch = 'fF' cmd = OK state = MAIN />
+      <_ ch = 'eE' cmd = OK state = EXPONENT />
+      <_ range = '09' cmd = OK />   
+   </>
+   <EXPONENT state = FRACTION stay >
+      <_ ch = '+-' cmd = OK state = FRACTION />
+   </>
+   <FRACTION state = MAIN stay >
+      <_ range = '09' cmd = OK />   
+      <_ ch = 'dD' cmd = OK state = MAIN />
+      <_ ch = 'fF' cmd = OK state = MAIN />
+   </>
+   <ISEQUAL cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '=' cmd = OPERCHAR itcmd state = MAIN value />
+   </>
+   <ISPLUS cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '=+' cmd = OPERCHAR itcmd state = MAIN value />
+   </>
+   <ISMINUS cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '=->' cmd = OPERCHAR itcmd state = MAIN value />
+   </>
+   <ISLESS cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '=' cmd = OPERCHAR itcmd state = MAIN value />
+      <_ ch = '<' state = ISEQUAL />
+   </>
+   <ISGREAT cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '=' cmd = OPERCHAR itcmd state = MAIN value />
+      <_ ch = '>' state = ISEQUAL />
+   </>
+   <ISAND cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '=&' cmd = OPERCHAR itcmd state = MAIN value />
+   </>
+   <ISOR cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '=|' cmd = OPERCHAR itcmd state = MAIN value />
+   </>
+   <ISPERCENT cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '{' cmd = OPERCHAR itcmd state = MAIN value />
+      <_ ch = '><=' state = ISEQUAL />
+   </>
+   <ISPERTRY state = ISPERCENT >
+      <_ multi = '%!=' cmd = OPERCHAR itcmd state = MAIN value />
+   </>
+   <MACROSTR cmd = OK comment = 'Macro string $"String"'>
+      <_ ch = '"' state = MAIN cmd = OK />
+      <_ multi = '""' cmd = OK />
+   </>
+   <STRING cmd = OK comment = 'String'>
+      <_ ch = '"' pop cmd = OK />
+      <_ multi = '\\' cmd = OK />
+      <_ multi = '\"' cmd = OK />
+      <_ multi = '\<' state = FILENAME itstate pos push />
+      <_ multi = '\*' state = STRCOMMENT push />
+      <_ multi = '\[' state = STRALL push cmd = STRNAME />
+      <_ multi = '\(' state = MAIN cmd = EXPR />
+   </>
+   <FILENAME cmd = OK comment = 'File data \<filename>'>
+      <_ ch = '>' pop new cmd = OK />
+   </>
+   <STRCOMMENT cmd = OK comment = 'String or Binary comment \* ... *\'>
+      <_ multi = '*\' pop cmd = OK />
+   </>
+   <STRALL cmd = OK comment = "String is ignoring '\'">
+      <_ ch = '[' cmd = STRNAME pop />
+   </>
+   <TEXTSTR cmd = OK comment = 'Text string'>
+      <_ multi = '\!' cmd = OK state = MAIN />
+      <_ multi = '\<' state = FILENAME itstate pos push />
+      <_ multi = '\*' state = STRCOMMENT push />
+      <_ multi = '\[' state = STRALL push cmd = STRNAME />
+      <_ multi = '\(' state = MAIN cmd = EXPR />
+      <_ multi = '\{' state = MAIN cmd = EXPR />
+      <_ multi = '\@' state = MAIN cmd = EXPR />
+   </>
+   <BINARY cmd = OK comment = 'Binary data'>
+      <_ ch = "'" pop cmd = OK />
+      <_ multi = '\"' state = BINSTR push />
+      <_ multi = '\<' state = FILENAME itstate pos push />
+      <_ multi = '\*' state = STRCOMMENT push />
+      <_ multi = '\(' state = MAIN cmd = EXPR />
+   </>
+   <BINSTR cmd = OK comment = 'String in Binary  \" ... "'>
+      <_ ch = '"' pop cmd = OK />
+   </>
+   <commands skip>
+      <LINE comment = "New line 0x0D0A or 0x0A" />
+      <OPERCHAR comment = "Operations" />
+      <SYSCHAR comment = "Punctuation marks" />
+      <MACRO comment = "Macro identifier $name or $name$" />
+      <NUMBER comment = "Number decimal, hexadecimal, float or double" />
+   </commands>
+   <keywords skip>
+      <cmd id = 1>
+         as break case cdecl continue default define do elif else extern for foreach fornum func global goto if ifdef import include label method of operator private property public return sizeof stdcall switch subfunc type while with 
+      </>
+      <cmdtext = text id = 255 />
+   </keywords>
+</gentee>

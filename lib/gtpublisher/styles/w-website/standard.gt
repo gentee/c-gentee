@@ -1,0 +1,87 @@
+/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* ID: standard 17.11.06 0.0.A.
+*
+* Author: Alexey Krivonogov ( gentee )
+*
+******************************************************************************/
+
+<- Advertisement link ->
+<ab = '<strong>#a=</strong>' />
+<adlink = '<p>#a= #br# #adesc=</p>' />
+
+<- Bold font ->
+<b = '<strong>&#1;</strong>' />
+
+<- Break ->
+<br = '<br>' />
+
+<- Div ->
+<divc = '<div class = "&#2;">&#1;</div>' />
+
+<- Form ->
+<formarea = '<h6>&#1;</h6><textarea name="&#2;"></textarea>' />
+<formareac = '<h6>&#1;</h6><textarea name="&#2;" class="&#3;"></textarea>' />
+<formphpareac = '<h6>&#1;</h6><textarea name="&#2;" class="&#3;"><?php echo $&#2; ?></textarea>' />
+<formhide = "<input type='hidden' name='&#2;' value='&#1;'>" />
+<formphphide = "<input type='hidden' name='&#1;' value='<?php echo $&#1; ?>'>" />
+<formimp = '<span class="imp">!</span>' />
+<formtext = '<h6>&#1;</h6><input type="text" class="input-text" name="&#2;">' />
+<formprotect = '<script language="JavaScript" type="text/javascript">
+document.write("<in"+"p"+"ut typ"+"e=\"h"+"idden"+"\" n"+"ame"+"=\"pro"+"tect\" val"+"ue=\"gepr" + "ote" + "ct\">");
+</script>' />
+
+<gt = '&gt;' />
+<lgt = '&lt;&#1;&gt;' />
+
+<- Headers ->
+<h1 = '<h1>&#1;</h1>' />
+<h2 = '<h2>&#1;</h2>' />
+<h3 = '<h3>&#1;</h3>' />
+<h4 = '<h4>&#1;</h4>' />
+
+<- Italic font ->
+<i = '<em>&#1;</em>' />
+
+<img = '<img src = "&#1;"
+alt="&#2;" />' />
+
+<- Paragraph ->
+<p = '<p>&#1;</p>' />
+<pc = '<p class = "&#2;">&#1;</p>' />
+
+<quote = '"&#1;"' />
+
+<php = '<?php' />
+
+<vert = '|' />
+<- Old ->
+
+<- Bold font ->
+<as = '<strong>#at=</strong>' />
+
+<- HR ->
+<hr = '<hr>' />
+
+<- Image ->
+<imgpic = '<img src = "&#1;" hspace=10 vspace=10 />' />
+<imgr = '<img src = "#setting/root#&#1;" class = "imager"/>' />
+
+<- Span ->
+<span1 = '<span class = "style1">&#1;</span>' />
+<span2 = '<span class = "style2">&#1;</span>' />
+<span3 = '<span class = "style3">&#1;</span>' />
+<span4 = '<span class = "style4">&#1;</span>' />
+<span5 = '<span class = "style5">&#1;</span>' />
+<span6 = '<span class = "style6">&#1;</span>' />
+<span7 = '<span class = "style7">&#1;</span>' />
+
+<star = '<span class = "star">*</span>' />
+

@@ -1,0 +1,7 @@
+﻿<data 
+    name = Russian native = Русский
+/>
+<default>
+    <test2 = "Тест 2 элемент" /> 
+    <test3>Тест 3 элемент</> 
+</>

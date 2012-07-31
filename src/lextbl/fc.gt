@@ -1,0 +1,152 @@
+/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* ID: fgentee 18.10.06 0.0.A.
+*
+* Author: Alexey Krivonogov ( gentee )
+*
+* Summary: Full C's lexical table
+*
+******************************************************************************/
+
+<fc prefix = "FC_" desc = "Full C sources" gout =
+     "..\..\example\autoformat\lexfc.g" >
+   <MAIN state = UNKNOWN itstate pos >
+      <_ ch = ' ' state = SPACE pos itstate /> 
+      <_ ch = '.?' cmd = OPERCHAR pos itcmd value/> 
+      <_ ch = '~' cmd = OPERCHAR pos itcmd value/> 
+      <_ hexch = '09' state = TAB pos itstate /> 
+      <_ hexch = '0A' cmd = LINE pos itcmd />
+      <_ hexch = '0D' state = ISLINE pos />
+      <_ ch = '/' state = ISCOMMENT pos/>
+      <_ ch = '!=*' state = ISEQUAL pos/>
+      <_ ch = '^' state = ISEQUAL pos/>
+      <_ ch = '+' state = ISPLUS pos/>
+      <_ ch = '-' state = ISMINUS pos/>
+      <_ ch = '<' state = ISLESS pos/>
+      <_ ch = '>' state = ISGREAT pos/>
+      <_ ch = '\' state = IGNLINE pos itstate/>
+      <_ ch = '%' cmd = OPERCHAR pos itcmd value />
+      <_ ch = '&' state = ISAND pos/>
+      <_ ch = '|' state = ISOR pos/>
+      <_ ch = '#' state = NAME pos itstate keyword/>
+      <_ name state = NAME pos itstate keyword/>
+      <_ ch = '"' state = STRING pos itstate push />
+      <_ ch = "'" state = BINARY pos itstate push />
+      <_ ch = '0' pos cmd = NUMBER state = ISNUMBER itcmd />
+      <_ range = '19' pos cmd = NUMBER state = DECIMAL itcmd /> 
+      <_ ch = ',()' cmd = SYSCHAR pos itcmd value/>
+      <_ ch = ';{}' cmd = SYSCHAR pos itcmd value/>
+      <_ ch = ':[]' cmd = SYSCHAR pos itcmd value/> 
+   </>   
+   <IGNLINE state = MAIN stay comment = "Ignore line character \">
+      <_ hexch = '0D' cmd = OK />
+      <_ hexch = '0A' cmd = OK state = MAIN />
+   </>
+   <UNKNOWN cmd = OK comment = "Unknown characters">
+      <_ hexrange = '20FF' state = MAIN stay />
+      <_ hexch = '090D0A' state = MAIN stay />
+   </>
+   <SPACE state = MAIN stay comment = "Space characters">
+      <_ ch = ' ' cmd = OK />
+   </>
+   <TAB state = MAIN stay comment = "Tab characters">
+      <_ hexch = '09' cmd = OK />
+   </>
+   <ISLINE state = UNKNOWN itstate stay >
+      <_ hexch = '0A' cmd = LINE itcmd state = MAIN />
+   </>
+   <ISCOMMENT cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '*' state = COMMENT itstate />
+      <_ ch = '/' state = LINECOMMENT itstate />
+      <_ ch = '=' cmd = OPERCHAR itcmd state = MAIN value />
+   </>
+   <COMMENT cmd = OK comment = "Comment /* ... */">
+      <_ multi = '*/' cmd = OK state = MAIN />
+   </>
+   <LINECOMMENT cmd = OK comment = "Comment //... ">
+      <_ hexch = '0D0A' state = MAIN stay />
+   </>
+   <NAME state = MAIN stay comment = "Name identifier">
+      <_ numname cmd = OK />
+   </>
+   <ISNUMBER state = MAIN stay >
+      <_ range = '09' state = DECIMAL cmd = OK />
+      <_ ch = 'xX' state = HEX cmd = OK />
+      <_ ch = 'lL' cmd = OK state = MAIN />
+      <_ ch = 'eE' cmd = OK state = EXPONENT />
+      <_ ch = '.' cmd = OK state = DOUBLE />
+   </>
+   <DECIMAL state = MAIN stay >
+      <_ range = '09' cmd = OK />
+      <_ ch = 'lL' cmd = OK state = MAIN />
+      <_ ch = 'eE' cmd = OK state = EXPONENT />
+      <_ ch = '.' cmd = OK state = DOUBLE />
+   </>
+   <HEX state = MAIN stay >
+      <_ numhex cmd = OK />
+      <_ ch = 'lL' cmd = OK state = MAIN />
+   </>
+   <DOUBLE state = MAIN stay >
+      <_ ch = 'eE' cmd = OK state = EXPONENT />
+      <_ range = '09' cmd = OK />   
+   </>
+   <EXPONENT state = FRACTION stay >
+      <_ ch = '+-' cmd = OK state = FRACTION />
+   </>
+   <FRACTION state = MAIN stay >
+      <_ range = '09' cmd = OK />   
+   </>
+   <ISEQUAL cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '=' cmd = OPERCHAR itcmd state = MAIN value />
+   </>
+   <ISPLUS cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '=+' cmd = OPERCHAR itcmd state = MAIN value />
+   </>
+   <ISMINUS cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '=->' cmd = OPERCHAR itcmd state = MAIN value />
+   </>
+   <ISLESS cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '=' cmd = OPERCHAR itcmd state = MAIN value />
+      <_ ch = '<' state = ISEQUAL />
+   </>
+   <ISGREAT cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '=' cmd = OPERCHAR itcmd state = MAIN value />
+      <_ ch = '>' state = ISEQUAL />
+   </>
+   <ISAND cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '=&' cmd = OPERCHAR itcmd state = MAIN value />
+   </>
+   <ISOR cmd = OPERCHAR itcmd state = MAIN stay value >
+      <_ ch = '=|' cmd = OPERCHAR itcmd state = MAIN value />
+   </>
+   <STRING cmd = OK comment = 'String'>
+      <_ ch = '"' pop cmd = OK />
+      <_ multi = '\\' cmd = OK />
+      <_ multi = '\"' cmd = OK />
+   </>
+   <BINARY cmd = OK comment = 'Binary data'>
+      <_ ch = "'" pop cmd = OK />
+   </>
+   <commands skip>
+      <LINE comment = "New line 0x0D0A or 0x0A" />
+      <OPERCHAR comment = "Operations" />
+      <SYSCHAR comment = "Punctuation marks" />
+      <NUMBER comment = "Number decimal, hexadecimal, float or double" />
+   </commands>
+   <keywords skip>
+      <cmd id = 1>
+         break case CDECLCALL continue default #define do #elif else extern for foreach goto if #ifdef #include return sizeof STDCALL switch typedef while #else #endif #ifndef enum const struct 
+      </>
+      <type id = 256>
+         byte double float int long short ubyte uint ulong ushort void pvoid
+         pubyte
+      </>
+   </keywords>
+</fgentee>

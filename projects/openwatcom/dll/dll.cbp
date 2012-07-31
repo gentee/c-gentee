@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="dll" />
+		<Option pch_mode="2" />
+		<Option compiler="ow" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin\Debug\gentee" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="3" />
+				<Option compiler="ow" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-d2" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin\Release\gentee" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="3" />
+				<Option compiler="ow" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-ox" />
+					<Add option="-os" />
+					<Add option="-ol" />
+					<Add option="-fpi" />
+					<Add option="-4s" />
+					<Add option="-cc" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-wx" />
+			<Add option="-dBUILD_DLL" />
+			<Add option="-bt=nt" />
+		</Compiler>
+		<Linker>
+			<Add option="OPTION IMPLIB" />
+			<Add library="user32" />
+		</Linker>
+		<Unit filename="..\..\..\res\dll\version.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="..\..\..\src\algorithm\qsort.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\algorithm\qsort.h" />
+		<Unit filename="..\..\..\src\algorithm\search.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\algorithm\search.h" />
+		<Unit filename="..\..\..\src\bytecode\bytecode.h" />
+		<Unit filename="..\..\..\src\bytecode\cmdlist.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\bytecode\cmdlist.h" />
+		<Unit filename="..\..\..\src\bytecode\funclist.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\bytecode\funclist.h" />
+		<Unit filename="..\..\..\src\bytecode\ge.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\bytecode\ge.h" />
+		<Unit filename="..\..\..\src\bytecode\geload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\bytecode\gesave.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\arr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\arr.h" />
+		<Unit filename="..\..\..\src\common\arrdata.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\arrdata.h" />
+		<Unit filename="..\..\..\src\common\buf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\buf.h" />
+		<Unit filename="..\..\..\src\common\collection.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\collection.h" />
+		<Unit filename="..\..\..\src\common\crc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\crc.h" />
+		<Unit filename="..\..\..\src\common\file.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\file.h" />
+		<Unit filename="..\..\..\src\common\hash.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\hash.h" />
+		<Unit filename="..\..\..\src\common\memory.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\memory.h" />
+		<Unit filename="..\..\..\src\common\mix.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\mix.h" />
+		<Unit filename="..\..\..\src\common\msg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\msg.h" />
+		<Unit filename="..\..\..\src\common\msglist.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\msglist.h" />
+		<Unit filename="..\..\..\src\common\number.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\number.h" />
+		<Unit filename="..\..\..\src\common\str.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\common\str.h" />
+		<Unit filename="..\..\..\src\common\types.h" />
+		<Unit filename="..\..\..\src\compiler\alias.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\alias.h" />
+		<Unit filename="..\..\..\src\compiler\bcodes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\bcodes.h" />
+		<Unit filename="..\..\..\src\compiler\body.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\compile.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\compile.h" />
+		<Unit filename="..\..\..\src\compiler\compinit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\compinit.h" />
+		<Unit filename="..\..\..\src\compiler\define.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\define.h" />
+		<Unit filename="..\..\..\src\compiler\desc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\expr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\extern.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\for.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\foreach.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\func.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\func.h" />
+		<Unit filename="..\..\..\src\compiler\global.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\global.h" />
+		<Unit filename="..\..\..\src\compiler\goto.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\if.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\ifdef.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\ifdef.h" />
+		<Unit filename="..\..\..\src\compiler\import.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\import.h" />
+		<Unit filename="..\..\..\src\compiler\include.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\include.h" />
+		<Unit filename="..\..\..\src\compiler\jump.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\lexem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\lexem.h" />
+		<Unit filename="..\..\..\src\compiler\macro.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\macro.h" />
+		<Unit filename="..\..\..\src\compiler\macroexp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\macroexp.h" />
+		<Unit filename="..\..\..\src\compiler\operlist.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\operlist.h" />
+		<Unit filename="..\..\..\src\compiler\out.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\out.h" />
+		<Unit filename="..\..\..\src\compiler\subfunc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\switch.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\type.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\type.h" />
+		<Unit filename="..\..\..\src\compiler\vars.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\while.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\compiler\with.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\genteeapi\gentee.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\genteeapi\gentee.h" />
+		<Unit filename="..\..\..\src\lex\lex.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\lex\lex.h" />
+		<Unit filename="..\..\..\src\lex\lexgentee.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\lex\lexgentee.h" />
+		<Unit filename="..\..\..\src\lex\lextbl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\lex\lextbl.h" />
+		<Unit filename="..\..\..\src\os\user\defines.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\os\user\defines.h" />
+		<Unit filename="..\..\..\src\projects\dll\dll.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\vm\vm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\vm\vm.h" />
+		<Unit filename="..\..\..\src\vm\vmload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\vm\vmload.h" />
+		<Unit filename="..\..\..\src\vm\vmmanage.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\vm\vmmanage.h" />
+		<Unit filename="..\..\..\src\vm\vmres.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\vm\vmres.h" />
+		<Unit filename="..\..\..\src\vm\vmrun.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\vm\vmrun.h" />
+		<Unit filename="..\..\..\src\vm\vmtype.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\src\vm\vmtype.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

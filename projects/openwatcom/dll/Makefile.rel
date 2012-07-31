@@ -1,0 +1,489 @@
+# A simple makefile generator by KiSoft, 2007. mailto: kisoft@rambler.ru
+# version: 0.3.11.11
+
+# Project Variables start
+CPP=wcl386.exe
+CC=wcl386.exe
+LD=wlink.exe
+LIB=wlib.exe
+WINDRES=wrc.exe
+# Project Variables end
+
+# Target: Release
+
+OBJS_RELEASE=obj\Release\res\dll\version.res obj\Release\src\algorithm\qsort.obj obj\Release\src\algorithm\search.obj obj\Release\src\bytecode\cmdlist.obj obj\Release\src\bytecode\funclist.obj obj\Release\src\bytecode\ge.obj obj\Release\src\bytecode\geload.obj obj\Release\src\bytecode\gesave.obj obj\Release\src\common\arr.obj obj\Release\src\common\arrdata.obj obj\Release\src\common\buf.obj obj\Release\src\common\collection.obj obj\Release\src\common\crc.obj obj\Release\src\common\file.obj obj\Release\src\common\hash.obj obj\Release\src\common\memory.obj obj\Release\src\common\mix.obj obj\Release\src\common\msg.obj obj\Release\src\common\msglist.obj obj\Release\src\common\number.obj obj\Release\src\common\str.obj obj\Release\src\compiler\alias.obj obj\Release\src\compiler\bcodes.obj obj\Release\src\compiler\body.obj obj\Release\src\compiler\compile.obj obj\Release\src\compiler\compinit.obj obj\Release\src\compiler\define.obj obj\Release\src\compiler\desc.obj obj\Release\src\compiler\expr.obj obj\Release\src\compiler\extern.obj obj\Release\src\compiler\for.obj obj\Release\src\compiler\foreach.obj obj\Release\src\compiler\func.obj obj\Release\src\compiler\global.obj obj\Release\src\compiler\goto.obj obj\Release\src\compiler\if.obj obj\Release\src\compiler\ifdef.obj obj\Release\src\compiler\import.obj obj\Release\src\compiler\include.obj obj\Release\src\compiler\jump.obj obj\Release\src\compiler\lexem.obj obj\Release\src\compiler\macro.obj obj\Release\src\compiler\macroexp.obj obj\Release\src\compiler\operlist.obj obj\Release\src\compiler\out.obj obj\Release\src\compiler\subfunc.obj obj\Release\src\compiler\switch.obj obj\Release\src\compiler\type.obj obj\Release\src\compiler\vars.obj obj\Release\src\compiler\while.obj obj\Release\src\compiler\with.obj obj\Release\src\genteeapi\gentee.obj obj\Release\src\lex\lex.obj obj\Release\src\lex\lexgentee.obj obj\Release\src\lex\lextbl.obj obj\Release\src\os\user\defines.obj obj\Release\src\projects\dll\dll.obj obj\Release\src\vm\vm.obj obj\Release\src\vm\vmload.obj obj\Release\src\vm\vmmanage.obj obj\Release\src\vm\vmres.obj obj\Release\src\vm\vmrun.obj obj\Release\src\vm\vmtype.obj
+
+Release: bin\Release\gentee.dll
+
+bin\Release\gentee.dll: $(OBJS_RELEASE)
+	@echo Building dynamic library bin\Release\gentee.dll
+	@wlink.exe option quiet   name  library user32 $(Release)
+
+obj\Release\res\dll\version.res: ..\..\..\res\dll\version.rc
+	@echo Compiling: ..\..\..\res\dll\version.rc
+	@wrc.exe -q -r -fo=obj\Release\res\dll\version.res  ..\..\..\res\dll\version.rc
+
+obj\Release\src\algorithm\qsort.obj: ..\..\..\src\algorithm\qsort.c
+	@echo Compiling: ..\..\..\src\algorithm\qsort.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\algorithm\qsort.obj ..\..\..\src\algorithm\qsort.c
+
+obj\Release\src\algorithm\search.obj: ..\..\..\src\algorithm\search.c
+	@echo Compiling: ..\..\..\src\algorithm\search.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\algorithm\search.obj ..\..\..\src\algorithm\search.c
+
+obj\Release\src\bytecode\cmdlist.obj: ..\..\..\src\bytecode\cmdlist.c
+	@echo Compiling: ..\..\..\src\bytecode\cmdlist.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\bytecode\cmdlist.obj ..\..\..\src\bytecode\cmdlist.c
+
+obj\Release\src\bytecode\funclist.obj: ..\..\..\src\bytecode\funclist.c
+	@echo Compiling: ..\..\..\src\bytecode\funclist.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\bytecode\funclist.obj ..\..\..\src\bytecode\funclist.c
+
+obj\Release\src\bytecode\ge.obj: ..\..\..\src\bytecode\ge.c
+	@echo Compiling: ..\..\..\src\bytecode\ge.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\bytecode\ge.obj ..\..\..\src\bytecode\ge.c
+
+obj\Release\src\bytecode\geload.obj: ..\..\..\src\bytecode\geload.c
+	@echo Compiling: ..\..\..\src\bytecode\geload.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\bytecode\geload.obj ..\..\..\src\bytecode\geload.c
+
+obj\Release\src\bytecode\gesave.obj: ..\..\..\src\bytecode\gesave.c
+	@echo Compiling: ..\..\..\src\bytecode\gesave.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\bytecode\gesave.obj ..\..\..\src\bytecode\gesave.c
+
+obj\Release\src\common\arr.obj: ..\..\..\src\common\arr.c
+	@echo Compiling: ..\..\..\src\common\arr.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\arr.obj ..\..\..\src\common\arr.c
+
+obj\Release\src\common\arrdata.obj: ..\..\..\src\common\arrdata.c
+	@echo Compiling: ..\..\..\src\common\arrdata.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\arrdata.obj ..\..\..\src\common\arrdata.c
+
+obj\Release\src\common\buf.obj: ..\..\..\src\common\buf.c
+	@echo Compiling: ..\..\..\src\common\buf.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\buf.obj ..\..\..\src\common\buf.c
+
+obj\Release\src\common\collection.obj: ..\..\..\src\common\collection.c
+	@echo Compiling: ..\..\..\src\common\collection.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\collection.obj ..\..\..\src\common\collection.c
+
+obj\Release\src\common\crc.obj: ..\..\..\src\common\crc.c
+	@echo Compiling: ..\..\..\src\common\crc.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\crc.obj ..\..\..\src\common\crc.c
+
+obj\Release\src\common\file.obj: ..\..\..\src\common\file.c
+	@echo Compiling: ..\..\..\src\common\file.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\file.obj ..\..\..\src\common\file.c
+
+obj\Release\src\common\hash.obj: ..\..\..\src\common\hash.c
+	@echo Compiling: ..\..\..\src\common\hash.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\hash.obj ..\..\..\src\common\hash.c
+
+obj\Release\src\common\memory.obj: ..\..\..\src\common\memory.c
+	@echo Compiling: ..\..\..\src\common\memory.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\memory.obj ..\..\..\src\common\memory.c
+
+obj\Release\src\common\mix.obj: ..\..\..\src\common\mix.c
+	@echo Compiling: ..\..\..\src\common\mix.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\mix.obj ..\..\..\src\common\mix.c
+
+obj\Release\src\common\msg.obj: ..\..\..\src\common\msg.c
+	@echo Compiling: ..\..\..\src\common\msg.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\msg.obj ..\..\..\src\common\msg.c
+
+obj\Release\src\common\msglist.obj: ..\..\..\src\common\msglist.c
+	@echo Compiling: ..\..\..\src\common\msglist.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\msglist.obj ..\..\..\src\common\msglist.c
+
+obj\Release\src\common\number.obj: ..\..\..\src\common\number.c
+	@echo Compiling: ..\..\..\src\common\number.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\number.obj ..\..\..\src\common\number.c
+
+obj\Release\src\common\str.obj: ..\..\..\src\common\str.c
+	@echo Compiling: ..\..\..\src\common\str.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\common\str.obj ..\..\..\src\common\str.c
+
+obj\Release\src\compiler\alias.obj: ..\..\..\src\compiler\alias.c
+	@echo Compiling: ..\..\..\src\compiler\alias.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\alias.obj ..\..\..\src\compiler\alias.c
+
+obj\Release\src\compiler\bcodes.obj: ..\..\..\src\compiler\bcodes.c
+	@echo Compiling: ..\..\..\src\compiler\bcodes.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\bcodes.obj ..\..\..\src\compiler\bcodes.c
+
+obj\Release\src\compiler\body.obj: ..\..\..\src\compiler\body.c
+	@echo Compiling: ..\..\..\src\compiler\body.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\body.obj ..\..\..\src\compiler\body.c
+
+obj\Release\src\compiler\compile.obj: ..\..\..\src\compiler\compile.c
+	@echo Compiling: ..\..\..\src\compiler\compile.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\compile.obj ..\..\..\src\compiler\compile.c
+
+obj\Release\src\compiler\compinit.obj: ..\..\..\src\compiler\compinit.c
+	@echo Compiling: ..\..\..\src\compiler\compinit.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\compinit.obj ..\..\..\src\compiler\compinit.c
+
+obj\Release\src\compiler\define.obj: ..\..\..\src\compiler\define.c
+	@echo Compiling: ..\..\..\src\compiler\define.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\define.obj ..\..\..\src\compiler\define.c
+
+obj\Release\src\compiler\desc.obj: ..\..\..\src\compiler\desc.c
+	@echo Compiling: ..\..\..\src\compiler\desc.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\desc.obj ..\..\..\src\compiler\desc.c
+
+obj\Release\src\compiler\expr.obj: ..\..\..\src\compiler\expr.c
+	@echo Compiling: ..\..\..\src\compiler\expr.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\expr.obj ..\..\..\src\compiler\expr.c
+
+obj\Release\src\compiler\extern.obj: ..\..\..\src\compiler\extern.c
+	@echo Compiling: ..\..\..\src\compiler\extern.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\extern.obj ..\..\..\src\compiler\extern.c
+
+obj\Release\src\compiler\for.obj: ..\..\..\src\compiler\for.c
+	@echo Compiling: ..\..\..\src\compiler\for.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\for.obj ..\..\..\src\compiler\for.c
+
+obj\Release\src\compiler\foreach.obj: ..\..\..\src\compiler\foreach.c
+	@echo Compiling: ..\..\..\src\compiler\foreach.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\foreach.obj ..\..\..\src\compiler\foreach.c
+
+obj\Release\src\compiler\func.obj: ..\..\..\src\compiler\func.c
+	@echo Compiling: ..\..\..\src\compiler\func.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\func.obj ..\..\..\src\compiler\func.c
+
+obj\Release\src\compiler\global.obj: ..\..\..\src\compiler\global.c
+	@echo Compiling: ..\..\..\src\compiler\global.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\global.obj ..\..\..\src\compiler\global.c
+
+obj\Release\src\compiler\goto.obj: ..\..\..\src\compiler\goto.c
+	@echo Compiling: ..\..\..\src\compiler\goto.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\goto.obj ..\..\..\src\compiler\goto.c
+
+obj\Release\src\compiler\if.obj: ..\..\..\src\compiler\if.c
+	@echo Compiling: ..\..\..\src\compiler\if.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\if.obj ..\..\..\src\compiler\if.c
+
+obj\Release\src\compiler\ifdef.obj: ..\..\..\src\compiler\ifdef.c
+	@echo Compiling: ..\..\..\src\compiler\ifdef.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\ifdef.obj ..\..\..\src\compiler\ifdef.c
+
+obj\Release\src\compiler\import.obj: ..\..\..\src\compiler\import.c
+	@echo Compiling: ..\..\..\src\compiler\import.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\import.obj ..\..\..\src\compiler\import.c
+
+obj\Release\src\compiler\include.obj: ..\..\..\src\compiler\include.c
+	@echo Compiling: ..\..\..\src\compiler\include.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\include.obj ..\..\..\src\compiler\include.c
+
+obj\Release\src\compiler\jump.obj: ..\..\..\src\compiler\jump.c
+	@echo Compiling: ..\..\..\src\compiler\jump.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\jump.obj ..\..\..\src\compiler\jump.c
+
+obj\Release\src\compiler\lexem.obj: ..\..\..\src\compiler\lexem.c
+	@echo Compiling: ..\..\..\src\compiler\lexem.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\lexem.obj ..\..\..\src\compiler\lexem.c
+
+obj\Release\src\compiler\macro.obj: ..\..\..\src\compiler\macro.c
+	@echo Compiling: ..\..\..\src\compiler\macro.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\macro.obj ..\..\..\src\compiler\macro.c
+
+obj\Release\src\compiler\macroexp.obj: ..\..\..\src\compiler\macroexp.c
+	@echo Compiling: ..\..\..\src\compiler\macroexp.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\macroexp.obj ..\..\..\src\compiler\macroexp.c
+
+obj\Release\src\compiler\operlist.obj: ..\..\..\src\compiler\operlist.c
+	@echo Compiling: ..\..\..\src\compiler\operlist.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\operlist.obj ..\..\..\src\compiler\operlist.c
+
+obj\Release\src\compiler\out.obj: ..\..\..\src\compiler\out.c
+	@echo Compiling: ..\..\..\src\compiler\out.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\out.obj ..\..\..\src\compiler\out.c
+
+obj\Release\src\compiler\subfunc.obj: ..\..\..\src\compiler\subfunc.c
+	@echo Compiling: ..\..\..\src\compiler\subfunc.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\subfunc.obj ..\..\..\src\compiler\subfunc.c
+
+obj\Release\src\compiler\switch.obj: ..\..\..\src\compiler\switch.c
+	@echo Compiling: ..\..\..\src\compiler\switch.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\switch.obj ..\..\..\src\compiler\switch.c
+
+obj\Release\src\compiler\type.obj: ..\..\..\src\compiler\type.c
+	@echo Compiling: ..\..\..\src\compiler\type.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\type.obj ..\..\..\src\compiler\type.c
+
+obj\Release\src\compiler\vars.obj: ..\..\..\src\compiler\vars.c
+	@echo Compiling: ..\..\..\src\compiler\vars.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\vars.obj ..\..\..\src\compiler\vars.c
+
+obj\Release\src\compiler\while.obj: ..\..\..\src\compiler\while.c
+	@echo Compiling: ..\..\..\src\compiler\while.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\while.obj ..\..\..\src\compiler\while.c
+
+obj\Release\src\compiler\with.obj: ..\..\..\src\compiler\with.c
+	@echo Compiling: ..\..\..\src\compiler\with.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\compiler\with.obj ..\..\..\src\compiler\with.c
+
+obj\Release\src\genteeapi\gentee.obj: ..\..\..\src\genteeapi\gentee.c
+	@echo Compiling: ..\..\..\src\genteeapi\gentee.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\genteeapi\gentee.obj ..\..\..\src\genteeapi\gentee.c
+
+obj\Release\src\lex\lex.obj: ..\..\..\src\lex\lex.c
+	@echo Compiling: ..\..\..\src\lex\lex.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\lex\lex.obj ..\..\..\src\lex\lex.c
+
+obj\Release\src\lex\lexgentee.obj: ..\..\..\src\lex\lexgentee.c
+	@echo Compiling: ..\..\..\src\lex\lexgentee.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\lex\lexgentee.obj ..\..\..\src\lex\lexgentee.c
+
+obj\Release\src\lex\lextbl.obj: ..\..\..\src\lex\lextbl.c
+	@echo Compiling: ..\..\..\src\lex\lextbl.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\lex\lextbl.obj ..\..\..\src\lex\lextbl.c
+
+obj\Release\src\os\user\defines.obj: ..\..\..\src\os\user\defines.c
+	@echo Compiling: ..\..\..\src\os\user\defines.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\os\user\defines.obj ..\..\..\src\os\user\defines.c
+
+obj\Release\src\projects\dll\dll.obj: ..\..\..\src\projects\dll\dll.c
+	@echo Compiling: ..\..\..\src\projects\dll\dll.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\projects\dll\dll.obj ..\..\..\src\projects\dll\dll.c
+
+obj\Release\src\vm\vm.obj: ..\..\..\src\vm\vm.c
+	@echo Compiling: ..\..\..\src\vm\vm.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\vm\vm.obj ..\..\..\src\vm\vm.c
+
+obj\Release\src\vm\vmload.obj: ..\..\..\src\vm\vmload.c
+	@echo Compiling: ..\..\..\src\vm\vmload.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\vm\vmload.obj ..\..\..\src\vm\vmload.c
+
+obj\Release\src\vm\vmmanage.obj: ..\..\..\src\vm\vmmanage.c
+	@echo Compiling: ..\..\..\src\vm\vmmanage.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\vm\vmmanage.obj ..\..\..\src\vm\vmmanage.c
+
+obj\Release\src\vm\vmres.obj: ..\..\..\src\vm\vmres.c
+	@echo Compiling: ..\..\..\src\vm\vmres.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\vm\vmres.obj ..\..\..\src\vm\vmres.c
+
+obj\Release\src\vm\vmrun.obj: ..\..\..\src\vm\vmrun.c
+	@echo Compiling: ..\..\..\src\vm\vmrun.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\vm\vmrun.obj ..\..\..\src\vm\vmrun.c
+
+obj\Release\src\vm\vmtype.obj: ..\..\..\src\vm\vmtype.c
+	@echo Compiling: ..\..\..\src\vm\vmtype.c
+	@wcl386.exe -q -c   -fo=obj\Release\src\vm\vmtype.obj ..\..\..\src\vm\vmtype.c
+
+..\..\..\src\algorithm\qsort.c: ../common/memory.h ../vm/vmrun.h qsort.h
+
+..\..\..\src\common\memory.h: types.h
+
+..\..\..\src\vm\vmrun.h: vm.h
+
+..\..\..\src\vm\vm.h: ../common/hash.h ../common/msg.h ../common/collection.h ../bytecode/cmdlist.h
+
+..\..\..\src\common\hash.h: arr.h
+
+..\..\..\src\common\arr.h: buf.h
+
+..\..\..\src\common\buf.h: memory.h
+
+..\..\..\src\common\msg.h: ../os/user/defines.h msglist.h
+
+..\..\..\src\os\user\defines.h: windows.h ../../common/str.h
+
+..\..\..\src\common\str.h: buf.h
+
+..\..\..\src\common\msglist.h: ../common/types.h
+
+..\..\..\src\common\collection.h: buf.h
+
+..\..\..\src\bytecode\cmdlist.h: ../common/types.h
+
+..\..\..\src\algorithm\qsort.h: ../common/types.h
+
+..\..\..\src\algorithm\search.c: ../common/memory.h search.h
+
+..\..\..\src\algorithm\search.h: ../common/types.h
+
+..\..\..\src\bytecode\cmdlist.c: cmdlist.h bytecode.h
+
+..\..\..\src\bytecode\funclist.c: ../genteeapi/gentee.h funclist.h bytecode.h cmdlist.h ../common/crc.h ../common/mix.h ../common/arr.h ../common/collection.h ../vm/vmtype.h ../vm/vmres.h ../algorithm/qsort.h ../algorithm/search.h
+
+..\..\..\src\genteeapi\gentee.h: ../common/str.h ../vm/vm.h ../compiler/compile.h
+
+..\..\..\src\compiler\compile.h: ../os/user/defines.h ../lex/lex.h ../common/arrdata.h
+
+..\..\..\src\lex\lex.h: ../common/hash.h
+
+..\..\..\src\common\arrdata.h: arr.h str.h
+
+..\..\..\src\bytecode\funclist.h: ../common/types.h
+
+..\..\..\src\common\crc.h: types.h
+
+..\..\..\src\common\mix.h: str.h
+
+..\..\..\src\vm\vmtype.h: vmrun.h
+
+..\..\..\src\vm\vmres.h: vm.h
+
+..\..\..\src\bytecode\ge.c: ge.h
+
+..\..\..\src\bytecode\ge.h: ../common/buf.h
+
+..\..\..\src\bytecode\geload.c: ge.h ../vm/vmload.h ../vm/vmres.h ../vm/vmmanage.h ../common/crc.h
+
+..\..\..\src\vm\vmload.h: vmrun.h
+
+..\..\..\src\vm\vmmanage.h: vm.h
+
+..\..\..\src\bytecode\gesave.c: ge.h ../vm/vmload.h ../vm/vmres.h ../common/crc.h ../bytecode/bytecode.h
+
+..\..\..\src\common\arr.c: arr.h ../bytecode/cmdlist.h ../vm/vmtype.h ../os/user/defines.h ../genteeapi/gentee.h
+
+..\..\..\src\common\arrdata.c: arrdata.h
+
+..\..\..\src\common\buf.c: buf.h ../genteeapi/gentee.h ../os/user/defines.h
+
+..\..\..\src\common\collection.c: collection.h ../bytecode/cmdlist.h ../vm/vmtype.h ../genteeapi/gentee.h
+
+..\..\..\src\common\crc.c: crc.h
+
+..\..\..\src\common\file.c: ../os/user/defines.h ../genteeapi/gentee.h ../common/arrdata.h
+
+..\..\..\src\common\hash.c: hash.h ../os/user/defines.h
+
+..\..\..\src\common\memory.c: memory.h ../os/user/defines.h
+
+..\..\..\src\common\mix.c: mix.h ../genteeapi/gentee.h
+
+..\..\..\src\common\msg.c: ../os/user/defines.h ../genteeapi/gentee.h msg.h ../compiler/lexem.h
+
+..\..\..\src\compiler\lexem.h: ../common/str.h ../common/arr.h ../common/number.h
+
+..\..\..\src\common\number.h: types.h
+
+..\..\..\src\common\number.c: number.h ../bytecode/cmdlist.h ../os/user/defines.h
+
+..\..\..\src\common\str.c: str.h ../genteeapi/gentee.h ../os/user/defines.h
+
+..\..\..\src\compiler\alias.c: ../vm/vm.h ../vm/vmload.h lexem.h out.h
+
+..\..\..\src\compiler\bcodes.c: bcodes.h compinit.h ../vm/vm.h ../vm/vmres.h ../vm/vmtype.h ../common/msg.h alias.h
+
+..\..\..\src\compiler\bcodes.h: lexem.h func.h
+
+..\..\..\src\compiler\func.h: ../os/user/defines.h ../lex/lex.h ../lex/lexgentee.h ../common/arrdata.h ../common/msglist.h ../genteeapi/gentee.h ../vm/vmload.h ../bytecode/cmdlist.h lexem.h operlist.h type.h out.h
+
+..\..\..\src\compiler\operlist.h: ../common/types.h
+
+..\..\..\src\compiler\type.h: lexem.h
+
+..\..\..\src\compiler\compinit.h: ../bytecode/cmdlist.h operlist.h
+
+..\..\..\src\compiler\alias.h: lexem.h
+
+..\..\..\src\compiler\body.c: func.h ifdef.h ../vm/vmtype.h
+
+..\..\..\src\compiler\ifdef.h: lexem.h
+
+..\..\..\src\compiler\compile.c: compile.h ../lex/lex.h ../lex/lexgentee.h ../genteeapi/gentee.h ../common/file.h ../common/hash.h ../bytecode/ge.h lexem.h operlist.h define.h macro.h compinit.h include.h import.h global.h
+
+..\..\..\src\common\file.h: str.h
+
+..\..\..\src\compiler\define.h: lexem.h
+
+..\..\..\src\compiler\macro.h: lexem.h macroexp.h
+
+..\..\..\src\compiler\macroexp.h: ../os/user/defines.h ../lex/lex.h ../lex/lexgentee.h ../common/arrdata.h ../common/msglist.h lexem.h operlist.h bcodes.h ../genteeapi/gentee.h
+
+..\..\..\src\compiler\include.h: lexem.h
+
+..\..\..\src\compiler\import.h: lexem.h
+
+..\..\..\src\compiler\global.h: lexem.h
+
+..\..\..\src\compiler\compinit.c: compinit.h ../vm/vm.h ../vm/vmload.h ../vm/vmmanage.h
+
+..\..\..\src\compiler\define.c: ../genteeapi/gentee.h define.h macro.h bcodes.h out.h
+
+..\..\..\src\compiler\desc.c: func.h macroexp.h
+
+..\..\..\src\compiler\expr.c: func.h bcodes.h compinit.h ../vm/vmtype.h alias.h
+
+..\..\..\src\compiler\extern.c: func.h
+
+..\..\..\src\compiler\for.c: func.h bcodes.h
+
+..\..\..\src\compiler\foreach.c: func.h bcodes.h
+
+..\..\..\src\compiler\func.c: func.h bcodes.h out.h alias.h
+
+..\..\..\src\compiler\global.c: ../genteeapi/gentee.h bcodes.h compile.h ../common/file.h
+
+..\..\..\src\compiler\goto.c: func.h
+
+..\..\..\src\compiler\if.c: func.h
+
+..\..\..\src\compiler\ifdef.c: ifdef.h macro.h
+
+..\..\..\src\compiler\import.c: ../genteeapi/gentee.h bcodes.h compile.h ../common/file.h
+
+..\..\..\src\compiler\include.c: ../genteeapi/gentee.h bcodes.h compile.h
+
+..\..\..\src\compiler\jump.c: func.h
+
+..\..\..\src\compiler\lexem.c: lexem.h compile.h ../genteeapi/gentee.h ../lex/lex.h ../lex/lexgentee.h operlist.h ifdef.h macro.h ../common/file.h
+
+..\..\..\src\compiler\macro.c: ../genteeapi/gentee.h macro.h
+
+..\..\..\src\compiler\macroexp.c: macroexp.h
+
+..\..\..\src\compiler\operlist.c: operlist.h
+
+..\..\..\src\compiler\out.c: ../genteeapi/gentee.h ../vm/vmload.h lexem.h
+
+..\..\..\src\compiler\subfunc.c: func.h
+
+..\..\..\src\compiler\switch.c: func.h bcodes.h
+
+..\..\..\src\compiler\type.c: ../genteeapi/gentee.h define.h macro.h bcodes.h ../genteeapi/gentee.h type.h
+
+..\..\..\src\compiler\vars.c: func.h bcodes.h
+
+..\..\..\src\compiler\while.c: func.h
+
+..\..\..\src\compiler\with.c: func.h
+
+..\..\..\src\genteeapi\gentee.c: gentee.h ../common/crc.h ../common/memory.h ../common/file.h ../os/user/defines.h ../bytecode/ge.h
+
+..\..\..\src\lex\lex.c: lex.h lextbl.h ../os/user/defines.h
+
+..\..\..\src\lex\lextbl.h: lex.h
+
+..\..\..\src\lex\lexgentee.c: lextbl.h
+
+..\..\..\src\lex\lextbl.c: lex.h lextbl.h ../os/user/defines.h
+
+..\..\..\src\os\user\defines.c: defines.h ../../genteeapi/gentee.h
+
+..\..\..\src\projects\dll\dll.c: ../../genteeapi/gentee.h ../../common/msglist.h
+
+..\..\..\src\vm\vm.c: vm.h vmrun.h vmmanage.h vmload.h vmtype.h vmres.h ../bytecode/bytecode.h ../bytecode/funclist.h ../common/file.h ../genteeapi/gentee.h
+
+..\..\..\src\vm\vmload.c: vmload.h vmmanage.h ../compiler/operlist.h ../bytecode/cmdlist.h ../bytecode/bytecode.h ../genteeapi/gentee.h ../compiler/lexem.h ../compiler/macro.h
+
+..\..\..\src\vm\vmmanage.c: vmmanage.h
+
+..\..\..\src\vm\vmres.c: vmres.h
+
+..\..\..\src\vm\vmrun.c: vmtype.h vmload.h ../common/collection.h
+
+..\..\..\src\vm\vmtype.c: vmrun.h vmtype.h vmload.h ../common/collection.h
+
+.PHONY: clean_Release
+
+clean_Release: 
+	@echo Delete $(OBJS_RELEASE) bin\Release\gentee.dll
+	-@del /f $(OBJS_RELEASE) bin\Release\gentee.dll
+
+
+

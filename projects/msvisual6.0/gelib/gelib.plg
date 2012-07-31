@@ -1,0 +1,93 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: gelib - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\86C2~1\AppData\Local\Temp\RSP596.tmp" with contents
+[
+/nologo /Gz /Zp1 /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /D "_ASM" /Fp"Release/gelib.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"K:\gentee\Open Source\gentee\src\compiler\compile.c"
+]
+Creating command line "cl.exe @C:\Users\86C2~1\AppData\Local\Temp\RSP596.tmp" 
+Creating temporary file "C:\Users\86C2~1\AppData\Local\Temp\RSP597.tmp" with contents
+[
+/nologo /out:"Release\gelib.lib" 
+".\Release\cmdlist.obj"
+".\Release\funclist.obj"
+".\Release\geasm.obj"
+".\Release\geload.obj"
+".\Release\geoptimize.obj"
+".\Release\gesave.obj"
+".\Release\arr.obj"
+".\Release\arrdata.obj"
+".\Release\buf.obj"
+".\Release\collection.obj"
+".\Release\crc.obj"
+".\Release\file.obj"
+".\Release\hash.obj"
+".\Release\memory.obj"
+".\Release\mix.obj"
+".\Release\msg.obj"
+".\Release\msglist.obj"
+".\Release\number.obj"
+".\Release\str.obj"
+".\Release\alias.obj"
+".\Release\bcodes.obj"
+".\Release\body.obj"
+".\Release\compile.obj"
+".\Release\compinit.obj"
+".\Release\define.obj"
+".\Release\desc.obj"
+".\Release\expr.obj"
+".\Release\extern.obj"
+".\Release\for.obj"
+".\Release\foreach.obj"
+".\Release\func.obj"
+".\Release\global.obj"
+".\Release\goto.obj"
+".\Release\if.obj"
+".\Release\ifdef.obj"
+".\Release\import.obj"
+".\Release\include.obj"
+".\Release\jump.obj"
+".\Release\lexem.obj"
+".\Release\macro.obj"
+".\Release\macroexp.obj"
+".\Release\operlist.obj"
+".\Release\out.obj"
+".\Release\subfunc.obj"
+".\Release\switch.obj"
+".\Release\type.obj"
+".\Release\vars.obj"
+".\Release\while.obj"
+".\Release\with.obj"
+".\Release\gentee.obj"
+".\Release\lex.obj"
+".\Release\lexgentee.obj"
+".\Release\lextbl.obj"
+".\Release\defines.obj"
+".\Release\vm.obj"
+".\Release\vmload.obj"
+".\Release\vmmanage.obj"
+".\Release\vmres.obj"
+".\Release\vmrun.obj"
+".\Release\vmtype.obj"
+".\Release\qsort.obj"
+".\Release\search.obj"
+]
+Creating command line "link.exe -lib @C:\Users\86C2~1\AppData\Local\Temp\RSP597.tmp"
+<h3>Output Window</h3>
+Compiling...
+compile.c
+Creating library...
+
+
+
+<h3>Results</h3>
+gelib.lib - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

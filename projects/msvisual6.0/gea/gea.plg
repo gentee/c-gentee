@@ -1,0 +1,97 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: gea - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\Alexey\AppData\Local\Temp\RSP4A0C.tmp" with contents
+[
+/nologo /Gz /Zp1 /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "GEA_EXPORTS" /Fp"Release/gea.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"K:\gentee\Open Source\gentee\src\projects\gea\Huffman\dehuffman.c"
+"K:\gentee\Open Source\gentee\src\projects\gea\LZGE\delzge.c"
+"K:\gentee\Open Source\gentee\src\projects\gea\PPMD\deppmd.c"
+"K:\gentee\Open Source\gentee\src\projects\gea\Huffman\enhuffman.c"
+"K:\gentee\Open Source\gentee\src\projects\gea\LZGE\enlzge.c"
+"K:\gentee\Open Source\gentee\src\projects\gea\PPMD\enppmd.c"
+"K:\gentee\Open Source\gentee\src\projects\gea\gea.c"
+"K:\gentee\Open Source\gentee\src\projects\gea\Huffman\huffman.c"
+"K:\gentee\Open Source\gentee\src\projects\gea\LZGE\lzge.c"
+"K:\gentee\Open Source\gentee\src\projects\gea\LZGE\match.c"
+"K:\gentee\Open Source\gentee\src\projects\gea\memory.c"
+"K:\gentee\Open Source\gentee\src\projects\gea\PPMD\ppmd.c"
+"K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdCmn.c"
+"K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdDec.c"
+"K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdEnc.c"
+]
+Creating command line "cl.exe @C:\Users\Alexey\AppData\Local\Temp\RSP4A0C.tmp" 
+Creating temporary file "C:\Users\Alexey\AppData\Local\Temp\RSP4A0D.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib msvcrt.lib /nologo /dll /incremental:no /pdb:"Release/gea.pdb" /machine:I386 /nodefaultlib /def:"..\..\..\src\projects\gea\gea.def" /out:"..\..\..\exe\gea.dll" /implib:"Release/gea.lib" 
+".\Release\dehuffman.obj"
+".\Release\delzge.obj"
+".\Release\deppmd.obj"
+".\Release\enhuffman.obj"
+".\Release\enlzge.obj"
+".\Release\enppmd.obj"
+".\Release\gea.obj"
+".\Release\huffman.obj"
+".\Release\lzge.obj"
+".\Release\match.obj"
+".\Release\memory.obj"
+".\Release\ppmd.obj"
+".\Release\PPMdCmn.obj"
+".\Release\PPMdDec.obj"
+".\Release\PPMdEnc.obj"
+]
+Creating command line "link.exe @C:\Users\Alexey\AppData\Local\Temp\RSP4A0D.tmp"
+<h3>Output Window</h3>
+Compiling...
+dehuffman.c
+delzge.c
+deppmd.c
+enhuffman.c
+enlzge.c
+enppmd.c
+gea.c
+huffman.c
+lzge.c
+match.c
+memory.c
+ppmd.c
+PPMdCmn.c
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdCmn.c(77) : warning C4013: 'mem_free' undefined; assuming extern returning int
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdCmn.c(83) : warning C4018: '==' : signed/unsigned mismatch
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdCmn.c(85) : warning C4013: 'mem_alloc' undefined; assuming extern returning int
+PPMdDec.c
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdDec.c(67) : warning C4018: '<' : signed/unsigned mismatch
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdDec.c(70) : warning C4244: '=' : conversion from 'long ' to 'unsigned short ', possible loss of data
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdDec.c(73) : warning C4244: '=' : conversion from 'long ' to 'unsigned short ', possible loss of data
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdDec.c(81) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdDec.c(92) : warning C4244: '-=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdDec.c(121) : warning C4244: '+=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdDec.c(133) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+PPMdEnc.c
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdEnc.c(75) : warning C4244: '=' : conversion from 'long ' to 'unsigned short ', possible loss of data
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdEnc.c(78) : warning C4244: '=' : conversion from 'long ' to 'unsigned short ', possible loss of data
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdEnc.c(86) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdEnc.c(86) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned char ', possible loss of data
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdEnc.c(97) : warning C4244: '-=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdEnc.c(126) : warning C4244: '+=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdEnc.c(137) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdEnc.c(137) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned char ', possible loss of data
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdEnc.c(140) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned char ', possible loss of data
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdEnc.c(140) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned char ', possible loss of data
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdEnc.c(141) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned char ', possible loss of data
+K:\gentee\Open Source\gentee\src\projects\gea\PPMD\PPMdEnc.c(141) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned char ', possible loss of data
+Linking...
+   Creating library Release/gea.lib and object Release/gea.exp
+
+
+
+<h3>Results</h3>
+gea.dll - 0 error(s), 22 warning(s)
+</pre>
+</body>
+</html>

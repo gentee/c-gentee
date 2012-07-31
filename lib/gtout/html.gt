@@ -1,0 +1,59 @@
+/******************************************************************************
+*
+* Copyright (C) 2006, The Gentee Group. All rights reserved. 
+* This file is part of the Gentee open source project - http://www.gentee.com. 
+* 
+* THIS FILE IS PROVIDED UNDER THE TERMS OF THE GENTEE LICENSE ("AGREEMENT"). 
+* ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS 
+* ACCEPTANCE OF THE AGREEMENT.
+*
+* ID: html.gt 03.11.06 0.0.A.  
+*
+* Summary: The HTML commands.   
+*
+******************************************************************************/
+
+<as = '<strong>#a=</strong>' />
+<ah = '<h4>#a=</h4>' />
+<b = '<strong>&#1;</strong>' />
+<br = '<br>' />
+<cmt = '<!-- &#1; -->' />
+
+<farea = '<tr><td class = "farea" colspan = 2>&#1;</td></tr><tr>
+   <td class = "farea" colspan = 2><textarea name="&#2;" rows=&#3; cols=&#4;></textarea></td></tr>' />
+
+<farearight = '<tr><td class = "farea">&#1;</td>
+   <td class = "farea"><textarea name="&#2;" rows=&#3; cols=&#4;></textarea></td></tr>' />
+
+<ftext = '<tr><td class = "ftext">&#1;</td><td>
+   <input type=text name="&#2;" size=&#3;></td></tr>' />
+<fhide = "<input type='hidden' name='&#2;' value='&#1;'>" />
+<fhideprotect = '<script language="JavaScript" type="text/javascript">
+document.write("<in"+"p"+"ut typ"+"e=\"h"+"idden"+"\" n"+"ame"+"=\"pro"+"tect\" val"+"ue=\"gepr" + "ote" + "ct\">");
+</script>' />
+<form>
+  &nbsp;<form enctype='multipart/form-data' action='&#1;' method='post'>
+  <table class = "form" cols = 2>
+</> 
+<formtblend = "</table></form>" />
+<formend = "</form>" />
+<fsubmit = "<tr><td colspan = 2 class = 'btn'>#hr#</td></tr>
+<tr><td colspan = 2 class = 'btn'><input type=submit value='&#1;'></td>
+      <!--td  class = 'btn'><input type=reset value='&#2;'></td--></tr>" />
+<h1 ="<h1>&#1;</h1>" />
+<h2 ="<h2>&#1;</h2>" />
+<h3 ="<h3>&#1;</h3>" />
+<h4 ="<h4>&#1;</h4>" />
+<h5 ="<h5>&#1;</h5>" />
+<hr = "<hr>" />
+<i = '<em>&#1;</em>' />
+<img = '<img src = "&#1;" >' />
+<li ="<li>&#1;" />
+<lgt = '<&#1;>' />
+<p ="<p>&#1;</p>" />
+<pc ="<center><p>&#1;</p></center>" />
+<span = '<span class = "&#2;">&#1;</span>' />
+<star = '<span class = "star">*</span>' />
+<table = '<table border=0 cellpadding=0 cellspacing=0 class = "&#2;">&#1;</table>' />
+<trd2 = '<tr><td class="td"><strong> &#1;</strong></td><td class="td">&#2;</td></tr>' />
+<trdv2 = '<tr valign=top><td class="td" width = "33%"><strong> &#1;</strong></td><td class="td">&#2;</td></tr>' />

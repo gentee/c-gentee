@@ -1,0 +1,510 @@
+# depslib dependency file v1.0
+1196188160 source:d:\ano_projects\project_cb\gentee_3\res\dll\version.rc
+
+1186462900 source:d:\ano_projects\project_cb\gentee_3\src\algorithm\qsort.c
+	"../common/memory.h"
+	"../vm/vmrun.h"
+	"qsort.h"
+
+1197330614 d:\ano_projects\project_cb\gentee_3\src\common\memory.h
+	"types.h"
+
+1197330334 d:\ano_projects\project_cb\gentee_3\src\common\types.h
+	<_mingw.h>
+	<stdlib.h>
+
+1183364362 d:\ano_projects\project_cb\gentee_3\src\vm\vmrun.h
+	"vm.h"
+
+1186649672 d:\ano_projects\project_cb\gentee_3\src\vm\vm.h
+	"../common/hash.h"
+	"../common/msg.h"
+	"../common/collection.h"
+	"../bytecode/cmdlist.h"
+
+1162216418 d:\ano_projects\project_cb\gentee_3\src\common\hash.h
+	"arr.h"
+
+1177058554 d:\ano_projects\project_cb\gentee_3\src\common\arr.h
+	"buf.h"
+
+1190293702 d:\ano_projects\project_cb\gentee_3\src\common\buf.h
+	"memory.h"
+
+1197156170 d:\ano_projects\project_cb\gentee_3\src\common\msg.h
+	"../os/user/defines.h"
+	"msglist.h"
+
+1186462772 d:\ano_projects\project_cb\gentee_3\src\os\user\defines.h
+	"windows.h"
+	<stdio.h>
+	<conio.h>
+	"../../common/str.h"
+
+1197330552 d:\ano_projects\project_cb\gentee_3\src\common\str.h
+	"buf.h"
+
+1186992454 d:\ano_projects\project_cb\gentee_3\src\common\msglist.h
+	"../common/types.h"
+
+1177069426 d:\ano_projects\project_cb\gentee_3\src\common\collection.h
+	"buf.h"
+
+1186680672 d:\ano_projects\project_cb\gentee_3\src\bytecode\cmdlist.h
+	"../common/types.h"
+
+1186462900 d:\ano_projects\project_cb\gentee_3\src\algorithm\qsort.h
+	"../common/types.h"
+
+1186405368 source:d:\ano_projects\project_cb\gentee_3\src\algorithm\search.c
+	"../common/memory.h"
+	"search.h"
+
+1186405572 d:\ano_projects\project_cb\gentee_3\src\algorithm\search.h
+	"../common/types.h"
+
+1186680672 source:d:\ano_projects\project_cb\gentee_3\src\bytecode\cmdlist.c
+	"cmdlist.h"
+	"bytecode.h"
+
+1197156168 d:\ano_projects\project_cb\gentee_3\src\bytecode\bytecode.h
+
+1197158338 source:d:\ano_projects\project_cb\gentee_3\src\bytecode\funclist.c
+	<math.h>
+	"../genteeapi/gentee.h"
+	"funclist.h"
+	"bytecode.h"
+	"cmdlist.h"
+	"../common/crc.h"
+	"../common/mix.h"
+	"../common/arr.h"
+	"../common/collection.h"
+	"../vm/vmtype.h"
+	"../vm/vmres.h"
+	"../algorithm/qsort.h"
+	"../algorithm/search.h"
+
+1197377463 d:\ano_projects\project_cb\gentee_3\src\genteeapi\gentee.h
+	"../common/str.h"
+	"../vm/vm.h"
+	"../compiler/compile.h"
+
+1197329762 d:\ano_projects\project_cb\gentee_3\src\compiler\compile.h
+	"../os/user/defines.h"
+	"../lex/lex.h"
+	"../common/arrdata.h"
+
+1187024378 d:\ano_projects\project_cb\gentee_3\src\lex\lex.h
+	"../common/hash.h"
+
+1161863426 d:\ano_projects\project_cb\gentee_3\src\common\arrdata.h
+	"arr.h"
+	"str.h"
+
+1196671312 d:\ano_projects\project_cb\gentee_3\src\bytecode\funclist.h
+	"../common/types.h"
+
+1161178006 d:\ano_projects\project_cb\gentee_3\src\common\crc.h
+	"types.h"
+
+1186849678 d:\ano_projects\project_cb\gentee_3\src\common\mix.h
+	"str.h"
+
+1185279698 d:\ano_projects\project_cb\gentee_3\src\vm\vmtype.h
+	"vmrun.h"
+
+1172760440 d:\ano_projects\project_cb\gentee_3\src\vm\vmres.h
+	"vm.h"
+
+1161261346 source:d:\ano_projects\project_cb\gentee_3\src\bytecode\ge.c
+	"ge.h"
+
+1186582294 d:\ano_projects\project_cb\gentee_3\src\bytecode\ge.h
+	"../common/buf.h"
+
+1197158376 source:d:\ano_projects\project_cb\gentee_3\src\bytecode\geload.c
+	"ge.h"
+	"../vm/vmload.h"
+	"../vm/vmres.h"
+	"../vm/vmmanage.h"
+	"../common/crc.h"
+
+1186721352 d:\ano_projects\project_cb\gentee_3\src\vm\vmload.h
+	"vmrun.h"
+
+1168442220 d:\ano_projects\project_cb\gentee_3\src\vm\vmmanage.h
+	"vm.h"
+
+1197158376 source:d:\ano_projects\project_cb\gentee_3\src\bytecode\gesave.c
+	"ge.h"
+	"../vm/vmload.h"
+	"../vm/vmres.h"
+	"../common/crc.h"
+	"../bytecode/bytecode.h"
+
+1189663334 source:d:\ano_projects\project_cb\gentee_3\src\common\arr.c
+	"arr.h"
+	"../bytecode/cmdlist.h"
+	"../vm/vmtype.h"
+	"../os/user/defines.h"
+	"../genteeapi/gentee.h"
+
+1161863440 source:d:\ano_projects\project_cb\gentee_3\src\common\arrdata.c
+	"arrdata.h"
+
+1197158376 source:d:\ano_projects\project_cb\gentee_3\src\common\buf.c
+	"buf.h"
+	"../genteeapi/gentee.h"
+	"../os/user/defines.h"
+
+1177069446 source:d:\ano_projects\project_cb\gentee_3\src\common\collection.c
+	"collection.h"
+	"../bytecode/cmdlist.h"
+	"../vm/vmtype.h"
+	"../genteeapi/gentee.h"
+
+1161177982 source:d:\ano_projects\project_cb\gentee_3\src\common\crc.c
+	"crc.h"
+
+1193242536 source:d:\ano_projects\project_cb\gentee_3\src\common\file.c
+	"../os/user/defines.h"
+	"../genteeapi/gentee.h"
+	"../common/arrdata.h"
+
+1162216712 source:d:\ano_projects\project_cb\gentee_3\src\common\hash.c
+	"hash.h"
+	"../os/user/defines.h"
+
+1192173958 source:d:\ano_projects\project_cb\gentee_3\src\common\memory.c
+	"memory.h"
+	"../os/user/defines.h"
+
+1186849414 source:d:\ano_projects\project_cb\gentee_3\src\common\mix.c
+	"mix.h"
+	"../genteeapi/gentee.h"
+
+1187024124 source:d:\ano_projects\project_cb\gentee_3\src\common\msg.c
+	"../os/user/defines.h"
+	"../genteeapi/gentee.h"
+	"msg.h"
+	"../compiler/lexem.h"
+
+1196934470 d:\ano_projects\project_cb\gentee_3\src\compiler\lexem.h
+	"../common/str.h"
+	"../common/arr.h"
+	"../common/number.h"
+
+1167119214 d:\ano_projects\project_cb\gentee_3\src\common\number.h
+	"types.h"
+
+1187024982 source:d:\ano_projects\project_cb\gentee_3\src\common\msglist.c
+
+1187180352 source:d:\ano_projects\project_cb\gentee_3\src\common\number.c
+	"number.h"
+	"../bytecode/cmdlist.h"
+	"../os/user/defines.h"
+
+1177658878 source:d:\ano_projects\project_cb\gentee_3\src\common\str.c
+	"str.h"
+	"../genteeapi/gentee.h"
+	"../os/user/defines.h"
+
+1183732528 source:d:\ano_projects\project_cb\gentee_3\src\compiler\alias.c
+	"../vm/vm.h"
+	"../vm/vmload.h"
+	"lexem.h"
+	"out.h"
+
+1172149040 d:\ano_projects\project_cb\gentee_3\src\compiler\out.h
+
+1190889902 source:d:\ano_projects\project_cb\gentee_3\src\compiler\bcodes.c
+	"bcodes.h"
+	"compinit.h"
+	"../vm/vm.h"
+	"../vm/vmres.h"
+	"../vm/vmtype.h"
+	"../common/msg.h"
+	"alias.h"
+
+1197159870 d:\ano_projects\project_cb\gentee_3\src\compiler\bcodes.h
+	"lexem.h"
+	"func.h"
+
+1197159928 d:\ano_projects\project_cb\gentee_3\src\compiler\func.h
+	"../os/user/defines.h"
+	"../lex/lex.h"
+	"../lex/lexgentee.h"
+	"../common/arrdata.h"
+	"../common/msglist.h"
+	"../genteeapi/gentee.h"
+	"../vm/vmload.h"
+	"../bytecode/cmdlist.h"
+	"lexem.h"
+	"operlist.h"
+	"type.h"
+	"out.h"
+
+1185435550 d:\ano_projects\project_cb\gentee_3\src\lex\lexgentee.h
+
+1171616190 d:\ano_projects\project_cb\gentee_3\src\compiler\operlist.h
+	"../common/types.h"
+
+1172048376 d:\ano_projects\project_cb\gentee_3\src\compiler\type.h
+	"lexem.h"
+
+1171291302 d:\ano_projects\project_cb\gentee_3\src\compiler\compinit.h
+	"../bytecode/cmdlist.h"
+	"operlist.h"
+
+1183711230 d:\ano_projects\project_cb\gentee_3\src\compiler\alias.h
+	"lexem.h"
+
+1185281358 source:d:\ano_projects\project_cb\gentee_3\src\compiler\body.c
+	"func.h"
+	"ifdef.h"
+	"../vm/vmtype.h"
+
+1164186018 d:\ano_projects\project_cb\gentee_3\src\compiler\ifdef.h
+	"lexem.h"
+
+1196671340 source:d:\ano_projects\project_cb\gentee_3\src\compiler\compile.c
+	"compile.h"
+	"../lex/lex.h"
+	"../lex/lexgentee.h"
+	"../genteeapi/gentee.h"
+	"../common/file.h"
+	"../common/hash.h"
+	"../bytecode/ge.h"
+	"lexem.h"
+	"operlist.h"
+	"define.h"
+	"macro.h"
+	"compinit.h"
+	"include.h"
+	"import.h"
+	"global.h"
+
+1186644694 d:\ano_projects\project_cb\gentee_3\src\common\file.h
+	"str.h"
+
+1164182558 d:\ano_projects\project_cb\gentee_3\src\compiler\define.h
+	"lexem.h"
+
+1181807008 d:\ano_projects\project_cb\gentee_3\src\compiler\macro.h
+	"lexem.h"
+	"macroexp.h"
+
+1172841778 d:\ano_projects\project_cb\gentee_3\src\compiler\macroexp.h
+	"../os/user/defines.h"
+	"../lex/lex.h"
+	"../lex/lexgentee.h"
+	"../common/arrdata.h"
+	"../common/msglist.h"
+	"lexem.h"
+	"operlist.h"
+	"bcodes.h"
+	"../genteeapi/gentee.h"
+
+1172042788 d:\ano_projects\project_cb\gentee_3\src\compiler\include.h
+	"lexem.h"
+
+1172067760 d:\ano_projects\project_cb\gentee_3\src\compiler\import.h
+	"lexem.h"
+
+1172566612 d:\ano_projects\project_cb\gentee_3\src\compiler\global.h
+	"lexem.h"
+
+1196872498 source:d:\ano_projects\project_cb\gentee_3\src\compiler\compinit.c
+	"compinit.h"
+	"../vm/vm.h"
+	"../vm/vmload.h"
+	"../vm/vmmanage.h"
+
+1181810866 source:d:\ano_projects\project_cb\gentee_3\src\compiler\define.c
+	"../genteeapi/gentee.h"
+	"define.h"
+	"macro.h"
+	"bcodes.h"
+	"out.h"
+
+1183120768 source:d:\ano_projects\project_cb\gentee_3\src\compiler\desc.c
+	"func.h"
+	"macroexp.h"
+
+1190117796 source:d:\ano_projects\project_cb\gentee_3\src\compiler\expr.c
+	"func.h"
+	"bcodes.h"
+	"compinit.h"
+	"../vm/vmtype.h"
+	"alias.h"
+
+1172829654 source:d:\ano_projects\project_cb\gentee_3\src\compiler\extern.c
+	"func.h"
+
+1176825080 source:d:\ano_projects\project_cb\gentee_3\src\compiler\for.c
+	"func.h"
+	"bcodes.h"
+
+1190892172 source:d:\ano_projects\project_cb\gentee_3\src\compiler\foreach.c
+	"func.h"
+	"bcodes.h"
+
+1193206546 source:d:\ano_projects\project_cb\gentee_3\src\compiler\func.c
+	"func.h"
+	"bcodes.h"
+	"out.h"
+	"alias.h"
+
+1183120210 source:d:\ano_projects\project_cb\gentee_3\src\compiler\global.c
+	"../genteeapi/gentee.h"
+	"bcodes.h"
+	"compile.h"
+	"../common/file.h"
+
+1172830256 source:d:\ano_projects\project_cb\gentee_3\src\compiler\goto.c
+	"func.h"
+
+1172839318 source:d:\ano_projects\project_cb\gentee_3\src\compiler\if.c
+	"func.h"
+
+1196936248 source:d:\ano_projects\project_cb\gentee_3\src\compiler\ifdef.c
+	"ifdef.h"
+	"macro.h"
+
+1187203072 source:d:\ano_projects\project_cb\gentee_3\src\compiler\import.c
+	"../genteeapi/gentee.h"
+	"bcodes.h"
+	"compile.h"
+	"../common/file.h"
+
+1172046308 source:d:\ano_projects\project_cb\gentee_3\src\compiler\include.c
+	"../genteeapi/gentee.h"
+	"bcodes.h"
+	"compile.h"
+
+1172830438 source:d:\ano_projects\project_cb\gentee_3\src\compiler\jump.c
+	"func.h"
+
+1196936368 source:d:\ano_projects\project_cb\gentee_3\src\compiler\lexem.c
+	"lexem.h"
+	"compile.h"
+	"../genteeapi/gentee.h"
+	"../lex/lex.h"
+	"../lex/lexgentee.h"
+	"operlist.h"
+	"ifdef.h"
+	"macro.h"
+	"../common/file.h"
+
+1186756070 source:d:\ano_projects\project_cb\gentee_3\src\compiler\macro.c
+	"../genteeapi/gentee.h"
+	"macro.h"
+
+1192030316 source:d:\ano_projects\project_cb\gentee_3\src\compiler\macroexp.c
+	"macroexp.h"
+
+1171616190 source:d:\ano_projects\project_cb\gentee_3\src\compiler\operlist.c
+	"operlist.h"
+
+1172666112 source:d:\ano_projects\project_cb\gentee_3\src\compiler\out.c
+	"../genteeapi/gentee.h"
+	"../vm/vmload.h"
+	"lexem.h"
+
+1184058690 source:d:\ano_projects\project_cb\gentee_3\src\compiler\subfunc.c
+	"func.h"
+
+1172848496 source:d:\ano_projects\project_cb\gentee_3\src\compiler\switch.c
+	"func.h"
+	"bcodes.h"
+
+1183120210 source:d:\ano_projects\project_cb\gentee_3\src\compiler\type.c
+	"../genteeapi/gentee.h"
+	"define.h"
+	"macro.h"
+	"bcodes.h"
+	"../genteeapi/gentee.h"
+	"type.h"
+
+1182266854 source:d:\ano_projects\project_cb\gentee_3\src\compiler\vars.c
+	"func.h"
+	"bcodes.h"
+
+1182177978 source:d:\ano_projects\project_cb\gentee_3\src\compiler\while.c
+	"func.h"
+
+1172837242 source:d:\ano_projects\project_cb\gentee_3\src\compiler\with.c
+	"func.h"
+
+1191562306 source:d:\ano_projects\project_cb\gentee_3\src\genteeapi\gentee.c
+	"gentee.h"
+	"../common/crc.h"
+	"../common/memory.h"
+	"../common/file.h"
+	"../os/user/defines.h"
+	"../bytecode/ge.h"
+
+1193242168 source:d:\ano_projects\project_cb\gentee_3\src\lex\lex.c
+	"lex.h"
+	"lextbl.h"
+	"../os/user/defines.h"
+
+1161178624 d:\ano_projects\project_cb\gentee_3\src\lex\lextbl.h
+	"lex.h"
+
+1185435550 source:d:\ano_projects\project_cb\gentee_3\src\lex\lexgentee.c
+	"lextbl.h"
+
+1162453654 source:d:\ano_projects\project_cb\gentee_3\src\lex\lextbl.c
+	"lex.h"
+	"lextbl.h"
+	"../os/user/defines.h"
+
+1191560952 source:d:\ano_projects\project_cb\gentee_3\src\os\user\defines.c
+	"defines.h"
+	"../../genteeapi/gentee.h"
+
+1197245020 source:d:\ano_projects\project_cb\gentee_3\src\projects\dll\dll.c
+	<windows.h>
+	"../../genteeapi/gentee.h"
+	"../../common/msglist.h"
+
+1186856020 source:d:\ano_projects\project_cb\gentee_3\src\vm\vm.c
+	"vm.h"
+	"vmrun.h"
+	"vmmanage.h"
+	"vmload.h"
+	"vmtype.h"
+	"vmres.h"
+	"../bytecode/bytecode.h"
+	"../bytecode/funclist.h"
+	"../common/file.h"
+	"../genteeapi/gentee.h"
+
+1196673046 source:d:\ano_projects\project_cb\gentee_3\src\vm\vmload.c
+	"vmload.h"
+	"vmmanage.h"
+	"../compiler/operlist.h"
+	"../bytecode/cmdlist.h"
+	"../bytecode/bytecode.h"
+	"../genteeapi/gentee.h"
+	"../compiler/lexem.h"
+	"../compiler/macro.h"
+
+1168588454 source:d:\ano_projects\project_cb\gentee_3\src\vm\vmmanage.c
+	"vmmanage.h"
+
+1172760440 source:d:\ano_projects\project_cb\gentee_3\src\vm\vmres.c
+	"vmres.h"
+
+1196872492 source:d:\ano_projects\project_cb\gentee_3\src\vm\vmrun.c
+	"vmtype.h"
+	"vmload.h"
+	"../common/collection.h"
+
+1185279914 source:d:\ano_projects\project_cb\gentee_3\src\vm\vmtype.c
+	"vmrun.h"
+	"vmtype.h"
+	"vmload.h"
+	"../common/collection.h"
+

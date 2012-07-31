@@ -1,0 +1,68 @@
+# depslib dependency file v1.0
+1196872578 source:e:\projects\project_cb\gentee_3\src\projects\exe\exe.c
+	"../../genteeapi/gentee.h"
+	"windows.h"
+
+1197329696 e:\projects\project_cb\gentee_3\src\genteeapi\gentee.h
+	"../common/str.h"
+	"../vm/vm.h"
+	"../compiler/compile.h"
+
+1197329852 e:\projects\project_cb\gentee_3\src\common\str.h
+	"buf.h"
+
+1190293702 e:\projects\project_cb\gentee_3\src\common\buf.h
+	"memory.h"
+
+1197329830 e:\projects\project_cb\gentee_3\src\common\memory.h
+	"types.h"
+
+1197329676 e:\projects\project_cb\gentee_3\src\common\types.h
+	<_mingw.h>
+	<stdlib.h>
+
+1186649672 e:\projects\project_cb\gentee_3\src\vm\vm.h
+	"../common/hash.h"
+	"../common/msg.h"
+	"../common/collection.h"
+	"../bytecode/cmdlist.h"
+
+1162216418 e:\projects\project_cb\gentee_3\src\common\hash.h
+	"arr.h"
+
+1177058554 e:\projects\project_cb\gentee_3\src\common\arr.h
+	"buf.h"
+
+1197156170 e:\projects\project_cb\gentee_3\src\common\msg.h
+	"../os/user/defines.h"
+	"msglist.h"
+
+1186462772 e:\projects\project_cb\gentee_3\src\os\user\defines.h
+	"windows.h"
+	<stdio.h>
+	<conio.h>
+	"../../common/str.h"
+
+1186992454 e:\projects\project_cb\gentee_3\src\common\msglist.h
+	"../common/types.h"
+
+1177069426 e:\projects\project_cb\gentee_3\src\common\collection.h
+	"buf.h"
+
+1186680672 e:\projects\project_cb\gentee_3\src\bytecode\cmdlist.h
+	"../common/types.h"
+
+1197329762 e:\projects\project_cb\gentee_3\src\compiler\compile.h
+	"../os/user/defines.h"
+	"../lex/lex.h"
+	"../common/arrdata.h"
+
+1187024378 e:\projects\project_cb\gentee_3\src\lex\lex.h
+	"../common/hash.h"
+
+1161863426 e:\projects\project_cb\gentee_3\src\common\arrdata.h
+	"arr.h"
+	"str.h"
+
+1197326556 source:e:\projects\project_cb\gentee_3\res\exe\version.rc
+

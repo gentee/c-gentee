@@ -1,0 +1,2 @@
+Добавить в оператор operator VARIANT = (VARIANT left, VARIANT right )
+обработку для VT_ARRAY

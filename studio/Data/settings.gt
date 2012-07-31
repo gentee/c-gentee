@@ -1,0 +1,43 @@
+<#|settings>
+   <general savews = 1>
+   </general>
+   <editor fontname = "Courier New" fontsize = 14 tabsize = 3 tabspaces = 1>
+      <syntax>
+         <default wrap = 0 color = i1 autoindent = 0 gutter = 0 linenum = 1 margin = 1 marginpos = 90>
+            <list = "default,selected">
+         </default>
+         <gentee wrap = 1 color = i1 autoindent = 1 gutter = 0 linenum = 1 margin = 0 marginpos = 50>
+            <list = "default,selected,keyword,identifier,string,binary,comment,number,operator">
+            <wildcards>
+            *.g
+                  *.gw
+               </wildcards>
+         </gentee>
+         <cpp wrap = 0 color = i1 autoindent = 1 gutter = 1 linenum = 1 margin = 0 marginpos = 80>
+            <list = "default,selected,keyword,identifier,string,comment,number,operator">
+            <wildcards>
+            *.c
+                  *.cpp
+                  *.h
+               </wildcards>
+         </cpp>
+         <html wrap = 0 color = i0 autoindent = 0 gutter = 0 linenum = 0 margin = 0 marginpos = 80>
+            <list = "default,selected,tagname,tagattrib,string,comment,operator,macro">
+            <wildcards>
+            *.htm
+                  *.html
+                  *.xml
+               </wildcards>
+         </html>
+         <gt wrap = 1 color = i1 autoindent = 1 gutter = 1 linenum = 1 margin = 0 marginpos = 80>
+            <list = "default,selected,tagname,tagattrib,string,comment,operator,macro">
+            <wildcards>
+            *.gt
+               </wildcards>
+         </gt>
+      </syntax>
+   </editor>
+   <panels mstyle = 1 fstyle = 3>
+   </panels>
+</settings>
+
