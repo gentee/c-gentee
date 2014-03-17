@@ -181,6 +181,14 @@ property datetime vDateTimePick.DateTime<result>
 }
 
 
+method uint vDateTimePick.Now()
+{
+   datetime dt
+   dt.gettime()
+   .DateTime = dt     
+   return 0
+}
+
 /*------------------------------------------------------------------------------
    Virtual methods
 */
@@ -211,6 +219,7 @@ method uint vDateTimePick.mWinNtf <alias=vDateTimePick_mWinNtf>( winmsg wmsg )
    }
    return 0
 }
+
 /*
 method vDateTimePick.mFocus <alias=vDateTimePick_mFocus> ( evparValUint eu )
 {

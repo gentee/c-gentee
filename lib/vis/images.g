@@ -333,8 +333,8 @@ method ImageList.LoadIco( str path, uint flgres, uint hmod, uint flgclear, str s
    buf bicon
    if flgres 
    {
-      uint handle = FindResource( hmod, path.ustr().ptr(), 14 )      
-      uint mem = LockResource( LoadResource( hmod, handle ))      
+      uint handle = FindResource( hmod, path.ustr().ptr(), 14 )
+      uint mem = LockResource( LoadResource( hmod, handle ))            
       bicon.copy( mem, SizeofResource( hmod, handle ))
    }
    else : bicon.read( path )
@@ -614,7 +614,7 @@ func uint EnumResNameProc( uint hModule, uint lpszType, uint lpszName, uint lPar
    {
       s.copy( lpszName )
    }
-   else : s = "#" + str( lpszName ) 
+   else : s = "#" + str( lpszName )   
    il.LoadIco( s.str(), 1, hModule, lParam->EnumResInfo.flgclear, 0->str )      
    return 1
 }
@@ -632,7 +632,8 @@ method ImageManager.LoadRes( str filename, str listname, uint flgclear )
       hres = LoadLibraryEx( filename.ptr(), 0, 0x00000002/*$LOAD_LIBRARY_AS_DATAFILE*/ )
       if !hres : return	
    }   
-   EnumResourceNames( hres, 14, callback(&EnumResNameProc,4), &eri )      
+   EnumResourceNames( hres, 14, callback(&EnumResNameProc,4), &eri )
+   //EnumResourceNames( hres, 3, callback(&EnumResNameProc,4), &eri )      
    if hres : FreeLibrary( hres )
 }
 
@@ -695,7 +696,7 @@ method ImageManager.Load( str name, uint flgclear )
    //.LoadRes( $"C:\Delphi7\Bin\delphi32.exe", "resources", flgclear )
    //.LoadRes( $"K:\Gentee\Open Source\gentee\exe\gentee2.exe", "resources", flgclear )
    //.LoadRes( $"K:\main.exe", "resources", flgclear )
-   .LoadRes( "", "resources", flgclear )
+   .LoadRes( "", "resources", flgclear )   
    .LoadFileIcons( "files" )
    //.LoadRes( $"C:\Program Files\7-Zip\7zFM.exe", "resouces", flgclear )
    

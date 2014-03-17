@@ -329,6 +329,7 @@ property ustr vComboBoxItem.Label<result>()
 //   return 0->ustr
 }
 
+
 property vComboBoxItem.Key( ustr val )
 {
    uint combobox as .pComboBox->vComboBox
@@ -339,15 +340,16 @@ property vComboBoxItem.Key( ustr val )
    }
 }
 
-property ustr vComboBoxItem.Key()
+property ustr vComboBoxItem.Key<result>()
 {
+   
    uint combobox as .pComboBox->vComboBox
    if .pIndex < *combobox
    {
-      return combobox.pArrKeys[.pIndex]
-   }
-   return 0->ustr
+      result = combobox.pArrKeys[.pIndex]
+   }   
 }
+
 
 property vComboBoxItem.Val( uint val )
 {
@@ -459,27 +461,54 @@ method uint vComboBox.FindItemVal( uint val )
 
 method vComboBox.AddLines( ustr list )
 {
-   arrustr arrnames
-   ustr    sname, skey
-   uint    name, i
-   list.lines( arrnames )   
-   
-   fornum i, *arrnames
-   {      
-      
-      name as arrnames[i]
-      uint eq = name.findch('=')      
-      if eq < *name
-      {
-         sname.substr( name, 0, eq )
-         skey.substr( name, eq + 1, *name - eq - 1  )        
-      }
-      else
-      {
-         sname = name
-         skey.clear()
+   if *list> 32000
+   {
+      arrstr arrnames
+      str    sname, skey
+      uint    name, i
+      str slist = list
+      slist.lines( arrnames, 1 )   
+      fornum i, *arrnames
+      {      
+         name as arrnames[i]
+         uint eq = name.findch('=')      
+         if eq < *name
+         {
+            sname.substr( name, 0, eq )
+            skey.substr( name, eq + 1, *name - eq - 1  )        
+         }
+         else
+         {
+            sname = name
+            skey.clear()
+         }
+         ustr usname=sname
+         ustr uskey=skey
+         .AddItem( usname, uskey, int( skey ))
       }      
-      .AddItem( sname, skey, int( skey.str()))      
+   }
+   else
+   { 
+      arrustr arrnames
+      ustr    sname, skey
+      uint    name, i
+      list.lines( arrnames )   
+      fornum i, *arrnames
+      {      
+         name as arrnames[i]
+         uint eq = name.findch('=')      
+         if eq < *name
+         {
+            sname.substr( name, 0, eq )
+            skey.substr( name, eq + 1, *name - eq - 1  )        
+         }
+         else
+         {
+            sname = name
+            skey.clear()
+         }
+         .AddItem( sname, skey, int( skey.str()))
+      }
    }
 }
 
@@ -598,6 +627,16 @@ method vComboBoxItem vComboBox.GetItem( uint index, vComboBoxItem item )
    return item       
 }
  
+property vComboBox.Key( ustr val )
+{
+   //this[.pCurIndex].Key = val
+   this.CurIndex = this.FindItemKey( val )
+}
+
+property ustr vComboBox.Key<result>()
+{
+   result = this[.pCurIndex].Key
+}
 
 
 /*------------------------------------------------------------------------------

@@ -149,7 +149,12 @@ method vToolBarItem.iUpdate()
 */
 method vToolBarItem.iUpdateChecked
 {
-   .iUpdate()
+   //.iUpdate()
+   if ( this.pTBIStyle == $tbsAsCheckBox ||
+        this.pTBIStyle == $tbsAsRadioBtn ) 
+   {
+      this.Owner->vToolBar.WinMsg( $TB_CHECKBUTTON, this.pIndex, this.pChecked )
+   } 
    if this.pTBIStyle == $tbsAsRadioBtn  
    {
       if .pChecked

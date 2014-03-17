@@ -12,7 +12,7 @@
 ******************************************************************************/
 
 define {
-   CP_ACP = 0  
+   CP_ACP = 0 
    MB_PRECOMPOSED = 1
 }
 
@@ -21,6 +21,7 @@ global {
    VARIANT VTRUE
    VARIANT VFALSE
    VARIANT VMISSING
+   VARIANT VEMPTY
 }
 method buf buf.unicode( str src )
 {
@@ -42,6 +43,58 @@ method str str.fromunicode( uint src )
    return this
 }
 
+method uint VARIANT.arrcreate( buf b )
+{
+   this.clear()
+   uint ptr
+   uint psa as SafeArrayCreateVector($VT_UI1, 0, *b)->SAFEARRAY
+   //print( "psa \(
+   SafeArrayAccessData( &psa, &ptr );   
+   mcopy( ptr, b.data, *b );   
+   SafeArrayUnaccessData( &psa );
+
+   this.vt = $VT_ARRAY | $VT_UI1; 
+   this.val = ulong( &psa );
+//print( "ssssaaqqq \(this.vt)\n" )   
+   return 1
+   
+   //if *bounds > 1 && !(*bounds & 0x01)
+   {  
+      uint sarr      
+      uint els
+      int i
+      uint arrbound
+      
+      this.vt = $VT_ARRAY | $VT_UI1//eltype   
+      els = sizeof(SAFEARRAY) + sizeof(SAFEARRAYBOUND) * ( /*(*bounds >> 1)*/1 - 1 ) 
+      //sarr as SysAllocStringByteLen( 0, els - 1  )->SAFEARRAY
+      sarr as malloc( els + sizeof(SAFEARRAYBOUND) + 100 )->SAFEARRAY
+//print( "alloc \(sizeof(SAFEARRAY) + sizeof(SAFEARRAYBOUND) * 
+//( (*bounds >> 1) -1 ))\n" )
+      mzero( &sarr, els )
+      this.val = ulong( &sarr )
+      sarr.cDims = 1//*bounds >> 1
+      arrbound as sarr.rgsabound
+      els = 1
+      //for i = *bounds-1, i>=0, i--
+      //{  
+         arrbound.lLbound = 0//bounds[i--]
+         els *= *b//bounds[i]
+         arrbound.cElements = *b//bounds[i]         
+         arrbound as uint 
+         arrbound += sizeof(SAFEARRAYBOUND) 
+      //}
+      sarr.fFeatures = /*$FADF_HAVEVARTYPE*/ $FADF_VARIANT |$FADF_FIXEDSIZE
+      sarr.cbElements = 1//sizeof(VARIANT)
+      els *= sarr.cbElements      
+      sarr.pvData = SysAllocStringByteLen( 0,  els - 1 )
+      //mzero( sarr.pvData, els )
+      mcopy( sarr.pvData, b.ptr(), *b )
+      return 1      
+   }  
+   return 0
+} 
+
 method VARIANT VARIANT.fromg( uint gtype, uint pval )
 {
    uint vt
@@ -60,7 +113,8 @@ method VARIANT VARIANT.fromg( uint gtype, uint pval )
          val = pval->long
       }
       case uint
-      {            
+      {        
+         //print( "xxx \(pval->uint)\n" )    
          vt = $VT_UI4
          val = ulong( pval->uint )  
       }
@@ -86,6 +140,20 @@ method VARIANT VARIANT.fromg( uint gtype, uint pval )
          ul.unicode( pval->str )         
          val = ulong( SysAllocString( ul.ptr() ))
       }
+      case buf
+      {
+         this.arrcreate( pval->buf )
+         return this
+         /*print( "BUFFF \( $VT_BLOB)\n ")
+         vt = $VT_BLOB
+         uint x as new( buf )
+         x as buf
+         x += *pval->buf
+         x += pval->buf
+         print( "BUFFF \( *x ) \(*pval->buf)\n ")
+         val = ulong( x.ptr() )//SysAllocStringByteLen( x.ptr(), *x + 1  ) )//pval->buf.ptr(), *pval->buf))
+         */
+      }
       case oleobj
       {
          /*vt = $VT_DISPATCH | $VT_BYREF
@@ -106,20 +174,27 @@ method VARIANT VARIANT.fromg( uint gtype, uint pval )
          }
          else
          {
-            vt = pval->VARIANT.vt | $VT_BYREF    
-            if pval->VARIANT.vt & $VT_BYREF 
-            {            
-               val = ulong(pval->VARIANT.val)
+            vt = pval->VARIANT.vt 
+            if vt != $VT_EMPTY && vt != $VT_NULL
+            {               
+               vt |= $VT_BYREF    
+               if pval->VARIANT.vt & $VT_BYREF 
+               {            
+                  val = ulong(pval->VARIANT.val)
+               }
+               else
+               {  
+                  //print( "xxx \(&pval->VARIANT) \((&pval->VARIANT.val)->uint) \(&(pval->VARIANT.val)))\n" )
+                  val = ulong(&(pval->VARIANT.val))
+               }
             }
-            else
-            {  
-               val = ulong(&pval->VARIANT.val)
-            }            
+                        
          }
       }
    }
    this.vt = vt
    this.val = val
+   //print( "BUFFF \( this.vt )\n ")
    return this
 }
 
@@ -221,6 +296,11 @@ operator VARIANT = (VARIANT left, ulong right )
 operator VARIANT = (VARIANT left, str right )
 {
    return left.fromg( str, &right )
+}
+
+operator VARIANT = (VARIANT left, buf right )
+{
+   return left.fromg( buf, &right )
 }
 
 /*-----------------------------------------------------------------------------
@@ -362,7 +442,7 @@ method uint VARIANT.uint
 
    if this.vt & $VT_BYREF : val = uint( this.val )->ulong
    else : val = this.val
-   
+      
    switch this.vt & $VT_TYPEMASK
    {
       case $VT_UI4, $VT_UI2, $VT_UI1, $VT_I4, $VT_I2, $VT_I1, $VT_DECIMAL
@@ -571,4 +651,6 @@ func variantinit<entry>
    VFALSE.vt = $VT_BOOL   
    VNULL.clear()
    VNULL.vt = $VT_NULL
+   VEMPTY.clear()
+   VEMPTY.vt = $VT_EMPTY
 }

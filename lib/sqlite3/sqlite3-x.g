@@ -40,6 +40,8 @@ define
  SQLITE_ROW         = 100  /* sqlite_step() has another row ready */
  SQLITE_DONE        = 101  /* sqlite_step() has finished executing */
  SQLITE_ANY         = 5
+ 
+ SQLITE_TRANSIENT   = -1
 }
 
 define 
@@ -113,6 +115,12 @@ import "sqlite3.dll"<cdeclare>{
   uint sqlite3_backup_init( uint, uint, uint, uint )
   int sqlite3_backup_step( uint, int )
   int sqlite3_backup_finish( uint )
+  
+  int sqlite3_bind_blob(uint, int, uint, int, uint )
+  int sqlite3_bind_text(uint, int, uint, int, uint )
+  int sqlite3_bind_int(uint, int, int);  
+  
+  uint sqlite3_column_decltype(uint,int);
 }
 
 type arr_str
@@ -133,6 +141,7 @@ type sqlite3
   uint db_ptr        // ptr to database handle
   str error_message
   arrstr col_names      // array of column headers
+  arrstr col_decltypes   // array of column declypes
   arr    col_types of uint  // array of column types
   arr col_val of arrstr // array of column values
   uint compiled_sql_ptr  // ptr to compiled sql
@@ -256,7 +265,8 @@ method sqlite3.close()
 * Executes the SQL statement in <sql_code>. For 'select' statements an array 
 * of the result set is returned (col_val)
 -----------------------------------------------------------------------------*/
-method int sqlite3.sql_execute(str sql_code)
+
+/*method int sqlite3.sql_execute(str sql_code)
 {
   uint tail_ptr,num_cols=0,ich=0
   int done=0,result1 = 0,retCode=0  
@@ -269,37 +279,16 @@ method int sqlite3.sql_execute(str sql_code)
     this.getColumnNames(num_cols)         
     while (!done) 
     {
-      /*uint j
-         fornum j=0, 2 * 30 * 4453
-          {
-            //fornum i=0,5//num_cols 
-            {
-                //sqlite3_column_type(this.compiled_sql_ptr, 0)
-                sqlite3_column_count(this.compiled_sql_ptr)
-            }            
-            print( "j = \(j)\n" )
-          }
-          print( "eee" ) 
-          getch()*/
          
          result1 = sqlite3_step(this.compiled_sql_ptr)
          uint i
-         /*print( "z1\n" )
-         fornum i=0, 1000 :sqlite3_column_type(this.compiled_sql_ptr,0)
-         print( "z2\n" )
-         getch()*/
          if (result1 == $SQLITE_ROW)  {
             
-           //this.getColumnsType(num_cols)
-          //this.getColumnsType(num_cols)
           this.getColumnsValue(num_cols,ich)
-          
-          //if ftest && (ftest - 370 <= ich) :  getch()          
                       
          } 
          else : done = 1 
          ich+=1   
-         //getch()*/
     }
     if(result1 == $SQLITE_DONE )
     {         
@@ -309,6 +298,128 @@ method int sqlite3.sql_execute(str sql_code)
     
   }  
   return retCode
+}*/
+method uint sqlite3.sql_execute( str sql_code, collection bind )
+{  
+   uint res
+   uint i, idx
+  //print( "z1 \(sql.str())\n" )
+   if sqlite3_prepare_v2( this.db, sql_code.ptr(), *sql_code->buf, &.compiled_sql_ptr, 0 ) == $SQLITE_OK 
+   {
+      if &bind 
+      {
+         fornum i=0, *bind
+         {
+            switch bind.gettype( i )
+            {
+               case uint
+               {
+                  if sqlite3_bind_int( .compiled_sql_ptr, i + 1, bind[i] ) != $SQLITE_OK
+                  {  
+                     return 0
+                  }
+               }
+               case str
+               {                    
+                  if sqlite3_bind_text( .compiled_sql_ptr, i + 1, bind[i]->buf.ptr(), *bind[i]->buf - 1, $SQLITE_TRANSIENT ) != $SQLITE_OK
+                  { 
+                     return 0
+                  }
+               }
+               case buf
+               {                  
+                  if sqlite3_bind_blob( .compiled_sql_ptr, i + 1, bind[i]->buf.ptr(), *bind[i]->buf, $SQLITE_TRANSIENT ) != $SQLITE_OK
+                  {  
+                     return 0
+                  }
+               }
+            }
+         }
+      }
+   
+      uint numcols = sqlite3_column_count( .compiled_sql_ptr )
+      
+      this.col_names.clear()      
+      this.col_names.expand(numcols)
+      this.col_decltypes.clear()
+      this.col_decltypes.expand(numcols) 
+      //this.hcol.clear()
+      
+      fornum i = 0, numcols
+      {
+         this.col_names[i].copy( sqlite3_column_name( .compiled_sql_ptr, i ) )
+         uint p
+         if p=sqlite3_column_decltype( .compiled_sql_ptr, i )
+         {
+            this.col_decltypes[i].copy( p )
+         }
+         //this.hcol[this.col_names[i].str()] = i
+      }
+
+      this.col_val.clear()      
+      while 1 
+      {    
+         switch sqlite3_step( this.compiled_sql_ptr )
+         {
+            case $SQLITE_ROW  
+            {
+               this.col_val[this.col_val.expand(1)].expand(numcols)
+               fornum i = 0, numcols
+               {
+                  switch sqlite3_column_type( .compiled_sql_ptr, i )
+                  {
+                     case $SQLITE_INTEGER, $SQLITE_FLOAT, $SQLITE_TEXT
+                     {                        
+/*ifdef $SQLITEOLD
+{                       if .sqliteold
+                        {
+                           str tmp
+                           tmp.copy( sqlite3_column_text( .Stmt, i ) , 
+                                       sqlite3_column_bytes( .Stmt, i ) )
+                                
+                           .rows[idx][i] = tmp.ustr()
+                        }  
+                        else
+                        {
+                           .rows[idx][i]->buf.copy( sqlite3_column_text16( .Stmt, i ) , 
+                                    sqlite3_column_bytes16( .Stmt, i ) + 2 )
+                        }
+}
+else
+{*/
+                        .col_val[idx][i]->buf.copy( sqlite3_column_text( .compiled_sql_ptr, i ) , 
+                                    sqlite3_column_bytes( .compiled_sql_ptr, i ) + 1 )
+//}                                                            
+                     }                      
+                     case $SQLITE_BLOB 
+                     {                       
+                        .col_val[idx][i]->buf.copy( sqlite3_column_blob( .compiled_sql_ptr, i ), 
+                                    sqlite3_column_bytes( .compiled_sql_ptr, i ) )
+                     }
+                  }
+               }               
+               idx+=1   
+            } 
+            case $SQLITE_DONE 
+            {
+               res = 1
+               break
+            } 
+            default 
+            {  
+               break
+            }  
+         }
+      }
+      sqlite3_finalize( .compiled_sql_ptr )    
+   }  
+   
+   return res
+} 
+
+method uint sqlite3.sql_execute( str sql )
+{
+   return .sql_execute( sql, 0->collection )
 }
 global { uint x }
 method sqlite3.getColumnsValue(uint num_columns,uint uLich)
@@ -629,3 +740,4 @@ method uint sqlite3.backup( str destbase )
    }
    return res       
 }
+

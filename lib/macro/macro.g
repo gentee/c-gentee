@@ -26,6 +26,10 @@ type macro< index = ustr >
    ubyte  slash
 }
 
+extern {
+   method int macro.getint( str name )
+}
+
 //-------------------------------------------------
 
 method macro macro.init
@@ -72,13 +76,54 @@ method ustr macro.replace( ustr result, uint level )
    while ( i = result.findch( i, this.syschar )) < *result
    {
       uint end
-      str  key
+      str  key sx sy
     
       end = result.findch( ++i, this.syschar ) 
       if end >= *result : break
-      key = str( val.substr( result, i, end - i ))      
+      if end == i : continue
+      key = str( val.substr( result, i, end - i ))
+      uint dot = key.findch('.')
+      uint div
+      if dot < *key
+      {
+          str right
+          uint roff           
+          right.substr( key, dot + 1, *key - dot - 1 )
+          key.setlen( dot )
+          fornum roff, *right
+          {
+            if right[ roff ]< '0' || (right[ roff ]> '9' && right[ roff ]< 'A' ) : break
+          }
+          sx = right
+          if roff < *right
+          {
+            div = right[roff]
+            sy.substr( right, roff + 1, *right - roff - 1 )
+            sx.setlen( roff )
+          }
+//          print("\(key)=\(right)=\(roff) =\(sx)=\(sy)\l")
+      }      
       if this.vals.find( key ) && (val = this[ key ]) != result 
       {
+         if *sx 
+         {
+            arrustr xval
+            uint x y 
+            
+            val.lines( xval, 1 )
+            if sx[0] >= 'A' : x = this.getint( sx )
+            else : x = uint( sx )
+            if x < *xval : val = xval[x]
+            if *sy && div 
+            {
+               xval.clear()
+               val.split( xval, div, $SPLIT_EMPTY | $SPLIT_NOSYS )
+               if sy[0] >= 'A' : y = this.getint( sy )
+               else : y = uint( sy )
+               if y < *xval : val = xval[y]
+               
+            }                
+         } 
          if level < 10 : this.replace( val, level + 1 )
          if this.slash && !level
          {
@@ -89,7 +134,7 @@ method ustr macro.replace( ustr result, uint level )
                val.insert( ++off, ustr( "\\" ))
                off++
             }
-         } 
+         }
          result.replace( i - 1, end - i + 2, val )
          i += *val - 1
       }                  

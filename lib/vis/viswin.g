@@ -361,6 +361,7 @@ import "user32"
    uint DrawMenuBar( uint )   
    uint DrawTextW( uint, uint, int, RECT, uint ) -> DrawText
    uint EnumThreadWindows( uint, uint, uint )
+   uint EnumWindows( uint, uint )
    uint EnableMenuItem( uint, uint, uint )
    uint EnableWindow( uint, uint )
    uint EndDialog( uint, uint )
@@ -2208,6 +2209,7 @@ type NMTOOLBAR {
 }
 
 define {
+TB_CHECKBUTTON          = $WM_USER + 2
 TB_INSERTBUTTON         = $WM_USER + 67
 TB_ADDBUTTONS           = $WM_USER + 68
 TB_HITTEST              = $WM_USER + 69

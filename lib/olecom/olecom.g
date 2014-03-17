@@ -51,7 +51,7 @@ import "Ole32.dll"
    //uint CoInitialize( uint ) 
    CoUninitialize()
    uint CoGetClassObject( uint, uint, uint, uint, uint )
-   //uint CoCreateInstance( uint, uint, uint, uint, uint )
+   uint CoCreateInstance( uint, uint, uint, uint, uint )
    //uint CoCreateInstanceEx( uint, uint, uint, uint, uint, uint )
    uint CLSIDFromString( uint, uint )
    uint CLSIDFromProgID( uint, uint )
@@ -312,8 +312,11 @@ method uint oleobj.getactiveobj( str name )
       if res
       {  
          res = this.check( GetActiveObject( iid.ptr(), 0, &pcf ) )
-         res = this.check( ((pcf->uint )->uint)->stdcall(
-                                    pcf, IDispatch.ptr(), &this.ppv ))               
+         if res
+         {
+            res = this.check( ((pcf->uint )->uint)->stdcall(
+                                    pcf, IDispatch.ptr(), &this.ppv ))
+         }               
       }
    }
    return res
@@ -426,6 +429,7 @@ method uint oleobj.dispatch ( str name, uint typeres,
    dp.rgvarg = varg.ptr()
    dp.rgdispidNamedArgs = &dispidnamedargs   
    dp.cArgs = cargs   
+   //print( "idmeth = \(idmeth)\n" )
 //Вызываем метод   
    if !this.check((this.ppv->uint+24)->uint->stdcall( this.ppv, idmeth, 
                    INULL.ptr(), 0, typecall, &dp, vres, 0, 0 ))
@@ -498,6 +502,111 @@ func err( uint errcode )
    print( "Ole error ["+ hex2stru( errcode ) + "]\n" )
 }
 
+
+/*
+ {$EXTERNALSYM IConnectionPointContainer}
+  IConnectionPointContainer = interface
+    ['{B196B284-BAB4-101A-B69C-00AA00341D07}']
+    function EnumConnectionPoints(out Enum: IEnumConnectionPoints): HResult;
+      stdcall;
+    function FindConnectionPoint(const iid: TIID;
+      out cp: IConnectionPoint): HResult; stdcall;
+  end;
+
+{ IEnumConnectionPoints interface }
+
+  {$EXTERNALSYM IEnumConnectionPoints}
+  IEnumConnectionPoints = interface
+    ['{B196B285-BAB4-101A-B69C-00AA00341D07}']
+    function Next(celt: Longint; out elt;
+      pceltFetched: PLongint): HResult; stdcall;
+    function Skip(celt: Longint): HResult; stdcall;
+    function Reset: HResult; stdcall;
+    function Clone(out Enum: IEnumConnectionPoints): HResult;
+      stdcall;
+  end;
+
+{ IConnectionPoint interface }
+
+  {$EXTERNALSYM IConnectionPoint}
+  IConnectionPoint = interface
+    ['{B196B286-BAB4-101A-B69C-00AA00341D07}']
+    function GetConnectionInterface(out iid: TIID): HResult; stdcall;
+    function GetConnectionPointContainer(out cpc: IConnectionPointContainer): HResult;
+      stdcall;
+    function Advise(const unkSink: IUnknown; out dwCookie: Longint): HResult; stdcall;
+    function Unadvise(dwCookie: Longint): HResult; stdcall;
+    function EnumConnections(out Enum: IEnumConnections): HResult; stdcall;
+  end;
+STDMETHODIMP CEventSink::Invoke(DISPID dispidMember,
+    REFIID riid,
+    LCID lcid,
+    WORD wFlags,
+    DISPPARAMS* pdispparams,
+    VARIANT* pvarResult,
+    EXCEPINFO* pexcepinfo,
+    UINT* puArgErr)
+{
+    switch (dispidMember)
+    {
+        case DISPID_HTMLELEMENTEVENTS2_ONCLICK:
+            OnClick();
+            break;
+
+        // Другие события
+        ...
+
+        default:
+            break;
+    }
+    return S_OK;
+}
+
+STDMETHODIMP CEventSink::OnClick()
+// Обрабатываем событие IHTMLElementEvetns2::OnClick
+{
+    ...
+}
+ПРИМЕЧАНИЕ
+Идентификаторы, подобные DISPID_HTMLELEMENTEVENTS2_ONCLICK, определены в файле mshtmdid.h. Несмотря на то, что интерфейсы вида HTMLXXXEvents работают в Internet Explorer, начиная с версии 4.0, соответствующие заголовочные файлы появились только в Internet Client SDK (INetSDK) для IE 5.0 и выше. Поэтому, прежде чем компилировать примеры к этой статье, убедитесь, что у вас присутствуют свежие версии заголовочных файлов. Кстати, Platform SDK (содержащий InetSDK) за ноябрь 2001 можно найти на CD к этому номеру журнала.
+
+
+Половина дела сделана, осталось подключиться к html-элементу, события которого нужно отслеживать.
+
+Для этого необходимо:
+Получить интерфейс IConnectionPointContainer требуемого элемента.
+Через вызов метода IConnectionPointContainer::FindConnectionPoint получить точку соединения (интерфейс IConnectionPoint) элемента. В параметре REFIID riid этого метода следует передать идентификатор интересующего нас событийного интерфейса. Для событий html-элемента это, скорее всего, будет HTMLElementEvents2. 
+Ну и, наконец, через вызов IConnectionPoint::Advise подключиться к событиям элемента. После того, как уведомления о событиях станут не нужны, отсоединиться от точки соединения, вызвав IConnectionPoint::Unadvise().
+
+Сделать это можно, например, так:HRESULT hr;
+IConnectionPointContainer* pCPC = NULL;
+IConnectionPoint* pCP = NULL;
+DWORD dwCookie;
+
+// Объект поддерживает точки соединения?
+hr = pElem->QueryInterface(IID_IConnectionPointContainer, (void**)&pCPC);
+
+if (SUCCEEDED(hr))
+{
+    // Находим точку соединения для HTMLElementEvents2
+    hr = pCPC->FindConnectionPoint(DIID_HTMLElementEvents2, &pCP);
+
+    if (SUCCEEDED(hr))
+    {
+        // Подключаемся
+        // pUnk указатель на IUnknown объекта - приемника событий
+        hr = pCP->Advise(pUnk, &dwCookie);
+
+        if (SUCCEEDED(hr))
+        {
+            // Подключились. Можно принимать события.
+        }
+        pCP->Release();
+    }
+    pCPC->Release();
+}
+
+*/
 
 /*-----------------------------------------------------------------------------
 * Id: olecom_desc F1

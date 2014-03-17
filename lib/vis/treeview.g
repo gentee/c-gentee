@@ -1438,7 +1438,7 @@ ifdef $DESIGNING {
 //"OnBeforeEdit", "eventTVEdit",
 "OnAfterEdit", "evparTVEdit",
 //"OnBeforeSelect", "",
-"OnAfterSelect", "evValUint",
+"OnAfterSelect", "evparValUint",
 /*,
 "OnBeforeExpand", "",
 "OnAfterExpand", "",

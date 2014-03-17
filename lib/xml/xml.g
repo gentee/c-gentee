@@ -145,7 +145,7 @@ include {
    "xmluser.g"
 }
 
-method xml.init()
+func xmlinit<entry>()
 {
    uint i,j
    arr ar[0,$NUMSYM] of posb   
@@ -189,7 +189,54 @@ method xml.init()
             case 255 : tp[i+1,j].afunc = &f_error                     
          }  
       }
-   }    
+   }   
+}
+
+method xml.init()
+{
+/*   uint i,j
+   arr ar[0,$NUMSYM] of posb   
+   ar->buf = X_tblsrc//.read( "sp.X_tblsrc" )
+   tp.expand( (*ar/$NUMSYM)*256 )
+   fornum i=0, *ar/$NUMSYM
+   {
+      fornum j=0, $NUMSYM
+      {
+         tp[i+1,j] = ar[i,j]
+         if ar[i,j].state && ar[i,j].state !=-1
+         {
+            tp[i+1,j].state <<= 12
+            tp[i+1,j].state += tp.ptr()
+         }         
+         if ar[i,j].retstate && ar[i,j].retstate !=-1
+         {
+            tp[i+1,j].retstate <<= 12
+            tp[i+1,j].retstate += tp.ptr()
+         }
+         switch ar[i,j].afunc 
+         {
+            case 1   : tp[i+1,j].afunc = &f_begent
+            case 2   : tp[i+1,j].afunc = &f_endent  
+            case 3   : tp[i+1,j].afunc = &f_endentnum
+            case 4   : tp[i+1,j].afunc = &f_endenthex
+            case 5   : tp[i+1,j].afunc = &f_begatrval
+            case 6   : tp[i+1,j].afunc = &f_endatrval
+            case 7   : tp[i+1,j].afunc = &f_begquest
+            case 8   : tp[i+1,j].afunc = &f_endquest
+            case 9   : tp[i+1,j].afunc = &f_endtagname
+            case 10  : tp[i+1,j].afunc = &f_begatr
+            case 11  : tp[i+1,j].afunc = &f_endatr
+            case 12  : tp[i+1,j].afunc = &f_begtag
+            case 13  : tp[i+1,j].afunc = &f_endtag
+            case 14  : tp[i+1,j].afunc = &f_endtagend  
+            case 15  : tp[i+1,j].afunc = &f_begendtag  
+            case 16  : tp[i+1,j].afunc = &f_begendtagend
+            case 17  : tp[i+1,j].afunc = &f_begcdata  
+            case 18  : tp[i+1,j].afunc = &f_endcdata            
+            case 255 : tp[i+1,j].afunc = &f_error                     
+         }  
+      }
+   }*/    
 }
 
 method uint xml.process( )

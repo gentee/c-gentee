@@ -99,6 +99,7 @@ func uint http_get( str url, buf databuf, uint notify, uint flag, str otherpars 
    if !sock.urlconnect( url, host, path ) 
    {
       nfy( $NFYINET_ERROR )
+      if flag & $HTTPF_STR : data += byte( 0 )
       return 0
    }
    if !nfy( $NFYINET_SEND ) : goto end
@@ -320,6 +321,7 @@ func uint http_post( str url, str data, str result, uint notify, str otherpars )
    if !sock.urlconnect( url, host, path ) 
    {
       nfy( $NFYINET_ERROR )
+      result->buf += byte( 0 )
       return 0
    }
    

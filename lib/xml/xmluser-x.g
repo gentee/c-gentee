@@ -506,50 +506,31 @@ method uint xmltags.first( fordata tfd )
 *
 * Define: foreach variable,xmlitem.tags( xmltags ) {...}
 * 
------------------------------------------------------------------------------*/
+-----------------------------------------------------------------------------
 
 
-type xmlattribs <index=str>
+type xmlattribs <index = str>
 {        
    uint   item
 }
 
-type attrfordata <inherit=fordata>
+method  xmlattribs  xmlitem.tags( xmlattribs attribs )
 {
-   str    lst
-   uint   flgeof
-}
-
-method  xmlattribs  xmlitem.attribs<result>(  )
-{
-   result.item = &this  
-//   tags.parent = &this
+   tags.parent = &this
 //   tags.cur = 0
-   //return attribs
-   //result.item = &this
+   return attribs
 }
 
-method uint xmlattribs.eof( attrfordata tfd )
+method uint xmlattribs.eof( fordata tfd )
 {
-   //print( "eof\n" )
-   return tfd.icur >= this.item->xmlitem.tgend
+   return tfd.icur >= this.item.tgend
 }
 
-method uint xmlattribs.next( attrfordata tfd )
+method uint xmlattribs.next( fordata tfd )
 {
-   //if tfd.icur == this.item->xmlitem.tgend : return 0
-   tfd.icur++
-   with this.item->xmlitem.xml->xml
-   {
-      tfd.lst = .names[.attribs[tfd.icur].attid]
-   }
-   /*with this.item->xmlitem.xml->xml
-   {    
-      .gettext( tfd.lst, .attribs[tfd.icur++].attstart, 
-                  .attribs[tfd.icur++].attend )
-   }*/
-   //print( "next \(tfd.lst) \n" ) 
-   return &tfd.lst
+   if tfd.icur == this.item.tgend : return 0
+   tfd.icur++    
+   return tfd.icur
 }
 /*fornum i = this.tgstart, this.tgend
       {
@@ -559,27 +540,9 @@ method uint xmlattribs.next( attrfordata tfd )
                   this.xml->xml.attribs[i].attend )
             break
          }
-      }*/
-method uint xmlattribs.first( attrfordata tfd )
+      }
+method uint xmlattribs.first( fordata tfd )
 {
-   
-   tfd.icur = .item->xmlitem.tgstart   
-   //print( "first \(tfd.icur)\n" )
-   //print( "f2 \(
-   with this.item->xmlitem.xml->xml
-   {
-      tfd.lst = .names[.attribs[tfd.icur].attid]
-   }
-   
-   
-     
-   /*with this.item->xmlitem.xml->xml
-   {    
-   print( "x1 \(.attribs[tfd.icur].attstart)\n" )
-   print( "x2 \(.attribs[tfd.icur].attend)\n" )
-      .gettext( tfd.lst, .attribs[tfd.icur].attstart, 
-                  .attribs[tfd.icur].attend )
-   }*/
-   //print( "first \(tfd.lst) \n" )
-   return &tfd.lst
-}
+   tfd.icur = this.tgstart
+   return tfd.icur
+}*/

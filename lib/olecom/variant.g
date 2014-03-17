@@ -17,6 +17,10 @@ import "Oleaut32.dll"
    uint SysFreeString( uint )
    uint SysAllocStringByteLen( uint, uint )
    uint SysStringByteLen( uint )
+   
+   uint SafeArrayAccessData( uint, uint )
+   uint SafeArrayCreateVector( uint, uint, uint )
+   uint SafeArrayUnaccessData( uint )
 }
 
 //Типы VARIANT VARIANT.vt
@@ -254,6 +258,7 @@ method uint VARIANT.arrcreate( collection bounds )
    }  
    return 0
 }
+
 
 /*-----------------------------------------------------------------------------
 * Id: variant_arrgetptr F2

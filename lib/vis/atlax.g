@@ -65,9 +65,11 @@ method vAtlAx vAtlAx.mCreateWin <alias=vAtlAx_mCreateWin>()
 //   .CreateWin( "AtlAxWin".ustr(), 0, style, 
 //      ?( *.pProgId, .pProgId, "shell.explorer".ustr()))
       
+   //print( "pp \(.pProgId.str())\n" )   
    if .pVisible : style |= $WS_VISIBLE 
    if !.pEnabled : style |= $WS_DISABLED   
-   this.hwnd = CreateWindowEx( 0, "AtlAxWin".ustr().ptr(), "shell.explorer".ustr().ptr(), style, 
+   this.hwnd = CreateWindowEx( 0, "AtlAxWin".ustr().ptr(), 
+      ?( *.pProgId, .pProgId, "shell.explorer".ustr()).ptr(), style, 
       this.loc.left, this.loc.top, this.loc.width, this.loc.height, ?( this.pOwner && this.pOwner != &App, this.pOwner->vCtrl.hwnd, 0), 0, GetModuleHandle( 0 ), 0 )      
    .prevuserdata = GetWindowLong( this.hwnd, $GWL_USERDATA )
    this->vCtrl.mCreateWin()

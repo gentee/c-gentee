@@ -219,7 +219,7 @@ property ustr vPicture.ImageFile <result>
 
 property vPicture.ImageFile( ustr val )
 {
-   if val != this.pImage
+   if val != this.pImageFile
    { 
       this.pImageFile = val
       .iUpdateImage()      

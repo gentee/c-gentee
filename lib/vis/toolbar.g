@@ -401,7 +401,6 @@ method uint vToolBar.mWinCmd <alias=vToolBar_mWinCmd>( uint ntfcmd, uint id )
       }
       evparEvent ev
       ev.sender = &item
-      
       item.OnClick.Run( ev )
    }    
    return 0
@@ -416,7 +415,7 @@ method uint vToolBar.mWinNtf  <alias=vToolBar_mWinNtf >( winmsg wmsg )//NMHDR nt
    switch  ntf.code
    {
       case $NM_CLICK
-      {  
+      {
          /*uint ntftb = &ntf
          ntftb as NMTOOLBAR
          if ntftb.iItem && ntftb.iItem !=-1

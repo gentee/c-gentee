@@ -260,10 +260,11 @@ method vApp.Load()
    themeinit()
    uint i
    fornum i, *.LoadForms
-   {            
+   {  
       .LoadForms[i]->vForm.pTypeDef = &gettypedef( .LoadForms[i]->vForm.pTypeId )
       .LoadForms[i]->vForm.Virtual( $mLoad )
       .LoadForms[i]->vForm.fLoad = 1
+      
    }
 }
 

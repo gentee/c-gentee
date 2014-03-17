@@ -139,7 +139,7 @@ method res.addresource( uint typeres, str name, buf data )
 
 method uint res.addicon( str idname iconfile )
 {
-   uint i
+   uint i added
    buf  groupicon
    arr  icons of iconinfo
    
@@ -147,11 +147,13 @@ method uint res.addicon( str idname iconfile )
    groupicon += ushort( 0 )
    groupicon += ushort( 1 )
    groupicon += ushort( *icons )
+   
    fornum i, *icons
    {
       uint idir
       idir as icons[i].icondir
-      
+      if !idir.bWidth || !idir.bHeight || idir.bWidth > 64 || idir.bHeight > 64 : continue
+      added++   
       this.addresource( $RC_ICON, str( ++this.iconid ), icons[i].data )   
       groupicon += byte( idir.bWidth )
       groupicon += byte( idir.bHeight )
@@ -162,6 +164,7 @@ method uint res.addicon( str idname iconfile )
       groupicon += idir.dwBytesInRes
       groupicon += ushort( this.iconid )
    }  
+   ( groupicon.ptr() + 4 )->ushort = added
    this.addresource( $RC_GROUP_ICON, idname, groupicon )   
    return 1   
 }

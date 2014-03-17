@@ -119,6 +119,8 @@ import "sqlite3.dll"<cdeclare>{
   int sqlite3_bind_blob(uint, int, uint, int, uint )
   int sqlite3_bind_text(uint, int, uint, int, uint )
   int sqlite3_bind_int(uint, int, int);  
+  
+  uint sqlite3_column_decltype(uint,int);
 }
 
 type arr_str
@@ -139,6 +141,7 @@ type sqlite3
   uint db_ptr        // ptr to database handle
   str error_message
   arrstr col_names      // array of column headers
+  arrstr col_decltypes   // array of column declypes
   arr    col_types of uint  // array of column types
   arr col_val of arrstr // array of column values
   uint compiled_sql_ptr  // ptr to compiled sql
@@ -317,9 +320,9 @@ method uint sqlite3.sql_execute( str sql_code, collection bind )
                   }
                }
                case str
-               {  
+               {                    
                   if sqlite3_bind_text( .compiled_sql_ptr, i + 1, bind[i]->buf.ptr(), *bind[i]->buf - 1, $SQLITE_TRANSIENT ) != $SQLITE_OK
-                  {  
+                  { 
                      return 0
                   }
                }
@@ -338,11 +341,18 @@ method uint sqlite3.sql_execute( str sql_code, collection bind )
       
       this.col_names.clear()      
       this.col_names.expand(numcols)
+      this.col_decltypes.clear()
+      this.col_decltypes.expand(numcols) 
       //this.hcol.clear()
       
       fornum i = 0, numcols
       {
          this.col_names[i].copy( sqlite3_column_name( .compiled_sql_ptr, i ) )
+         uint p
+         if p=sqlite3_column_decltype( .compiled_sql_ptr, i )
+         {
+            this.col_decltypes[i].copy( p )
+         }
          //this.hcol[this.col_names[i].str()] = i
       }
 

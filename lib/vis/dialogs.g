@@ -957,7 +957,8 @@ method vCalendar.Show( vCtrl ctrl, datetime dt )
 {
    .pPopupCtrl = &ctrl
    //.FormStyle = $fsPopup
-   .Owner = ctrl.GetForm()->vCtrl    
+   .Owner = ctrl.GetForm()->vCtrl
+   //print( "oner.name \(.Owner.Name)\n" )    
    RECT r, r1   
    GetWindowRect( ctrl.hwnd, r )
    .Date = dt

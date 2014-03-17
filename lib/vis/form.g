@@ -2451,7 +2451,7 @@ method uint vForm.ShowModal( vComp owner )
    elif !&this.Owner 
    { 
       if activewnd
-      {  
+      {  //print( "activewnd \(activewnd) \(&getctrl( activewnd ))\n" )
          this.Owner = getctrl( activewnd )
       }
       elif *App.Comps
@@ -2473,8 +2473,11 @@ method uint vForm.ShowModal( vComp owner )
          this.Top =  max( owner.Top + ( owner.Height - this.Height ) / 2, 20 )
       }
    }
-   else :this.Owner = App*/   
-   //this.Visible = 0  
+   else :this.Owner = App*/
+   if this.Visible
+   {   
+      this.Visible = 0
+   }  
    this.curtab = 0
    
    
